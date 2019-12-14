@@ -25,12 +25,12 @@ const schema = new Schema({
 })
 
 schema.statics.authenticate = function (email, password, callback) {
-    User.findOne({ email: email })
+  Admin.findOne({ email: email })
       .exec(function (err, user) {
         if (err) {
           return callback(err)
         } else if (!user) {
-          var err = 'User not found.'
+          var err = 'Invaild Email.'
           return callback(err);
         }
         bcrypt.compare(password, user.password, function (err, result) {
@@ -60,5 +60,5 @@ schema.pre('save', function(next){
     }
 })
 
-const User = mongoose.model('User', schema)
-module.exports = User 
+const Admin= mongoose.model('Admin', schema)
+module.exports = Admin

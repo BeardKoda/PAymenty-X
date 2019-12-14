@@ -18,7 +18,10 @@ var flash = require('connect-flash');
 var helpers = require('handlebars-helpers')();
 
 const IN_PROD = NODE_ENV === 'production'
-app
+
+// load database
+// app.use(db)
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser(SESS_NAME));

@@ -13,4 +13,12 @@ module.exports = {
 
     ADMIN_URL: process.env.ADMIN_URL,
     USER_URL: process.env.USER_URL,
+
+    ADMIN_SESS_LIFETIME: process.env.ADMIN_SESS_LIFETIME,
+    ADMIN_SESS_NAME: process.env.ADMIN_SESS_NAME,
+    ADMIN_SESS_SECRET: process.env.ADMIN_SESS_SECRET,
+
+    USER_SESS_LIFETIME: process.env.USER_SESS_LIFETIME,
+    USER_SESS_NAME: process.env.USER_SESS_NAME,
+    USER_SESS_SECRET: process.env.USER_SESS_SECRET,
 };

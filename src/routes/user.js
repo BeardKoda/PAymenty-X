@@ -1,4 +1,11 @@
+const cookieParser = require('cookie-parser');
+const session = require('express-session')
+const { NODE_ENV, USER_SESS_NAME, USER_SESS_LIFETIME, USER_SESS_SECRET } = require('../config/app')
+
+const IN_PROD = NODE_ENV === 'production'
+
 const path = require('path')
+
 const auth = require('../app/middleware/user/auth')
 const unauth = require('../app/middleware/user/unauth')
 const AuthController = require('../app/controllers/users/authController')
@@ -6,6 +13,17 @@ const DashboardController = require('../app/controllers/users/dashboardControlle
 const ejs = require( 'ejs' )
 
 const userRoute = (user)=>{
+    user.use(session({
+        name:USER_SESS_NAME,
+        resave:false,
+        saveUninitialized:false,
+        secret:USER_SESS_SECRET,
+        cookie:{
+            maxAge:parseInt(USER_SESS_LIFETIME),
+            sameSite:true,
+            secure:IN_PROD
+        }
+    }))
     // user.engine( 'hbs');
     
     user.set( 'view engine', 'ejs' );
