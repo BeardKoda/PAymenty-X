@@ -1,0 +1,648 @@
+/*
+Some default styles
+*/
+
+@font-face {
+  font-family: "chronobankicons-regular";
+  src: url("./fonts/ChronoBankIcons.eot");
+  src: url("./fonts/ChronoBankIcons.eot") format("embedded-opentype"),
+    url("./fonts/ChronoBankIcons.woff") format("woff"),
+    url("./fonts/ChronoBankIcons.ttf") format("truetype");
+  src: url("./fonts/ChronoBankIcons.eot") format("embedded-opentype"),
+    url("./fonts/ChronoBankIcons.woff") format("woff"),
+    url("./fonts/ChronoBankIcons.ttf") format("truetype");
+}
+
+html {
+  height: 100%;
+  font-size: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: "Nunito Sans", Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
+  color: #151828;
+}
+
+#root {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+button {
+  cursor: pointer;
+  outline: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+button:focus {
+  outline: 0;
+  background: none;
+}
+
+select::-moz-focus-inner {
+  border: 0;
+}
+
+select {
+  outline: 0;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.h0 {
+  font-family: "Nunito Sans", Arial;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 123%;
+}
+
+.h1 {
+  font-family: "Nunito Sans", Arial;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 54px;
+  line-height: 121%;
+}
+
+.h2 {
+  font-family: "Nunito Sans", Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 160%;
+}
+
+.h3 {
+  font-family: "Nunito Sans", Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 118%;
+}
+
+.h4 {
+  font-family: "Nunito Sans", Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 118%;
+}
+
+.h5 {
+  font-family: "Nunito Sans", Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 120%;
+}
+
+.capture {
+  font-family: "Nunito Sans", Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 140%;
+}
+
+.capture-small {
+  font-family: "Nunito Sans", Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 130%;
+}
+
+.caption {
+  font-family: "Nunito Sans", Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* additional colors */
+
+.yellow {
+  color: #ffdb21;
+}
+
+.green {
+  color: #79c573;
+}
+
+.red {
+  color: #f97c7c;
+}
+
+/* text colors */
+
+.notes {
+  color: #d9dbe4;
+}
+
+.gray-30 {
+  color: #b9babf;
+}
+
+.gray-50 {
+  color: #8a8b93;
+}
+
+.gray-70 {
+  color: #5b5d69;
+}
+
+.gray {
+  color: #151828;
+}
+
+.black {
+  color: #333333;
+}
+
+/* color colors */
+
+.bk {
+  color: #f6fbfb;
+}
+
+.gray-bk {
+  color: #f0f2f9;
+}
+
+.blue-bk {
+  color: #1436e5;
+}
+
+.turquoise-bk {
+  color: #50eff5;
+}
+
+.white-bk {
+  color: #ffffff;
+}
+
+td {
+  border: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+iframe#launcher {
+  z-index: 999999 !important;
+}
+
+@keyframes errorAnimation {
+  0% {
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(0px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Login */
+
+.persons div {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  left: 118px;
+  top: 50vh;
+  opacity: 0;
+  transition: opacity 1s;
+}
+.persons div.show {
+  opacity: 1;
+}
+.persons .checkMail {
+  /* background: url("../../images/check_mail_person.svg"); */
+  width: 282px;
+  height: 755px;
+  margin-top: calc(-755px / 2);
+}
+.persons .signIn {
+  /* background: url("../../images/sign_in_person.svg"); */
+  width: 370px;
+  height: 557px;
+  margin-top: calc(-557px / 2);
+}
+.persons .signUp {
+  /* background: url("../../images/sign_up_person.svg"); */
+  width: 346px;
+  height: 464px;
+  margin-top: calc(-464px / 2);
+}
+.persons .checkCode {
+  /* background: url("../../images/confirm_code_person.svg"); */
+  width: 325px;
+  height: 251px;
+  margin-top: calc(-251px / 2);
+}
+.title {
+  height: 80px;
+  text-align: left;
+  width: 100%;
+  white-space: nowrap;
+  overflow: visible;
+  font-family: "Nunito Sans", Arial;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 121%;
+}
+.inputLabel {
+  text-align: left;
+  margin-bottom: 21px;
+  margin-top: 17px;
+  font-family: Nunito Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 140%;
+}
+.inputs {
+  display: flex;
+}
+.inputs > div {
+  margin-right: 25px;
+}
+@-moz-document url-prefix() {
+  .inputs > div input::placeholder {
+    line-height: 42px;
+  }
+}
+.inputs > div input {
+  height: 68px;
+  margin: 0;
+  letter-spacing: 0.8px;
+  padding-left: 22px;
+}
+.inputs button {
+  width: 200px;
+  height: 68px;
+  font-family: "Nunito Sans", Arial;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 120%;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.loader {
+  margin: 0 auto;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  /* background-image: url("../../images/paymentx-rolling-loader.svg"); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.passwordsErrors {
+  margin-top: 10px;
+  margin-bottom: -5px;
+  display: flex;
+  align-items: center;
+}
+.passwordsErrors span {
+  margin-left: 7px;
+}
+.additionalActions {
+  margin-top: 16px;
+  width: 370px;
+  display: flex;
+  justify-content: space-between;
+}
+.goBack {
+  display: flex;
+}
+.goBack span,
+.goBack button {
+  margin-left: 6px;
+  line-height: 25px;
+}
+.passwords {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 30px;
+  margin-right: -19px;
+}
+@-moz-document url-prefix() {
+  .passwords input::placeholder {
+    line-height: 42px;
+  }
+}
+.passwords input {
+  height: 68px;
+  margin: 0;
+  letter-spacing: 0.8px;
+  padding-left: 20px;
+}
+.passwordButtonsWrapper {
+  margin-top: 30px;
+  margin-right: -19px;
+}
+.passwordButtonsWrapper button {
+  height: 68px;
+  width: 100%;
+  font-family: "Nunito Sans", Arial;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 120%;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../assets/images/Dalmatian-Spots.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.loginWrapper {
+  width: 100%;
+  max-width: 1170px;
+  position: absolute;
+  top: 22px;
+}
+.loginWrapper .logo {
+  /* background-image: url("../../images/main_logo.svg"); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 163px;
+  height: 35px;
+}
+@keyframes openSlideAnimation {
+  0% {
+    opacity: 0;
+    transform: translateX(500px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 550px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+.formContainer form {
+  flex-grow: 1;
+  margin-top: 17px;
+  width: 100%;
+  z-index: 1;
+}
+.formContainer form .fieldsWrapper {
+  min-height: 200px;
+}
+.formContainer form .fieldsWrapperAnimated {
+  transform: translateX(500px);
+  min-height: 200px;
+  animation: openSlideAnimation 0.5s;
+  animation-fill-mode: forwards;
+}
+.formContainer form :global(.backButton) button {
+  border-radius: 50%;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  left: -20px;
+  top: 90px;
+}
+.formContainer :global(.successMessageContainer) {
+  flex-grow: 1;
+  padding-top: 50px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  z-index: 1;
+}
+.formContainer :global(.successMessageContainer) button {
+  margin-top: 20px;
+}
+.formContainer :global(.messageContainer) {
+  flex-grow: 1;
+}
+.formContainer :global(.anotherEmail) {
+  text-align: center;
+  padding: 5px 0;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+}
+.popupContainer {
+  display: flex;
+  width: 500px;
+  height: 170px;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.popupContainer div {
+  display: flex;
+  margin: 10px;
+}
+.footer {
+  position: absolute;
+  bottom: 15px;
+  left: 148px;
+}
+.buttonsWrapper {
+  margin-bottom: 25px;
+}
+.buttonsWrapper button {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+
+.jGVOBN {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.hfyoFp {
+    display: flex;
+    min-height: 30px;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.hfyoFp .input-wrapper {
+    position: relative;
+}
+
+.ioKZsq {
+    width: 100%;
+    height: 42px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 140%;
+    background-color: rgb(255, 255, 255);
+    color: rgb(91, 93, 105);
+    text-align: left;
+    padding: 12px 16px;
+    margin: 0px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(207, 210, 215);
+    border-image: initial;
+    text-decoration: none;
+    border-radius: 4px;
+    outline: none;
+}
+
+.ioKZsq.error {
+    background-color: rgb(255, 252, 252);
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: rgb(249, 124, 124) !important;
+    border-image: initial !important;
+    animation: 0.2s linear 0s 1 normal none running errorAnimation !important;
+}
+
+.gJOssB:disabled {
+    cursor: not-allowed;
+    background-color: rgb(255, 255, 255);
+    color: rgb(217, 219, 228);
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(217, 219, 228);
+    border-image: initial;
+}
+
+.gJOssB {
+    box-shadow: none;
+    -webkit-box-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    min-width: 84px;
+    min-height: 42px;
+    white-space: nowrap;
+    font-family: "Nunito Sans", Arial;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 11px;
+    line-height: 120%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgb(20, 54, 229);
+    outline: none;
+    background: inherit inherit inherit inherit inherit inherit inherit inherit inherit;
+    text-decoration: none;
+    padding: 10px 30px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(20, 54, 229);
+    border-image: initial;
+    border-radius: 3px;
+}
+
+.cPFPGG {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 5px 0px;
+}
+
+.cPFPGG.d_none {
+  display: none;
+}
+
+.cPFPGG.d_show {
+  display: block;
+}
+
+@media screen and (max-width: 900px) {
+  .formContainer {
+    width: 89%;
+  }
+
+  .title {
+    font-size: 26px;
+    height: 36px;
+  }
+
+  .inputLabel {
+    font-size: 16px;
+  }
+
+  .inputs button {
+    width: 118px;
+    height: 50px;
+    font-size: 12px;
+  }
+
+  .footer {
+    bottom: 15px;
+    left: unset;
+  }
+
+}

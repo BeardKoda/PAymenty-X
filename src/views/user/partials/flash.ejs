@@ -1,0 +1,14 @@
+<div>
+<%if(message) {%>
+	<%if(message.success) {%>
+		<div class="alert">
+			<strong class="alert-alert-success"><%= message.success %></strong> 
+		</div>
+	<%}%>
+	<%if(message.error) {%>
+		<div class="alert">
+			<strong class="alert-alert-success"><%= message.error %></strong> 
+		</div>
+	<%}%>
+<%}%>
+</div>

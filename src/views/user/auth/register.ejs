@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title><%= site_title %> - Register </title>
+        <link rel="stylesheet" href="/static/user/assets/css/sanitize.css" />
+        <link rel="stylesheet" href="/static/user/assets/css/index.css" />
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="container">
+                    <%- include('../partials/flash') %>
+                <div class="loginWrapper">
+                    <div class="logo"></div>
+                </div>
+                <div class="formContainer">
+                    <form method="POST" action="register" name="signup_form" onsubmit="return validate(event, 'signup_form')">
+                        <div class="fieldsWrapperAnimated">
+                            <div>
+                                <div class="title gray">
+                                    Create a new account
+                                </div>
+                                <div class="inputLabel gray-70">
+                                    Please type your email address to signup
+                                    to<br />PaymentX or <a href="/user/login">login to your PaymentX
+                                    account</a>
+                                </div>
+                                <div class="inputs">
+                                    <div class="sc-bxivhb jGVOBN">
+                                        <div class="sc-bZQynM hfyoFp">
+                                            <div class="input-wrapper">
+                                                <input
+                                                id="inputId_email"
+                                                class="sc-bwzfXH ioKZsq"
+                                                type="email"
+                                                name="email"
+                                                placeholder="your_mail@domain.com"
+                                                required
+                                                onblur="checkEmailField('signup_form')"
+                                                />
+                                            </div>
+                                            <div id="email_error" class="sc-ifAKCX cPFPGG capture red d_none">
+                                                Please enter valid email address
+                                            </div>
+                                        </div>
+
+                                        <div class="sc-bZQynM hfyoFp">
+                                            <div class="input-wrapper">
+                                                <input
+                                                    id="inputId_username"
+                                                    class="sc-bwzfXH ioKZsq"
+                                                    type="text"
+                                                    name="username"
+                                                    placeholder="your username"
+                                                    minlength="3"
+                                                    required
+                                                    onblur="checkUsernameField('signup_form')"
+                                                />
+                                            </div>
+                                            <div id="username_error" class="sc-ifAKCX cPFPGG capture red d_none">
+                                                username cannot be less than 3 characters and cannot contain 
+                                            </div>
+                                        </div>
+
+                                        <div class="sc-bZQynM hfyoFp">
+                                            <div class="input-wrapper">
+                                                <input
+                                                    id="inputId_password"
+                                                    class="sc-bwzfXH ioKZsq"
+                                                    type="password"
+                                                    name="password"
+                                                    placeholder="your password"
+                                                    required
+                                                    minlength="8"
+                                                    onblur="checkPasswordField('signup_form')"
+                                                />
+                                            </div>
+                                            <div id="password_error" class="sc-ifAKCX cPFPGG capture red d_none">
+                                                Password cannot be less than 8 characters and cannot contain 
+                                            </div>
+                                        </div>
+
+                                        <div class="sc-bZQynM hfyoFp">
+                                            <div class="input-wrapper">
+                                                <button
+                                                    id="emailPageActionButton"
+                                                    type="submit"
+                                                    class="sc-gzVnrw gJOssB"
+                                                >
+                                                    Create
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="footer capture gray-70">
+                    © PaymentX 2019. All rights reserved.
+                </div>
+            </div>
+        </div>
+
+        <script src="./assets/js/script.js"></script>
+    </body>
+</html>
