@@ -7,7 +7,7 @@ version: 2
 jobs:
   build:
     branches:
-      only: V2
+      only: master
     docker:
       # specify the version you desire here
       - image: circleci/node:10.9.0
