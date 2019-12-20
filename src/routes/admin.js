@@ -5,13 +5,8 @@ const { NODE_ENV, ADMIN_SESS_NAME, ADMIN_SESS_LIFETIME, ADMIN_SESS_SECRET } = re
 const IN_PROD = NODE_ENV === 'production'
 
 const path = require('path')
-
-const AuthController = require('../app/controllers/admin/authController')
-const DashboardController = require('../app/controllers/admin/dashboardController')
-const UserController = require('../app/controllers/admin/userController')
-const AdminController = require('../app/controllers/admin/adminController')
-const auth = require('../app/middleware/admin/auth')
-const unauth = require('../app/middleware/admin/unauth')
+const { AdminController, AuthController, UserController, DashboardController, TransactionController} = require('../app/controllers/admin')
+const {auth, unauth,mid} = require('../app/middleware/admin')
 
 const adminRoute = (admin)=>{
     admin.use(session({
@@ -25,7 +20,7 @@ const adminRoute = (admin)=>{
             secure:IN_PROD
         }
     }))
-    
+    admin.use(mid)
     admin.set( 'view engine', 'ejs' );
     admin.set('views', path.join(__dirname, '../views/admin'));
 
@@ -35,9 +30,10 @@ const adminRoute = (admin)=>{
     admin.get('/', auth, DashboardController.index);
     admin.get('/admins', auth, AdminController.index)
     admin.get('/users', auth, UserController.index)
-    admin.get('/loggedIn', auth, (req, res)=>{
-        console.log(admin.mountpath)
-        res.send('Admin Page')
+    admin.get('/transactions', auth, TransactionController.index)
+    admin.get('/exchange', auth, TransactionController.index)
+    admin.get('**', auth, (req,res,next)=>{
+        res.render('error/404')
     })
 }
 

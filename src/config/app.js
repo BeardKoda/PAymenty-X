@@ -21,4 +21,8 @@ module.exports = {
     USER_SESS_LIFETIME: process.env.USER_SESS_LIFETIME,
     USER_SESS_NAME: process.env.USER_SESS_NAME,
     USER_SESS_SECRET: process.env.USER_SESS_SECRET,
+
+    SALT : 10,
+    COIN_KEY :process.env.COIN_KEY,
+    COIN_SECRET: process.env.COIN_SECRET
 };

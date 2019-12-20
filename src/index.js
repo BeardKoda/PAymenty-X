@@ -16,6 +16,8 @@ const adminRoute = require('./routes/admin.js')
 const db = require('./database/db')
 var flash = require('connect-flash');
 var helpers = require('handlebars-helpers')();
+const mongoose = require('mongoose')
+const MongoStore = require('connect-mongo')(session);
 
 const IN_PROD = NODE_ENV === 'production'
 
@@ -30,6 +32,7 @@ app.use(session({
     resave:false,
     saveUninitialized:false,
     secret:SESS_SECRET,
+    store:new MongoStore({ mongooseConnection: mongoose.connection }),
     cookie:{
         maxAge:parseInt(SESS_LIFETIME),
         sameSite:true,

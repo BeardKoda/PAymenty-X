@@ -6,10 +6,8 @@ const IN_PROD = NODE_ENV === 'production'
 
 const path = require('path')
 
-const auth = require('../app/middleware/user/auth')
-const unauth = require('../app/middleware/user/unauth')
-const AuthController = require('../app/controllers/users/authController')
-const DashboardController = require('../app/controllers/users/dashboardController')
+const { auth, unauth, mid} = require('../app/middleware/user')
+const { AuthController, DashboardController, WalletController, TransactionController, ProfileController } = require('../app/controllers/users')
 const ejs = require( 'ejs' )
 
 const userRoute = (user)=>{
@@ -25,7 +23,7 @@ const userRoute = (user)=>{
         }
     }))
     // user.engine( 'hbs');
-    
+    user.use(mid)
     user.set( 'view engine', 'ejs' );
     // hbs.registerPartials(path.join(__dirname, '../views/user/partials'))
     user.set('views', path.join(__dirname, '../views/user'));
@@ -39,7 +37,22 @@ const userRoute = (user)=>{
     // AUTHENTICATED ROUTES
     user.get('/', auth, DashboardController.index);
     user.get('/blank', auth, DashboardController.blank);
+    user.get('/buy-sell', auth, DashboardController.blank);
+    user.get('/deposit', auth, TransactionController.showDeposit)
+    user.post('/deposit/processing', auth, TransactionController.postDeposit)
+
+    user.get('/withdraw', auth, TransactionController.showWithdraw)
+    user.post('/withdraw/processing', auth, TransactionController.postWithdraw)
+    user.get('/transactions', auth, TransactionController.index)
+    // user.get('/transactions/all', auth, TransactionController.getAll)
+    user.get('/settings', auth, DashboardController.blank);
+    user.get('/profile', auth, ProfileController.index);
+    user.get('/wallet', auth, WalletController.index)
     user.get('/logout', auth, AuthController.logout)
+
+    user.get('**', auth, (req,res,next)=>{
+        res.render('error/404')
+    })
 
 }
 

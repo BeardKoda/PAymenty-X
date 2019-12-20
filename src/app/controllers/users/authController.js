@@ -20,6 +20,7 @@ let controller = {
                 }
                 if(user){
                     req.session.userId = user._id
+                    // console.log(req.session.user.email)
                     res.redirect('/user')
                 }
             })

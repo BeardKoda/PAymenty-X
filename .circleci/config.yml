@@ -1,0 +1,86 @@
+
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    branches:
+      only: V2
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.9.0
+        environment:
+          NODE_OPTIONS: --max-old-space_size=8024
+        resource_class: large
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Compiling App
+          command: npm run build-dev:ssr
+      - save_cache:    
+          key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}    
+          paths:        
+            - dist 
+
+  # deploy-staging:
+  #     docker:
+  #       - image: buildpack-deps:trusty
+  #     steps:
+  #       - checkout
+  #       # Download and cache dependencies
+  #       - restore_cache:
+  #         key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}    
+         
+      - add_ssh_keys:
+          fingerprints:
+            - "5e:d5:59:cc:57:2c:b1:ef:17:0d:4d:10:af:2a:3e:ef"
+      - run:
+          name: Deploying to staging
+          command: ssh -o StrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "cd /home/payx && git pull https://$GITHUB_USER:$GITHUB_PASS@github.com/$GITHUB_USER/Payx"
+
+# workflows:
+#   version: 2
+#   build-deploy:
+#     jobs:
+#       - build
+#       - deploy-staging:
+#           requires:
+#             - build
+#       - approve-prod-deploy:
+#           type: approval
+#           requires:
+#             - build
+#           filters:
+#             branches:
+#               only: staging
+#       - deploy-prod:
+#           requires:
+#             - approve-prod-deploy
+#           filters:
+#             branches:
+#               only: production

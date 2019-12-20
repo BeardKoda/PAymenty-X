@@ -1,180 +1,113 @@
-<!-- header -->
-<div class="header">
-    <div class="nav-header">
-        <div class="brand-logo">
-            <a href="">
-                <!-- <i class="icofont icofont-dart"></i> -->
-                <img src="http://demo.tortoizthemes.com/paito/assets/images/logo-mini.png" alt="">
-                <span class="brand-title">Paito</span>
-            </a>
-        </div>
-    </div>
-
-    <div class="header-content">
-        <div class="header-left d-flex">
-            <div class="nav-control">
-                <div class="hamburger">
-                    <span class="line"></span>
-                    <span class="line"></span>
-                    <span class="line"></span>
-                </div>
-
-            </div>
-            <!-- <div class="nav-search-box">
-                <i class="fa fa-search"></i>
-                <input type="search" placeholder="Search">
+<div id="content" class="app-content box-shadow-1 box-radius-1" role="main">
+    <div class="content-header white box-shadow-1" id="content-header">
+        <div class="navbar navbar-expand-lg"><a class="d-lg-none mx-2" data-toggle="modal"
+                data-target="#aside"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 512 512">
+                    <path d="M80 304h352v16H80zM80 248h352v16H80zM80 192h352v16H80z" /></svg></a>
+            <div class="navbar-text nav-title flex" id="pageTitle"><%=title%></div>
+            <ul class="nav flex-row order-lg-2">
+                <!-- <li class="nav-item dropdown"><a class="nav-link px-3" data-toggle="dropdown"><i
+                            class="fa fa-bell text-muted"></i> <span
+                            class="badge badge-pill up danger">5</span></a>
+                    <div class="dropdown-menu dropdown-menu-right w-md animate fadeIn mt-2 p-0">
+                        <div class="scrollable hover" style="max-height: 250px">
+                            <div class="list">
+                                <div class="list-item" data-id="item-10"><span
+                                        class="w-24 avatar circle blue"><span
+                                            class="fa fa-google"></span></span>
+                                    <div class="list-body"><a href="#" class="item-title _500">Postiljonen</a>
+                                        <div class="item-except text-sm text-muted h-1x">Looking for some
+                                            client-work</div>
+                                        <div class="item-tag tag hide"></div>
+                                    </div>
+                                    <div><span class="item-date text-xs text-muted">08:00</span></div>
+                                </div>
+                                <div class="list-item" data-id="item-6"><span
+                                        class="w-24 avatar circle brown"><span
+                                            class="fa fa-envelope"></span></span>
+                                    <div class="list-body"><a href="#" class="item-title _500">Rita Ora</a>
+                                        <div class="item-except text-sm text-muted h-1x">Homepage mockup design
+                                        </div>
+                                        <div class="item-tag tag hide"></div>
+                                    </div>
+                                    <div><span class="item-date text-xs text-muted">13:23</span></div>
+                                </div>
+                                <div class="list-item" data-id="item-1"><span
+                                        class="w-24 avatar circle grey"><span
+                                            class="fa fa-comment"></span></span>
+                                    <div class="list-body"><a href="#" class="item-title _500">Summerella</a>
+                                        <div class="item-except text-sm text-muted h-1x">Send you a message
+                                        </div>
+                                        <div class="item-tag tag hide"></div>
+                                    </div>
+                                    <div><span class="item-date text-xs text-muted">July 21</span></div>
+                                </div>
+                                <div class="list-item" data-id="item-14"><span
+                                        class="w-24 avatar circle brown"><span class="fa fa-bell"></span></span>
+                                    <div class="list-body"><a href="#" class="item-title _500">Brielle
+                                            Williamson</a>
+                                        <div class="item-except text-sm text-muted h-1x">Looking for some
+                                            client-work</div>
+                                        <div class="item-tag tag hide"></div>
+                                    </div>
+                                    <div><span class="item-date text-xs text-muted">08:00</span></div>
+                                </div>
+                                <div class="list-item" data-id="item-5"><span
+                                        class="w-24 avatar circle blue-grey"><span
+                                            class="fa fa-github"></span></span>
+                                    <div class="list-body"><a href="#" class="item-title _500">Radionomy</a>
+                                        <div class="item-except text-sm text-muted h-1x">Competitive gaming
+                                            ladders</div>
+                                        <div class="item-tag tag hide"></div>
+                                    </div>
+                                    <div><span class="item-date text-xs text-muted">09:50</span></div>
+                                </div>
+                                <div class="list-item" data-id="item-4"><span
+                                        class="w-24 avatar circle pink"><span class="fa fa-male"></span></span>
+                                    <div class="list-body"><a href="#" class="item-title _500">Judith Garcia</a>
+                                        <div class="item-except text-sm text-muted h-1x">Eddel upload a media
+                                        </div>
+                                        <div class="item-tag tag hide"></div>
+                                    </div>
+                                    <div><span class="item-date text-xs text-muted">12:05</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex px-3 py-2 b-t">
+                            <div class="flex"><span>6 Notifications</span></div><a href="#">See all
+                                <i class="fa fa-angle-right text-muted"></i></a>
+                        </div>
+                    </div>
+                </li> -->
+                <li class="dropdown d-flex align-items-center"><a href="#" data-toggle="dropdown"
+                        class="d-flex align-items-center"><span class="avatar w-32"><img
+                                src="http://flatfull.com/themes/apply/assets/images/a9.jpg"
+                                alt="..."></span></a>
+                    <div class="dropdown-menu dropdown-menu-right w pt-0 mt-2 animate fadeIn">
+                        <div class="row no-gutters b-b mb-2">
+                            <div class="col-4 b-r"><a href="/user/profile"
+                                    class="py-2 pt-3 d-block text-center"><i
+                                        class="fa text-md fa-user text-muted"></i> <small
+                                        class="d-block">Profile</small></a></div>
+                            <div class="col-4 b-r"><a href="/user/settings"
+                                    class="py-2 pt-3 d-block text-center"><i
+                                        class="fa text-md fa-gear text-muted"></i> <small
+                                        class="d-block">Setting</small></a></div>
+                            <div class="col-4"><a href="/user/logout" class="py-2 pt-3 d-block text-center">
+                                <i class="fa text-md fa-sign-out text-muted"></i> <small class="d-block">Signout</small></a></div>
+                        </div>
+                    </div>
+                </li>
+                <li class="d-lg-none d-flex align-items-center"><a href="#" class="mx-2" data-toggle="collapse"
+                        data-target="#navbarToggler"><svg xmlns="http://www.w3.org/2000/svg" width="18"
+                            height="18" viewBox="0 0 512 512">
+                            <path d="M64 144h384v32H64zM64 240h384v32H64zM64 336h384v32H64z" /></svg></a></li>
+            </ul>
+            <!-- <div class="collapse navbar-collapse no-grow order-lg-1" id="navbarToggler">
+                <form class="input-group m-2 my-lg-0"><span class="input-group-btn"><button type="button"
+                            class="btn no-border no-bg no-shadow"><i class="fa fa-search"></i></button>
+                    </span><input type="text" class="form-control no-border no-bg no-shadow"
+                        placeholder="Search projects..."></form>
             </div> -->
         </div>
     </div>
-
-
-    <div class="navbar-custom-menu pull-right d-flex nav-right">
-        <!-- <div class="dropdown">
-            <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="badge badge-danger">
-                    <span></span>
-                </span>
-                <i class="fa fa-envelope"></i>
-            </a>
-
-            <div class="dropdown-menu inbox-dropdown  dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <div class="message-options">
-                    <a href="#" class="single-message">Message</a>
-                    <a href="#" class="view-all-message pull-right">View All</a>
-                    <a href="#" class="compose-message pull-right">Compose</a>
-                </div>
-                <a class="dropdown-item" href="#">
-                    <div class="media">
-                        <img class="mr-3" src="http://demo.tortoizthemes.com/paito/assets/images/user.png" alt="Generic placeholder image">
-                        <div class="media-body">
-                            <h6 class="mt-0">
-                                John Doe
-                                <span class="time">March 21, 2018</span>
-                            </h6>
-                            It is a long established fact that a reader...
-                        </div>
-                    </div>
-                </a>
-                <a class="dropdown-item" href="#">
-                    <div class="media">
-                        <img class="mr-3" src="http://demo.tortoizthemes.com/paito/assets/images/user.png" alt="Generic placeholder image">
-                        <div class="media-body">
-                            <h6 class="mt-0">
-                                John Doe
-                                <span class="time">March 21, 2018</span>
-                            </h6>
-                            It is a long established fact that a reader...
-                        </div>
-                    </div>
-                </a>
-                <a class="dropdown-item" href="#">
-                    <div class="media">
-                        <img class="mr-3" src="http://demo.tortoizthemes.com/paito/assets/images/user.png" alt="Generic placeholder image">
-                        <div class="media-body">
-                            <h6 class="mt-0">
-                                John Doe
-                                <span class="time">March 21, 2018</span>
-                            </h6>
-                            It is a long established fact that a reader...
-                        </div>
-                    </div>
-                </a>
-                <a class="dropdown-item" href="#">
-                    <div class="media">
-                        <img class="mr-3" src="http://demo.tortoizthemes.com/paito/assets/images/user.png" alt="Generic placeholder image">
-                        <div class="media-body">
-                            <h6 class="mt-0">
-                                John Doe
-                                <span class="time">March 21, 2018</span>
-                            </h6>
-                            It is a long established fact that a reader...
-                        </div>
-                    </div>
-                </a>
-                <a class="dropdown-item" href="#">
-                    <div class="media">
-                        <img class="mr-3" src="http://demo.tortoizthemes.com/paito/assets/images/user.png" alt="Generic placeholder image">
-                        <div class="media-body">
-                            <h6 class="mt-0">
-                                John Doe
-                                <span class="time">March 21, 2018</span>
-                            </h6>
-                            It is a long established fact that a reader...
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div> -->
-        <div class="dropdown">
-            <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="badge badge-danger">
-                    <span></span>
-                </span>
-                <i class="fa fa-bell"></i>
-            </a>
-
-            <div class="dropdown-menu notification-dropdown dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <li class="header">You have 10 notifications</li>
-                <li>
-                    <ul class="menu">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the page and may cause design problems
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-users text-red"></i> 5 new members joined
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-user text-red"></i> You changed your username
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="footer">
-                    <a href="#">View all</a>
-                </li>
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <a class="dropdown-toggle user-profile-dropdown" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="user-img">
-                    <img src="http://demo.tortoizthemes.com/paito/assets/images/user.png" alt="">
-                </span>
-                <span class="user-name">John Doe</span>
-            </a>
-
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">
-                    <i class="fa fa-user-circle" aria-hidden="true"></i> Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                    <i class="fa fa-cog"></i> Setting
-                </a>
-                <a class="dropdown-item" href="#">
-                    <i class="fa fa-question-circle" aria-hidden="true"></i> Help
-                </a>
-                <a class="dropdown-item" href="user\logout">
-                    <i class="fa fa-power-off" aria-hidden="true"></i> Logout
-                </a>
-            </div>
-        </div>
-
-    </div>
-
-</div>
-<!-- #/ header -->

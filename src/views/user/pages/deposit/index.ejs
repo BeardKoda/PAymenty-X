@@ -1,0 +1,53 @@
+<%- include('../../partials/top') %>
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-5 offset-md-3">
+                <div class="box">
+                    <!-- <div class="box-header b-b">
+                        <h3>Form Wizard</h3>
+                    </div> -->
+                    <div class="box-body">
+                        <form id="form" method="POST" action="/<%=url%>/deposit/processing">
+                            <div id="rootwizard" data-plugin="bootstrapWizard">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab1">
+                                        <div class="row m-b">
+                                            <div class="col-6">
+                                                <label for="currency">Currency</label>
+                                                <select class="form-control input-c" name="currency" id="currency">
+                                                    <option>BTC</option>
+                                                    <option>ETH</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="wallet">To</label>
+                                                <select class="form-control input-c" name="wallet" id="wallet">
+                                                    <option value="BTC">My Bitcoin wallet (0 BTC)</option>
+                                                    <option value="ETH">My Etherum wallet (0 ETH)</option>
+                                                </select>
+                                            </div>
+                                        </div><br/>
+                                        <div class="form-group">
+                                            <label>Amount</label>
+                                            <input type="number" id="amount" name="amount" class="form-control" placeholder="$0.00" required>
+                                        </div>
+                                    </div>
+                                    <div class="row py-3">
+                                        <div class="col-6">
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="d-flex justify-content-end">
+                                                <button type="submit" id="next" class="btn primary button-next">Deposit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+<%- include('../../partials/footer') %>

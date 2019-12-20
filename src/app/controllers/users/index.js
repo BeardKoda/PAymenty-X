@@ -1,2 +1,7 @@
-module.export =  AuthController = require('./authController')
-module.export =  DashboardController = require('./dashboardController')
+module.exports = {
+    AuthController : require('./authController'),
+    DashboardController : require('./dashboardController'),
+    WalletController : require('./walletController'),
+    ProfileController : require('./profileController'),
+    TransactionController : require('./transactionController')
+}

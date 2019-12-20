@@ -6,8 +6,11 @@
   "dependencies": {
     "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
+    "coinpayments": "^2.0.3",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.4",
+    "cryptr": "^6.0.1",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",

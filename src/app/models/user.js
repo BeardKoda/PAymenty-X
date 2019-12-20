@@ -1,28 +1,9 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const { SALT } = require('../../config/app')
+const {Wallet} = require('./index')
 
-let SALT = 10
-
-const { Schema } = mongoose;
-
-const schema = new Schema({
-    username:{
-        type:'string',
-        required: true,
-        trim: true
-    },
-    email:{
-        type:'string',
-        required: true,
-        unique: 1,
-        trim: true
-    },
-    password:{
-        type:'string',
-        required:true,
-        minLength:6
-    }
-})
+schema = require('../schema/user')
 
 schema.statics.authenticate = function (email, password, callback) {
     User.findOne({ email: email })
@@ -43,6 +24,39 @@ schema.statics.authenticate = function (email, password, callback) {
         })
       });
 }
+
+schema.post('save', (result)=>{
+  authuser = result
+  console.log(authuser)
+  Wallet. create({
+      userId:authuser._id,
+      type:"crypto",
+      currency:"Bitcoin",
+      CSF:"BTC",
+      amount:"0"
+    },
+    {
+      userId:authuser._id,
+      type:"crypto",
+      currency:"Etherum",
+      CSF:"ETH",
+      amount:"0"
+    },
+    {
+      userId:authuser._id,
+      type:"crypto",
+      currency:"Bitcon Cash",
+      CSF:"BCH",
+      amount:"0"
+    },
+    {
+    userId:authuser._id,
+    type:"crypto",
+    currency:"Ripple",
+    CSF:"XRP",
+    amount:"0"
+  })  
+})
 
 schema.pre('save', function(next){
     var user = this

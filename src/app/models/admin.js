@@ -1,28 +1,8 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const schema = require('../schema/admin')
 
-let SALT = 10
-
-const { Schema } = mongoose;
-
-const schema = new Schema({
-    username:{
-        type:'string',
-        required: true,
-        trim: true
-    },
-    email:{
-        type:'string',
-        required: true,
-        unique: 1,
-        trim: true
-    },
-    password:{
-        type:'string',
-        required:true,
-        minLength:6
-    }
-})
+let { SALT } = require('../../config/app')
 
 schema.statics.authenticate = function (email, password, callback) {
   Admin.findOne({ email: email })
