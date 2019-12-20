@@ -6,6 +6,8 @@
 version: 2
 jobs:
   build:
+    branches:
+      only: master
     docker:
       # specify the version you desire here
       - image: circleci/node:10.9.0
@@ -38,27 +40,40 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
 
-  deploy-staging:
-      docker:
-        - image: buildpack-deps:trusty
-      steps:
-        - checkout
+  # deploy-staging:
+  #     docker:
+  #       - image: buildpack-deps:trusty
+  #     steps:
+  #       - checkout
+  #       # Download and cache dependencies
+  #       - restore_cache:
+  #         key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}    
+         
+      - add_ssh_keys:
+          fingerprints:
+            - "c0:1b:eb:3e:f8:c2:12:9e:ba:fa:0d:f8:63:a2:5f:13"
+      - run:
+          name: Deploying to staging
+          command: ssh -o StrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "cd /home/payx && git pull https://$GITHUB_USER:$GITHUB_PASS@github.com/$GITHUB_USER/Payx"
 
-        - add_ssh_keys:
-            fingerprints:
-              - "c0:1b:eb:3e:f8:c2:12:9e:ba:fa:0d:f8:63:a2:5f:13"
-        - run:
-            name: Deploying to Server
-            command: ssh -o StrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "cd /home/payx && git pull https://$GITHUB_USER:$GITHUB_PASS@github.com/$GITHUB_USER/Payx"
-
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build
-      - deploy-staging:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
+# workflows:
+#   version: 2
+#   build-deploy:
+#     jobs:
+#       - build
+#       - deploy-staging:
+#           requires:
+#             - build
+#       - approve-prod-deploy:
+#           type: approval
+#           requires:
+#             - build
+#           filters:
+#             branches:
+#               only: staging
+#       - deploy-prod:
+#           requires:
+#             - approve-prod-deploy
+#           filters:
+#             branches:
+#               only: production
