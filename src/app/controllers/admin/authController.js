@@ -31,7 +31,7 @@ let controller = {
     // Register new User
     register:(req, res, next) => {
         const {username, email, password} = req.body
-        
+        // res.send(req.body)
         if(username && email && password){
             User.findOne({email:email}).then((response)=>{
                 if(response===null){
@@ -44,12 +44,14 @@ let controller = {
                         }).catch((err)=>{
                             console.log(err)
                             req.flash('error', err)
-                            res.redirect('login')
+                            // res.redirect('login')
+                            res.send('account created')
                         })
                 }else{
                     console.log('user exists')
                     req.flash('error', 'User Already Exists Login!')
-                    res.redirect('login')
+                    // res.redirect('login')
+                    res.send("error accout exists")
                 }
             })
         }

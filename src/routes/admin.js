@@ -26,6 +26,7 @@ const adminRoute = (admin)=>{
 
     admin.get('/login', unauth, AuthController.loginForm)
     admin.post('/login', unauth, AuthController.login)
+    admin.post('/register', unauth, AuthController.register)
 
     admin.get('/', auth, DashboardController.index);
     admin.get('/admins', auth, AdminController.index)
