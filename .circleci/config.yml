@@ -11,9 +11,6 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:10.9.0
-        environment:
-          NODE_OPTIONS: --max-old-space_size=8024
-        resource_class: large
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
