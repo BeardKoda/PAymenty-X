@@ -7,7 +7,7 @@ const IN_PROD = NODE_ENV === 'production'
 const path = require('path')
 
 const { auth, unauth, mid} = require('../app/middleware/user')
-const { AuthController, DashboardController, WalletController, TransactionController, ProfileController } = require('../app/controllers/users')
+const { AuthController, DashboardController, WalletController, TransactionController, ProfileController, ExchangeController } = require('../app/controllers/users')
 const ejs = require( 'ejs' )
 
 const userRoute = (user)=>{
@@ -37,13 +37,14 @@ const userRoute = (user)=>{
     // AUTHENTICATED ROUTES
     user.get('/', auth, DashboardController.index);
     user.get('/blank', auth, DashboardController.blank);
-    user.get('/buy-sell', auth, DashboardController.blank);
+    user.get('/buy-sell', auth, ExchangeController.index);
     user.get('/deposit', auth, TransactionController.showDeposit)
     user.post('/deposit/processing', auth, TransactionController.postDeposit)
 
     user.get('/withdraw', auth, TransactionController.showWithdraw)
     user.post('/withdraw/processing', auth, TransactionController.postWithdraw)
     user.get('/transactions', auth, TransactionController.index)
+    user.get('/exchange', auth, ExchangeController.index)
     // user.get('/transactions/all', auth, TransactionController.getAll)
     user.get('/settings', auth, DashboardController.blank);
     user.get('/profile', auth, ProfileController.index);

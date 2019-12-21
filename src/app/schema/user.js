@@ -25,6 +25,10 @@ const UserSchema = new Schema({
     isDeleted:{
         type:Boolean,
         default:false
+    },
+    lastLoggin:{
+        type:Date,
+        default:Date.now()
     }
 },
 {timestamps: true})

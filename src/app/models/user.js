@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const { SALT } = require('../../config/app')
 const {Wallet} = require('./index')
+const curency = require('../../config/currency')
 
 schema = require('../schema/user')
 
@@ -27,35 +28,20 @@ schema.statics.authenticate = function (email, password, callback) {
 
 schema.post('save', (result)=>{
   authuser = result
-  console.log(authuser)
-  Wallet. create({
-      userId:authuser._id,
-      type:"crypto",
-      currency:"Bitcoin",
-      CSF:"BTC",
-      amount:"0"
-    },
-    {
-      userId:authuser._id,
-      type:"crypto",
-      currency:"Etherum",
-      CSF:"ETH",
-      amount:"0"
-    },
-    {
-      userId:authuser._id,
-      type:"crypto",
-      currency:"Bitcon Cash",
-      CSF:"BCH",
-      amount:"0"
-    },
-    {
-    userId:authuser._id,
-    type:"crypto",
-    currency:"Ripple",
-    CSF:"XRP",
-    amount:"0"
-  })  
+  // console.log(authuser)
+  curency.forEach((cur)=>{
+    Wallet.findOne({userId:authuser._id}).then((response)=>{
+      if(response===null){
+        Wallet.create({
+          userId:authuser._id,
+          type:"crypto",
+          currency:cur.name,
+          CSF:cur.tag,
+          amount:"0"
+        })
+      }
+    })
+  })
 })
 
 schema.pre('save', function(next){

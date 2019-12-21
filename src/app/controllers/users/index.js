@@ -3,5 +3,6 @@ module.exports = {
     DashboardController : require('./dashboardController'),
     WalletController : require('./walletController'),
     ProfileController : require('./profileController'),
-    TransactionController : require('./transactionController')
+    TransactionController : require('./transactionController'),
+    ExchangeController:require('./exchangeController')
 }

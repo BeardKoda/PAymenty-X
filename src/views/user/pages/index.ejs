@@ -6,12 +6,8 @@
             <div class="p-3 light lt box-shadow-0 d-flex">
                 <div class="flex">
                     <h1 class="text-md mb-1 _400">Welcome back, <%= user.username %></h1><small class="text-muted">Last logged
-                        in: 03:00 21, July</small>
-                </div>
-                <div><small class="text-muted d-block">Status</small>
-                    <div class="mb-1 peity" data-plugin="peity" data-title="Status"
-                        data-option="'bar',{height: 20,width: 60,fill: [app.color.primary]}">
-                        56,32,21,16,25,23,42,24,6,10,44,27,34,52,54,59,61,68,78</div>
+                        in:<%  var current_datetime = user.lastLoggin %>
+                        <% var Ldated = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()%><%=Ldated%></small>
                 </div>
             </div>
             <div class="padding">
@@ -30,74 +26,42 @@
                     </div>
                     <%})%>
                 </div>
+                <hr/>
                 <div class="row">
                     <div class="col-sm-6 col-md-12 col-xl-6">
                         <div class="box p-3">
-                            <div class="box-header pl-0">
+                            <!-- <div class="box-header pl-0">
                                 <h3>Your Portfolio Balance</h3>
-                            </div>
+                            </div> -->
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mt-0">
-                                        <h2 class="text-lg text-dark">$179,626</h2>
-                                        <span class="text-success"><i class="fa fa-caret-up"></i> 64%</span>
+                                        <h2 class="text-lg text-dark">$<%=grandTotal%></h2>
+                                        <!-- <span class="text-success"><i class="fa fa-caret-up"></i> 64%</span> -->
                                     </div>
                                     <p class="pt-3">Overall balance</p>
                                     <div class="d-flex">
-                                        <p><button class="btn btn-fw primary mr-2" data-toggle="modal"
-                                                data-target="#deposit">Deposit</button></p>
-                                        <p><button class="btn btn-fw success" data-toggle="modal"
-                                                data-target="#withdraw"="">Withdraw</button></p>
+                                        <p><a href="/<%=url%>/deposit" class="btn btn-fw primary mr-2">Deposit</a></p>
+                                        <p><a href="/<%=url%>/Withdraw" class="btn btn-fw success">Withdraw</a></p>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <h5 class="text-sm">Portfolio Distribution</h5>
                                     <div class="list-group">
+                                        <%wallets.forEach((w)=>{%>
                                         <div class="p-1">
                                             <div class="d-flex">
-                                                <p class="mb-0">BTC</p>
-                                                <p class="mb-0">| 8.74</p>
+                                                <p class="mb-0"><%=w.currency%></p>
+                                                <p class="mb-0">|<%=w.amount%></p>
                                             </div>
                                             <div class="d-flex">
-                                                <div class="progress my-2 blue mr-2"
-                                                    style="height:3px;width: 78%;">
-                                                    <span class="progress-bar" role="progressbar"
-                                                        aria-valuenow="78" aria-valuemin="0"
-                                                        aria-valuemax="100"></span>
+                                                <div class="progress my-2 blue mr-2" style="height:3px;width: 0%;">
+                                                    <span class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></span>
                                                 </div>
-                                                <span class="gx-ml-2">78%</span>
+                                                <span class="gx-ml-2">0%</span>
                                             </div>
                                         </div>
-                                        <div class="p-1">
-                                            <div class="d-flex">
-                                                <p class="mb-0">RPL</p>
-                                                <p class="mb-0">| 1.23</p>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="progress my-2 pink mr-2"
-                                                    style="height:3px;width: 48%;">
-                                                    <span class="progress-bar" role="progressbar"
-                                                        aria-valuenow="48" aria-valuemin="0"
-                                                        aria-valuemax="100"></span>
-                                                </div>
-                                                <span class="gx-ml-2">48%</span>
-                                            </div>
-                                        </div>
-                                        <div class="p-1">
-                                            <div class="d-flex">
-                                                <p class="mb-0">LTE</p>
-                                                <p class="mb-0">| 0.71</p>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="progress my-2 deep-orange mr-2"
-                                                    style="height:3px;width: 34%;">
-                                                    <span class="progress-bar" role="progressbar"
-                                                        aria-valuenow="34" aria-valuemin="0"
-                                                        aria-valuemax="100"></span>
-                                                </div>
-                                                <span class="gx-ml-2">34%</span>
-                                            </div>
-                                        </div>
+                                        <%})%>
                                     </div>
                                 </div>
                             </div>
@@ -106,60 +70,24 @@
                     </div>
                     <div class="col-sm-6 col-md-12 col-xl-6">
                         <div class="box">
-                            <!-- <div class="box-header">
-                                <h3>Members</h3>
-                            </div> -->
                             <div class="box-body">
                                 <canvas id="chart-line-line" data-plugin="chart" height="120"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <hr/>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="box pt-3">
                             <div class="box-header">
-                                <h2 class="text-dark">Recent Transactions</h2>
-                            </div>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Account Holder Name</th>
-                                        <th>Last Transfer</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="box pt-3">
-                            <div class="box-header">
-                                <h2>Currency Calculator</h2>
+                                <h2>Transfer Coin</h2>
                             </div>
 
                             <div class="box-body">
-                                <p class="text-dark text-md">1.87 BTC equals</p>
+                                <!-- <p class="text-dark text-md">1.87 BTC equals</p>
                                 <h2 class="mb-2 text-blue font-weight-normal">11466.78 USD</h2>
-                                <p class="text-grey mb-3 mb-lg-4">@ 1 BTC = 6718.72 USD</p>
+                                <p class="text-grey mb-3 mb-lg-4">@ 1 BTC = 6718.72 USD</p> -->
 
                                 <form class="form-inline flex-wrap form-row pt-2" role="form">
                                     <div class="col-auto mb-2">
@@ -193,98 +121,83 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div id="deposit" class="modal fade" data-backdrop="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Deposit</h5>
-                </div>
-                <div class="modal-body p-lg">
-                    <form role="form" method="POST" action="<%=url%>/deposit">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="currency">Currency</label>
-                                <select class="form-control input-c" name="currency" id="currency">
-                                    <option value="BTC">BTC</option>
-                                    <option value="ETH">ETH</option>
-                                </select>
+                    <div class="col-sm-6">
+                        <div class="box pt-3">
+                            <div class="box-header">
+                                <h2 class="text-dark">Recent Transactions</h2>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="wallet">to</label>
-                                <select class="form-control input-c" name="wallet" id="wallet">
-                                    <option value="BTC">My Bitcoin wallet (0 BTC)</option>
-                                    <option value="BTC">My ETH wallet (0 BTC)</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="toWhere">Address</label>
-                                <input type="text" class="form-control" value="qwertyuioasdfghjkxcvbnmertyuixcvbnmghj" id="toWhere" readonly name="btcaddress">
-                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Date</th>
+                                        <th>Coin</th>
+                                        <th>Amount</th>
+                                        <th>Type</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%no=1%>
+                                    <% trans.forEach((t) => {%>
+                                    <tr>
+                                        <%  var current_datetime = t.createdAt %>
+                                         <% var dated = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()%>
+                                        <td><%=no++%></td>
+                                        <td><%=dated%></td>
+                                        <td><%=t.currencyFrom%></td>
+                                        <td><%=t.amount%></td>
+                                        <td><%=t.type%></td>
+                                        <td><a href="#" class="btn primary mr-]2">Details</a></td>
+                                    </tr>
+                                    <%})%>
+                                    <% if(trans.length == 0) {%>
+                                        <tr>
+                                            <td colspan="6" class="text-center">No transactions</td>
+                                        </tr>
+                                    <%}%>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn danger p-x-md">Continue</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="withdraw" class="modal fade" data-backdrop="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Withdraw</h5>
-                </div>
-                <div class="modal-body p-lg">
-                    <form role="form">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="withdrawCurrency">Currency</label>
-                                <select class="form-control input-c" id="withdrawCurrency">
-                                    <option>BTC</option>
-                                    <option>USD</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="withdrawWallet">From</label>
-                                <select class="form-control input-c" id="withdrawWallet">
-                                    <option>My Bitcoin wallet (0 BTC)</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-12">
-                                <label for="withdrawAddress">To</label>
-                                <input type="text" class="form-control" id="withdrawAddress"
-                                    placeholder="Paste, scan or select destination">
-                            </div>
-
-                            <div class="form-group col-6">
-                                <label for="withdrawAmount">Amount</label>
-                                <input type="number" class="form-control" id="withdrawAmount" placeholder="$0.00">
-
-                            </div>
-                            <div class="col-1 pt-4 mt-2 pl-3">
-                                <span class="mt-4">=</span>
-                            </div>
-                            <div class="form-group col-5">
-                                <label for="btc">BTC</label>
-                                <input type="number" class="form-control" id="btc" placeholder="0">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">Cancel</button> 
-                            <button type="button" class="btn danger p-x-md" data-dismiss="modal">Continue</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 <!-- </div> -->
 <!-- end main content -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script>
+    var ctx = document.getElementById('chart-line-line');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Pending', 'Cancelled', 'Completed'],
+                datasets: [{
+                    label: 'Transactions',
+                    data: ['<%=Ptrans%>','<%=Ctrans%>','<%=Dtrans%>',],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {}
+        });
+
+</script>
 <%- include('../partials/footer') %>

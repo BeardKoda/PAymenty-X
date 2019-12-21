@@ -19,6 +19,11 @@ var helpers = require('handlebars-helpers')();
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')(session);
 
+// GII database
+var mongo_express = require('mongo-express/lib/middleware')
+var mongo_express_config = require('./mongo_express_config')
+
+
 const IN_PROD = NODE_ENV === 'production'
 
 // load database
@@ -59,6 +64,7 @@ app.engine('ejs', (path, data, cb) => {
 app.set('views', path.join(__dirname, 'views'));
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
+app.use('/mongo_express', mongo_express(mongo_express_config))
 app.use(`/${ADMIN_URL}`, admin)
 app.use(`/${USER_URL}`, user)
 

@@ -1,17 +1,15 @@
 const mongoose = require('mongoose')
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('secret');
- 
-const { SALT } = require('../../config/app')
-// let SALT = 10
 
-const schema = require('../schema/transaction');
+
+const schema = require('../schema/exchange');
 
 schema.pre('save', function(next){
-    var transaction = this
-    if(transaction.isModified('amount')){
-        encrptyedA = cryptr.encrypt(transaction.amount)
-        transaction.amount = encrptyedA
+    var exchange = this
+    if(exchange.isModified('amount')){
+        encrptyedA = cryptr.encrypt(exchange.amount)
+        exchange.amount = encrptyedA
         next()
     }else{
         next()
@@ -25,5 +23,5 @@ schema.post('find', function(result){
     })
 })
 
-const transaction = mongoose.model('transaction', schema)
-module.exports = transaction 
+const exchange = mongoose.model('exchange', schema)
+module.exports = exchange

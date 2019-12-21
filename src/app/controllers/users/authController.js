@@ -19,9 +19,12 @@ let controller = {
                     res.redirect('login')
                 }
                 if(user){
-                    req.session.userId = user._id
-                    // console.log(req.session.user.email)
-                    res.redirect('/user')
+                    user.lastLoggin = Date.now()
+                    if(user.save()){
+                        req.session.userId = user._id
+                        // console.log(req.session.user.email)
+                        res.redirect('/user')
+                }
                 }
             })
         }else{

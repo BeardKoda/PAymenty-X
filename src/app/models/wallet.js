@@ -21,7 +21,7 @@ schema.post('find', function(result){
     result.forEach((wal)=>{
         decryptedA = cryptr.decrypt(wal.amount)
         wal.amount = decryptedA
-        console.log(wal.amount)
+        // console.log(wal.amount)
     })
 })
 

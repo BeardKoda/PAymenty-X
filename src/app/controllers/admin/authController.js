@@ -35,23 +35,17 @@ let controller = {
         if(username && email && password){
             User.findOne({email:email}).then((response)=>{
                 if(response===null){
-                    // console.log(res)
                     User.create(req.body)
                         .then((result)=>{
-                            console.log(result)
                             req.session.success = "Account Successfully created Login"
-                            res.redirect('login')
+                            res.status(200).json("Successfully Created Account")
                         }).catch((err)=>{
-                            console.log(err)
                             req.flash('error', err)
-                            // res.redirect('login')
                             res.send('account created')
                         })
                 }else{
-                    console.log('user exists')
                     req.flash('error', 'User Already Exists Login!')
-                    // res.redirect('login')
-                    res.send("error accout exists")
+                    res.status(200).json("error accout exists")
                 }
             })
         }
@@ -65,7 +59,6 @@ let controller = {
                 if(err) {
                     return next(err);
                 } else {
-                    console.log('loggedOut')
                     return res.redirect('login');
                 }
             });

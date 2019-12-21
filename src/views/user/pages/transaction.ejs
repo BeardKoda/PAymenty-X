@@ -59,9 +59,11 @@
                                             <tbody>
                                                 <%no=1%>
                                                 <%trans.forEach((t)=>{%>
+                                                    <%  var current_datetime =t.createdAt %>
+                                                <% var Ldated = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()%>
                                                 <tr>
                                                     <td><%=no++%></td>
-                                                    <td><%=t.createdAt%></td>
+                                                    <td><%=Ldated%></td>
                                                     <td><%=t.amount%> <%=t.currencyFrom%></td>
                                                     <td><%=t.type%></td>
                                                     <td><%=t.status%></td>

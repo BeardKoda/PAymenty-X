@@ -41,10 +41,10 @@ let controller = {
                 status:"awaiting",
                 data:JSON.stringify(response),
                 amount:req.body.amount
-            })
-            console.log(response)
+            }).catch((err)=>{console.log(err)})
+            // console.log(response)
             res.render('pages/deposit/pay', {title:'Send Payment', response})
-        })
+        }).catch((err)=>{console.log(err.message, 'error'), res.send(err.message)})
     },
 
     postWithdraw:(req, res, next)=>{

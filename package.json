@@ -18,6 +18,8 @@
     "express-session": "^1.17.0",
     "handlebars-helpers": "^0.10.0",
     "hbs": "^4.0.6",
+    "moment": "^2.24.0",
+    "mongo-express": "^0.53.0",
     "mongod": "^2.0.0",
     "mongoose": "^5.8.1"
   },
