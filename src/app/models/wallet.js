@@ -17,12 +17,12 @@ schema.pre('save', function(next){
         next()
     }
 })
-schema.post('find', function(result){
-    result.forEach((wal)=>{
+schema.post('init', function(wal){
+    // result.forEach((wal)=>{
         decryptedA = cryptr.decrypt(wal.amount)
         wal.amount = decryptedA
         // console.log(wal.amount)
-    })
+    // })
 })
 
 const wallet = mongoose.model('wallet', schema)

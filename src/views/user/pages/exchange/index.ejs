@@ -1,0 +1,114 @@
+<%- include('../../partials/top') %>
+<!-- main content --> <div class="padding">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <div class="box">
+                                <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active b-0" id="buyCoinLinks" data-toggle="tab"
+                                            href="#buyCoin">Buy</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="sellCoinLinks" data-toggle="tab"
+                                            href="#sellCoin">Sell</a>
+                                    </li>
+                                </ul>
+                                <div class="box-divider m-0"></div>
+                                <div class="box-body">
+                                    <div class="tab-content">
+                                        <form id="buyCoin" class="tab-pane fade show active" role="tabpanel">
+                                            <h3 class="text-center">Buy Coin</h3>
+                                            <div class="form-group">
+                                                <label class="mb-1 justify-content-start" for="Select Coin">Select the
+                                                    Crypto Currency ‘Minimum Value 0.001 BTC’</label>
+                                                <select class="form-control input-c" id="selectCryptocurrency">
+                                                    <option>Bitcoin</option>
+                                                    <option>Ethereum</option>
+                                                    <option>Bitcoin Cash</option>
+                                                    <option>Ripple</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="mb-1 justify-content-start" for="Payment Method">Choose
+                                                    Payment Method</label>
+                                                <select class="form-control input-c" id="selectPaymentMethod">
+                                                    <option>Visa</option>
+                                                    <option>Master</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-5">
+                                                    <div class="form-group">
+                                                        <label for="buyAmount">Amount</label>
+                                                        <input class="form-control input-c" type="number" name="buyAmount"
+                                                            id="buyAmount" placeholder="$0.00">
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 p-4 mt-2">
+                                                    <span class="pl-3">=</span>
+                                                </div>
+                                                <div class="col-5">
+                                                    <div class="form-group">
+                                                        <label for="Amount">BTC</label>
+                                                        <input class="form-control input-c" type="number" name="sellBTC"
+                                                            id="sellBTC" placeholder="$0.00">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="walletAddress">Address</label>
+                                                <input class="form-control input-c" type="number" name="amount"
+                                                    id="amount" placeholder="Paste or scan address">
+                                            </div>
+                                            <div class="form-group text-center">
+                                                <button type="submit" class="btn success"
+                                                    style="width: 300px;">Buy Coin</button>
+                                            </div>
+                                        </form>
+                                        <form id="sellCoin" class="tab-pane fade" role="tabpanel">
+                                            <h3 class="text-center">Sell</h3>
+                                            <div class="form-group">
+                                                <label class="mb-1 justify-content-start" for="Select Coin">Select the
+                                                    Crypto Currency ‘Minimum Value 0.001 BTC’</label>
+                                                <select class="form-control input-c" id="from">
+                                                    <option>Bitcoin</option>
+                                                    <option>Ethereum</option>
+                                                    <option>Bitcoin Cash</option>
+                                                    <option>Ripple</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-5">
+                                                    <div class="form-group">
+                                                        <label for="Amount">Amount</label>
+                                                        <input class="form-control input-c" type="number" name="sellAmount"
+                                                            id="sellAmount" placeholder="$0.00">
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 p-4 mt-2">
+                                                    <span class="pl-3">=</span>
+                                                </div>
+                                                <div class="col-5">
+                                                    <div class="form-group">
+                                                        <label for="Amount">BTC</label>
+                                                        <input class="form-control input-c" type="number" name="btcAmount"
+                                                            id="btcAmount" placeholder="$0.00">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="walletAddress">Select Wallet</label>
+                                                <input class="form-control input-c" type="text" name="sellWallet" id="sellWallet" value="45678987656tycgynbuig6td5SAwwWwZTs4s45uhi" disabled>
+                                            </div>
+                                            <div class="form-group text-center">
+                                                <button type="submit" class="btn success" style="width: 300px;">Sell Coin</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!-- end main content -->
+<%- include('../../partials/footer') %>

@@ -5,13 +5,10 @@ let controller = {
         authuser = res.locals.user
         
         response={
-            title: 'Exhange', 
+            title: 'Exchange - Buy / Sell', 
         }
         // console.log(val)
         res.render('pages/exchange/index', response );
-    },
-    blank:(req,res,next)=>{
-        res.render('pages/blank', { title: 'Blank' });
     },
 
 }

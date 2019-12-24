@@ -21,12 +21,14 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-md-12 col-xl-6">
-                        <h5>Your Portfolio Balance</h5><hr/>
                         <div class="box p-3">
+                            <!-- <div class="box-header pl-0">
+                                <h3>Your Portfolio Balance</h3>
+                            </div> -->
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mt-0">
-                                        <h2 class="text-lg text-dark">$0</h2>
+                                        <h2 class="text-lg text-dark">$<%=grandTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')%></h2>
                                         <!-- <span class="text-success"><i class="fa fa-caret-up"></i> 64%</span> -->
                                     </div>
                                     <p class="pt-3">Overall balance</p>
@@ -38,43 +40,22 @@
                                 <div class="col-sm-6">
                                     <h5 class="text-sm">Portfolio Distribution</h5>
                                     <div class="list-group">
+                                        <%tt=0%>
+                                        <%wallets.forEach((w)=>{%>
+                                            <%tt+=parseInt(w.amount)%>
                                         <div class="p-1">
                                             <div class="d-flex">
-                                                <p class="mb-0">BTC</p>
-                                                <p class="mb-0">| 0</p>
+                                                <p class="mb-0"><%=w.currency%></p>
+                                                <p class="mb-0">|<%=w.amount%></p>
                                             </div>
                                             <div class="d-flex">
-                                                <div class="progress my-2 blue mr-2" style="height:3px;width: 0%;">
-                                                    <span class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></span>
+                                                <div class="progress my-2 blue mr-2" style="height:3px;width: <%= (parseInt(w.amount)/tt)*100%>%;">
+                                                    <span class="progress-bar" role="progressbar" aria-valuenow="<%= (parseInt(w.amount)/tt)*100 ? (parseInt(w.amount)/tt)*100 :0%>" aria-valuemin="0" aria-valuemax="100"></span>
                                                 </div>
-                                                <span class="gx-ml-2">0%</span>
+                                                <span class="gx-ml-2"><%= (parseInt(w.amount)/tt)*100 ? (parseInt(w.amount)/tt)*100 :0%>%</span>
                                             </div>
                                         </div>
-                                        <div class="p-1">
-                                            <div class="d-flex">
-                                                <p class="mb-0">RPL</p>
-                                                <p class="mb-0">| 0</p>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="progress my-2 pink mr-2" style="height:3px;width: 0%;">
-                                                    <span class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></span>
-                                                </div>
-                                                <span class="gx-ml-2">0%</span>
-                                            </div>
-                                        </div>
-                                        <div class="p-1">
-                                            <div class="d-flex">
-                                                <p class="mb-0">LTE</p>
-                                                <p class="mb-0">| 0</p>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="progress my-2 deep-orange mr-2"
-                                                    style="height:3px;width: 0%;">
-                                                    <span class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></span>
-                                                </div>
-                                                <span class="gx-ml-2">0%</span>
-                                            </div>
-                                        </div>
+                                        <%})%>
                                     </div>
                                 </div>
                             </div>

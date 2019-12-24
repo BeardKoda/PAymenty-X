@@ -43,7 +43,8 @@ const userRoute = (user)=>{
 
     user.get('/withdraw', auth, TransactionController.showWithdraw)
     user.post('/withdraw/processing', auth, TransactionController.postWithdraw)
-    user.get('/transactions', auth, TransactionController.index)
+    user.get('/transactions/deposit', auth, TransactionController.Dindex)
+    user.get('/transactions/withdraw', auth, TransactionController.Windex)
     user.get('/exchange', auth, ExchangeController.index)
     // user.get('/transactions/all', auth, TransactionController.getAll)
     user.get('/settings', auth, DashboardController.blank);

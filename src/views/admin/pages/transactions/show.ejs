@@ -1,0 +1,52 @@
+<%- include('../../partials/top') %>
+<!-- main content -->
+<div class="padding">
+    <div class="row">
+        <div class="col-sm-6 offset-md-3">
+            <div class="box">
+                <div class="box-header b-b text-center">
+                    <h3>Transaction Detail</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row mr-2" style="margin:10px">
+                        <div class="col-4">
+                            <small class="text-muted">Type</small>
+                            <div class="_500"><%=trans.type%></div>
+                        </div>
+                        <div class="col-4">
+                            <small class="text-muted">Amount</small>
+                            <div class="_500"><%=trans.amount%></div>
+                        </div>
+                        <div class="col-4">
+                            <small class="text-muted">Currency</small>
+                            <div class="_500"><%=trans.currencyTo%></div>
+                        </div>
+                    </div>
+                    <div class="row mr-2" style="margin:10px">
+                        <div class="col-4">
+                            <small class="text-muted">Status</small>
+                            <div class="_500"><%=trans.status%></div>
+                        </div>
+                        <div class="col-4">
+                            <small class="text-muted">Dated</small>
+                            <div class="_500"><%=trans.createdAt%></div>
+                        </div>
+                        <div class="col-4">
+                            <small class="text-muted">Currency</small>
+                            <div class="_500"><%=trans.currencyTo%></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <% if(trans.type === 'Deposit' && trans.status !== "Paid") {%>
+                            <a href="/<%=url%>/transaction/verify/<%=trans._id%>" class="col-4 offset-md-4 btn primary mr-2 text-white">Verify Transaction</a>
+                        <%} if(trans.type === 'Withdraw' && trans.status !== "Paid"){%>
+                            <a class="col-4 offset-md-4 btn primary mr-2 text-white">Approve Widthrawal</a>
+                        <%}%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- end of script -->
+<%- include('../../partials/footer') %>

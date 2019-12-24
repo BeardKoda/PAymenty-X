@@ -1,16 +1,46 @@
-const { Transaction } = require('../../models')
+const { Transaction, Wallet } = require('../../models')
 const client = require('../../../config/coin')
+const axios = require('axios')
+
+const getRate = async(value) =>{
+    // console.log(value)
+    rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+value)
+       return rate.data.market_data.current_price.usd
+}
 
 let controller = {
-    index:async(req,res,next)=>{
-        authuser = res.locals.user
-        const transaction = await Transaction.find({userId: authuser._id });
+    Dindex:async(req,res,next)=>{
         var total=0;
-        transaction.forEach((tra) =>{
-            total = (parseInt(total) + parseInt(tra.amount))
-        })
-        // console.log(transaction)
-        res.render('pages/transaction', {title:'Transactions', trans:transaction, total:total})
+        authuser = res.locals.user
+        trans = await Transaction.find({userId: authuser._id, type:'Deposit'})
+        wal = await Wallet.findOne({CSF:trans[0].currencyTo})
+        value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
+        Ltotal = await getRate(value) * parseInt(trans[0].amount)
+        
+        for (const t of trans) {
+            wal = await Wallet.findOne({CSF:t.currencyTo})
+            value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
+            rate = await getRate(value) * parseInt(t.amount)
+            total += rate
+        }
+        res.render('pages/transaction/deposit', {title:'Deposit History', trans, total, Ltotal})
+    },
+
+    Windex:async(req,res,next)=>{
+        total=0
+        authuser = res.locals.user
+        trans = await Transaction.find({userId: authuser._id, type:'Withdraw'});
+        wal = await Wallet.findOne({CSF:trans[0].currencyTo})
+        value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
+        Ltotal = await getRate(value) * parseInt(trans[0].amount)
+        
+        for (const t of trans) {
+            wal = await Wallet.findOne({CSF:t.currencyTo})
+            value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
+            rate = await getRate(value) * parseInt(t.amount)
+            total += rate
+        }
+        res.render('pages/transaction/withdraw', {title:'Withdrawal History', trans, total, Ltotal})
     },
 
     showDeposit:(req,res,next)=>{

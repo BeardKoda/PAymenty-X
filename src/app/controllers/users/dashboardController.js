@@ -1,6 +1,11 @@
 const { Wallet, Transaction } = require('../../models')
-var moment = require('moment');
+const axios =require('axios')
 
+const getRate = async(value) =>{
+    console.log(value)
+    rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+value)
+       return rate.data.market_data.current_price.usd
+}
 let controller = {
     index:async (req,res,next)=>{
         authuser = res.locals.user
@@ -8,16 +13,15 @@ let controller = {
         const wallet = await Wallet.find({userId: authuser._id }).sort({'_id':-1}).limit(4);
         const transactions = await Transaction.find({userId:authuser._id}).sort({'_id':-1}).limit(3);
         const Ptrans= await Transaction.find({status:"awaiting"})
-        const Ctrans= await Transaction.find({status:"cancelled"})
-        const Dtrans= await Transaction.find({status:"completed"})
+        const Ctrans= await Transaction.find({status:"Cancelled"})
+        const Dtrans= await Transaction.find({status:"Paid"})
         let grandTotal= 0
         let val=[]
-        wallet.forEach((wal)=>{
-            grandTotal= grandTotal + wal.amount * 150
-            val[wal.CSF]= wal.amount*150
-            // await client.convertLimits(options);
-        })
-        
+        for(const wal of wallet){
+            value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
+            rate = await getRate(value) * parseInt(wal.amount)
+            grandTotal += rate
+        }
         response={
             title: 'Dashboard', 
             wallets:wallet,
@@ -28,7 +32,7 @@ let controller = {
             grandTotal,
             val
         }
-        // console.log(val)
+        console.log(grandTotal)
         res.render('pages/index', response );
     },
     blank:(req,res,next)=>{
