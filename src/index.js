@@ -1,11 +1,13 @@
 const express = require('express')
 const session = require('express-session')
 const bodyParser = require("body-parser");
+var morgan = require('morgan')
 const path = require('path')
 const cookieParser = require('cookie-parser');
 const app = express()
 const admin = express()
 const user = express()
+var fs = require('fs')
 const ejs = require('ejs')
 const dotenv = require('dotenv');
 dotenv.config();
@@ -20,11 +22,14 @@ const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')(session);
 
 
-
 const IN_PROD = NODE_ENV === 'production'
 
 // load database
 // app.use(db)
+var LogStream = fs.createWriteStream(path.join(__dirname, 'logs/access.log'), { flags: 'a' })
+
+// setup the logger
+app.use(morgan('combined', { stream: LogStream }))
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -44,11 +49,6 @@ app.use(session({
 app.use(flash());
 app.use(function(req, res, next){
   res.locals.site_title = APP_NAME
-    // console.log(req.flash()['success'])
-    // if there's a flash message in the session request, make it available in the response, then delete it
-    //   res.locals.sessionFlash = req.session.sessionFlash;
-      res.locals.message = req.flash();
-    //   delete req.session.sessionFlash;
       next();
 });
 // console.log(USER_URL, ADMIN_URL, PORT)

@@ -67,9 +67,8 @@
                                                     <td><%=Ldated%></td>
                                                     <td><%=t.amount%> <%=t.currencyFrom%></td>
                                                     <td><%=t.type%></td>
-                                                    <td><%= t.status %></td>
-                                                    <td><%if(t.type=="Deposit"&&t.status=="awaiting"){ %><a href="<%=obj.status_url%>" class="btn primary mr-2">Info</a></td><%}else{%>
-                                                    <a href="#" class="btn warning mr-2">Paid</a></td><%}%>
+                                                    <td><span class="badge <%if(t.status==='awaiting'){%>warning<%}%><%if(t.status==='Paid'){%>success<%}%><%if(t.status==='Cancelled'){%>danger<%}%>"><%= t.status %></span></td>
+                                                    <td><%if(t.status==='waiting'){%><a href="<%=obj.status_url%>" target="_blank" class="btn info mr-2">More Info</a><%}else{%><span class="btn <%if(t.status==='awaiting'){%>warning<%}%><%if(t.status==='Paid'){%>success<%}%><%if(t.status==='Cancelled'){%>danger<%}%>"><%=t.status%></span><%}%></td>
                                                 </tr>
                                                 <%})%>
                                             </tbody>

@@ -22,6 +22,13 @@ const UserSchema = new Schema({
         type:Boolean,
         default:true
     },
+    isVerified: {
+      type:Boolean,
+      default:false
+    },
+    token:{
+        type:String
+    },
     isDeleted:{
         type:Boolean,
         default:false

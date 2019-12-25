@@ -11,34 +11,39 @@ const getRate = async(value) =>{
 let controller = {
     Dindex:async(req,res,next)=>{
         var total=0;
+        var Ltotal = 0
         authuser = res.locals.user
-        trans = await Transaction.find({userId: authuser._id, type:'Deposit'})
-        wal = await Wallet.findOne({CSF:trans[0].currencyTo})
-        value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
-        Ltotal = await getRate(value) * parseInt(trans[0].amount)
-        
-        for (const t of trans) {
-            wal = await Wallet.findOne({CSF:t.currencyTo})
+        trans = await Transaction.find({userId: authuser._id, type:'Deposit'}).sort({createdAt: -1})
+        if(trans.length > 0){
+            wal = await Wallet.findOne({CSF:trans[0].currencyTo})
             value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
-            rate = await getRate(value) * parseInt(t.amount)
-            total += rate
+            Ltotal = await getRate(value) * parseInt(trans[0].amount)
+            for (const t of trans) {
+                wal = await Wallet.findOne({CSF:t.currencyTo})
+                value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
+                rate = await getRate(value) * parseInt(t.amount)
+                total += rate
+            }
         }
         res.render('pages/transaction/deposit', {title:'Deposit History', trans, total, Ltotal})
     },
 
     Windex:async(req,res,next)=>{
         total=0
+        Ltotal=0
         authuser = res.locals.user
-        trans = await Transaction.find({userId: authuser._id, type:'Withdraw'});
-        wal = await Wallet.findOne({CSF:trans[0].currencyTo})
-        value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
-        Ltotal = await getRate(value) * parseInt(trans[0].amount)
-        
-        for (const t of trans) {
-            wal = await Wallet.findOne({CSF:t.currencyTo})
+        trans = await Transaction.find({userId: authuser._id, type:'Withdraw'}).sort({createdAt: -1})
+        if(trans.length > 0){
+            wal = await Wallet.findOne({CSF:trans[0].currencyTo})
             value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
-            rate = await getRate(value) * parseInt(t.amount)
-            total += rate
+            Ltotal = await getRate(value) * parseInt(trans[0].amount)
+        
+            for (const t of trans) {
+                wal = await Wallet.findOne({CSF:t.currencyTo})
+                value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
+                rate = await getRate(value) * parseInt(t.amount)
+                total += rate
+            }
         }
         res.render('pages/transaction/withdraw', {title:'Withdrawal History', trans, total, Ltotal})
     },
@@ -71,10 +76,23 @@ let controller = {
                 status:"awaiting",
                 data:JSON.stringify(response),
                 amount:req.body.amount
+            }).then((trans)=>{
+                var id=trans._id
+                res.render('pages/deposit/pay', {title:'Send Payment', response, id})
             }).catch((err)=>{console.log(err)})
             // console.log(response)
-            res.render('pages/deposit/pay', {title:'Send Payment', response})
         }).catch((err)=>{console.log(err.message, 'error'), res.send(err.message)})
+    },
+
+    verify:(req,res,next)=>{
+        res.send(req.body)
+
+    },
+    showPay:async(req,res,next)=>{
+        res.send(req.body)
+        trans = await Transaction.findOne({_id:id})
+        response = JSON.parse(trans.data)
+        res.render('pages/deposit/pay', {title:'Send Payment', response})
     },
 
     postWithdraw:(req, res, next)=>{

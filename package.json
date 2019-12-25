@@ -14,15 +14,18 @@
     "cryptr": "^6.0.1",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
+    "email-templates": "^6.1.1",
     "express": "^4.17.1",
     "express-messages": "^1.0.1",
     "express-session": "^1.17.0",
+    "express-validator": "^6.3.0",
     "handlebars-helpers": "^0.10.0",
     "hbs": "^4.0.6",
     "moment": "^2.24.0",
     "mongo-express": "^0.53.0",
     "mongod": "^2.0.0",
-    "mongoose": "^5.8.1"
+    "mongoose": "^5.8.1",
+    "nodemailer": "^6.4.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",

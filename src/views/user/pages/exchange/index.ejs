@@ -16,32 +16,30 @@
                                 <div class="box-divider m-0"></div>
                                 <div class="box-body">
                                     <div class="tab-content">
-                                        <form id="buyCoin" class="tab-pane fade show active" role="tabpanel">
+                                        <form id="buyCoin" class="tab-pane fade show active" role="tabpanel" method="POST" action="/<%=url%>/exchange/buy">
                                             <h3 class="text-center">Buy Coin</h3>
                                             <div class="form-group">
                                                 <label class="mb-1 justify-content-start" for="Select Coin">Select the
                                                     Crypto Currency ‘Minimum Value 0.001 BTC’</label>
-                                                <select class="form-control input-c" id="selectCryptocurrency">
-                                                    <option>Bitcoin</option>
-                                                    <option>Ethereum</option>
-                                                    <option>Bitcoin Cash</option>
-                                                    <option>Ripple</option>
+                                                <select class="form-control input-c" name="Currency" id="selectCryptocurrency">
+                                                    <%for(const coin of coins) {%>
+                                                        <option value="<%=coin.tag%>"><%=coin.name%></option>
+                                                    <%}%>
                                                 </select>
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label class="mb-1 justify-content-start" for="Payment Method">Choose
                                                     Payment Method</label>
                                                 <select class="form-control input-c" id="selectPaymentMethod">
                                                     <option>Visa</option>
                                                     <option>Master</option>
                                                 </select>
-                                            </div>
+                                            </div> -->
                                             <div class="form-row">
                                                 <div class="col-5">
                                                     <div class="form-group">
                                                         <label for="buyAmount">Amount</label>
-                                                        <input class="form-control input-c" type="number" name="buyAmount"
-                                                            id="buyAmount" placeholder="$0.00">
+                                                        <input class="form-control input-c" type="number" name="buyUSDAmount" id="buyAmount" placeholder="$0.00">
                                                     </div>
                                                 </div>
                                                 <div class="col-2 p-4 mt-2">
@@ -50,32 +48,29 @@
                                                 <div class="col-5">
                                                     <div class="form-group">
                                                         <label for="Amount">BTC</label>
-                                                        <input class="form-control input-c" type="number" name="sellBTC"
-                                                            id="sellBTC" placeholder="$0.00">
+                                                        <input class="form-control input-c" type="number" name="buyCoinAmoun" id="sellBTC" placeholder="$0.00">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="walletAddress">Address</label>
-                                                <input class="form-control input-c" type="number" name="amount"
-                                                    id="amount" placeholder="Paste or scan address">
+                                                <input class="form-control input-c" type="text" name="address" id="amount" placeholder="Paste or scan address">
                                             </div>
                                             <div class="form-group text-center">
-                                                <button type="submit" class="btn success"
-                                                    style="width: 300px;">Buy Coin</button>
+                                                <button type="submit" class="btn success" style="width: 300px;">Buy Coin</button>
                                             </div>
                                         </form>
-                                        <form id="sellCoin" class="tab-pane fade" role="tabpanel">
+                                        <!-- Sell -->
+                                        <form id="sellCoin" class="tab-pane fade" role="tabpanel" method="POST" action="/<%=url%>/exchange/sell">
                                             <h3 class="text-center">Sell</h3>
                                             <div class="form-group">
                                                 <label class="mb-1 justify-content-start" for="Select Coin">Select the
                                                     Crypto Currency ‘Minimum Value 0.001 BTC’</label>
-                                                <select class="form-control input-c" id="from">
-                                                    <option>Bitcoin</option>
-                                                    <option>Ethereum</option>
-                                                    <option>Bitcoin Cash</option>
-                                                    <option>Ripple</option>
-                                                </select>
+                                                    <select class="form-control input-c" name="Currency"  id="selectCryptocurrency">
+                                                        <%for(const coin of coins) {%>
+                                                            <option value="<%=coin.tag%>"><%=coin.name%></option>
+                                                        <%}%>
+                                                    </select>
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-5">
@@ -91,14 +86,18 @@
                                                 <div class="col-5">
                                                     <div class="form-group">
                                                         <label for="Amount">BTC</label>
-                                                        <input class="form-control input-c" type="number" name="btcAmount"
+                                                        <input class="form-control input-c" type="number" name="CoinAmount"
                                                             id="btcAmount" placeholder="$0.00">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="walletAddress">Select Wallet</label>
-                                                <input class="form-control input-c" type="text" name="sellWallet" id="sellWallet" value="45678987656tycgynbuig6td5SAwwWwZTs4s45uhi" disabled>
+                                                <select class="form-control input-c" name="walletAddress" id="walletAddress">
+                                                    <%for(const wallet of wallets) {%>
+                                                        <option value="<%=wallet.CSF%>"><%=wallet.currency%> Wallet (<%=wallet.amount%>)</option>
+                                                    <%}%>
+                                                </select>
                                             </div>
                                             <div class="form-group text-center">
                                                 <button type="submit" class="btn success" style="width: 300px;">Sell Coin</button>

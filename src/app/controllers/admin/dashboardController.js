@@ -24,9 +24,8 @@ let controller = {
         response = {
             title: 'Dashboard', trans, users, total:grandTotal, w_total, d_total,
         }
-        console.log(grandTotal)
-        console.log(w_total)
-        console.log(d_total)
+        // console.log("grandTotal")
+        req.flash('error', "Welcome")
         res.render('pages/index', response);
     }
 }

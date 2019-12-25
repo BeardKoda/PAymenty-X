@@ -24,5 +24,12 @@ module.exports = {
 
     SALT : 10,
     COIN_KEY :process.env.COIN_KEY,
-    COIN_SECRET: process.env.COIN_SECRET
+    COIN_SECRET: process.env.COIN_SECRET,
+    // Email 
+    MAIL: {
+        USER : process.env.EMAIL_USER,
+        PASS : process.env.EMAIL_PASS,
+        HOST : process.env.EMAIL_HOST,
+        PORT : process.env.EMAIL_PORT
+    }
 };

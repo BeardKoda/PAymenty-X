@@ -1,4 +1,4 @@
-<%- include('../partials/top') %>
+<%- include('../../partials/top') %>
 <!-- main content -->
 <div class="padding">
     <div class="row">
@@ -58,8 +58,9 @@
                                         <td><%=t.createdAt%></td>
                                         <td><%=t.amount%> <%=t.currencyFrom%></td>
                                         <td><%=t.type%></td>
-                                        <td><%=t.status%></td>
-                                        <td><a href="/<%=url%>/transaction/<%=t._id%>" class="btn primary mr-2">Info</a></td>
+                                        <td><span class="badge <%if(t.status==='awaiting'){%>warning<%}%><%if(t.status==='Paid'){%>success<%}%><%if(t.status==='Cancelled'){%>danger<%}%>"><%= t.status %></span></td>
+                                        <td><a href="/<%=url%>/transaction/<%=t._id%>" class="btn info">more Info</a></td>
+                                        <!-- <td><a href="/<%=url%>/transaction/<%=t._id%>" class="btn primary mr-2">Info</a></td> -->
                                     </tr>
                                     <%})%>
                                 </tbody>
@@ -81,4 +82,4 @@
 
 </script>
 <!-- end of script -->
-<%- include('../partials/footer') %>
+<%- include('../../partials/footer') %>

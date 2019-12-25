@@ -1,13 +1,13 @@
 <div>
 <%if(message) {%>
 	<%if(message.success) {%>
-		<div class="alert">
-			<strong class="alert-alert-success"><%= message.success %></strong> 
+		<div class="alert alert-sm alert-success">
+			<p class="m-0"><%= message.success %></p>	
 		</div>
-	<%}%>
+	<%}%>		
 	<%if(message.error) {%>
-		<div class="alert">
-			<strong class="alert-alert-success"><%= message.error %></strong> 
+		<div class="alert alert-sm alert-warning">
+			<p class="m-0"><%= message.error %></p>	
 		</div>
 	<%}%>
 <%}%>

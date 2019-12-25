@@ -1,0 +1,85 @@
+<%- include('../../partials/top') %>
+<!-- main content -->
+<div class="padding">
+    <div class="row">
+        <div class="col-6 col-md-4 col-lg-4">
+            <div class="box p-3">
+                <div class="d-flex"><span class="text-muted">Completed Transactions</span></div>
+                <div class="py-3 text-center text-lg text-success"><%=completed%></div>
+                <!-- <div class="d-flex"><span class="flex text-muted">Income</span> <span><i
+                            class="fa fa-caret-up text-success"></i> 12%</span></div> -->
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-4">
+            <div class="box p-3">
+                <div class="d-flex"><span class="text-muted">Pending Transactions</span></div>
+                <div class="py-3 text-center text-lg text-danger"><%=pending%></div>
+                <!-- <div class="d-flex"><span class="flex text-muted">New order</span> <span><i
+                            class="fa fa-caret-down text-danger"></i> 5%</span></div> -->
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-4">
+            <div class="box p-3">
+                <div class="d-flex"><span class="text-muted">Cancelled Transactions</span></div>
+                <div class="py-3 text-center text-lg text-primary"><%=cancelled%></div>
+                <!-- <div class="d-flex"><span class="flex text-muted">New income</span> <span><i
+                            class="fa fa-caret-up text-primary"></i> 1%</span></div> -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-12">
+            <p>All Transactions</p>
+            <div class="table-responsive">
+                <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="datatable" class="table v-middle p-0 m-0 box dataTable no-footer"style="width: 1168px;">
+                                <thead>
+                                    <tr role="row">
+                                        <th>id</th>
+                                        <th>Date
+                                        </th>
+                                        <th>Amount
+                                        </th>
+                                        <th>Type
+                                        </th>
+                                        <th>Status</th>
+                                        <th>Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%no=1%>
+                                    <%trans.forEach((t)=>{%>
+                                    <tr>
+                                        <td><%=no++%></td>
+                                        <td><%=t.createdAt%></td>
+                                        <td><%=t.amount%> <%=t.currencyFrom%></td>
+                                        <td><%=t.type%></td>
+                                        <td><span class="badge <%if(t.status==='awaiting'){%>warning<%}%><%if(t.status==='Paid'){%>success<%}%><%if(t.status==='Cancelled'){%>danger<%}%>"><%= t.status %></span></td>
+                                        <td><a href="/<%=url%>/transaction/<%=t._id%>" class="btn info">more Info</a></td>
+                                        <!-- <td><a href="/<%=url%>/transaction/<%=t._id%>" class="btn primary mr-2">Info</a></td> -->
+                                    </tr>
+                                    <%})%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+
+<script>
+    (function ($) {
+        $("#datatable").dataTable();
+    })(jQuery);
+
+</script>
+<!-- end of script -->
+<%- include('../../partials/footer') %>

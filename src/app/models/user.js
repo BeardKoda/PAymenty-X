@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const { SALT } = require('../../config/app')
 const {Wallet} = require('./index')
 const curency = require('../../config/currency')
+var crypto = require("crypto");
 
 schema = require('../schema/user')
 
@@ -52,6 +53,7 @@ schema.pre('save', function(next){
             bcrypt.hash(user.password, salt, (err, hash)=>{
                 if(err)return next(err)
                 user.password=hash
+                user.token= crypto.randomBytes(45).toString('hex')
                 next()
             })
         } )
@@ -59,6 +61,25 @@ schema.pre('save', function(next){
         next()
     }
 })
-
+schema.statics.verify = (token, callback) =>{
+  User.findOne({ token: token})
+  .exec((err, user)=>{
+    if(err){
+      return callback(err)
+    }else if(!user){
+      var err = "Invalid token"
+      return callback(err)
+    }
+    if(user.token ===token){
+      user.token=null
+      user.isVerified=true
+      user.save()
+      return callback(null, user)
+    }else{
+      err = "Non token/ invalid token"
+      return callback(err)
+    }
+  })
+}
 const User = mongoose.model('User', schema)
 module.exports = User 

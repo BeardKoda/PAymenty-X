@@ -1,10 +1,15 @@
 const { Wallet, Transaction } = require('../../models')
 const axios =require('axios')
+const Emitter = require('../../events/emitter');
 
 const getRate = async(value) =>{
-    console.log(value)
-    rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+value)
+    // console.log(value)
+    try{
+        rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+value)
        return rate.data.market_data.current_price.usd
+    }catch(err){
+      console.log(err)
+    }
 }
 let controller = {
     index:async (req,res,next)=>{
@@ -32,7 +37,6 @@ let controller = {
             grandTotal,
             val
         }
-        console.log(grandTotal)
         res.render('pages/index', response );
     },
     blank:(req,res,next)=>{

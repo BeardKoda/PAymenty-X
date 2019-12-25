@@ -37,11 +37,11 @@
                                 <i class="fa fa-align-left"></i></span> <span class="nav-text">Transactions</span>
                             </a>
                             <ul class="nav-sub">
-                                <li class="<%if('/'+url+'/transactions'==c_url){%> active <%};%>">
-                                    <a href="/<%= url %>/transactions"><span class="nav-text">Deposits</span></a>
+                                <li class="<%if('/'+url+'/transactions/deposits'==c_url){%> active <%};%>">
+                                    <a href="/<%= url %>/transactions/deposits"><span class="nav-text">Deposits</span></a>
                                 </li>
-                                <li class="<%if('/'+url+'/transactions'==c_url){%> active <%};%>">
-                                    <a href="/<%= url %>/transactions"><span class="nav-text">Deposits</span></a>
+                                <li class="<%if('/'+url+'/transactions/withdraws'==c_url){%> active <%};%>">
+                                    <a href="/<%= url %>/transactions/withdraws"><span class="nav-text">Withdrawals</span></a>
                                 </li>
                             </ul>
                         </li>
