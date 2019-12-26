@@ -46,13 +46,11 @@ const adminRoute = (admin)=>{
     admin.get('**', auth, (req,res,next)=>{
         res.render('error/404')
     })
-    admin.error(function(err, req, res) {
-        res.render('error/500.ejs', {
-           status: 500,
-           locals: {
-              error: error
-           }
-        });
+    
+    // Handle 500
+    admin.use(function(error, req, res, next) {
+        res.status(500);
+        res.render('error/500', {title:'500: Internal Server Error', error: error});
     });
 }
 

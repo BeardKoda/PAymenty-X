@@ -7,16 +7,12 @@ const appRoute = (app)=>{
     app.get('**', (req,res,next)=>{
         res.render('front/error/404')
     })
-    // if (app.settings.env === 'production') {
-        app.error(function(err, req, res) {
-            res.render('500.ejs', {
-               status: 500,
-               locals: {
-                  error: error
-               }
-            });
-        });
-    //  }
+    
+    // Handle 500
+    app.use(function(error, req, res, next) {
+        res.status(500);
+        res.render('error/500', {title:'500: Internal Server Error', error: error});
+    });
 }
 
 module.exports = appRoute;
