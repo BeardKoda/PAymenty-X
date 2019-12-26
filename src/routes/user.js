@@ -69,6 +69,14 @@ const userRoute = (user)=>{
     user.get('**', auth, (req,res,next)=>{
         res.render('error/404')
     })
+    user.error(function(err, req, res) {
+        res.render('error/500.ejs', {
+           status: 500,
+           locals: {
+              error: error
+           }
+        });
+    });
 
 }
 
