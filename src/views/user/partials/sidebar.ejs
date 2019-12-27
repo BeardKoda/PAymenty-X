@@ -44,6 +44,18 @@
                                 <span class="nav-text">Wallet</span>
                             </a>
                         </li>
+                        <li class="<%if('/'+url+'/settings'==c_url){%> active <%};%>">
+                            <a href="/<%= url %>/settings"><span class="nav-icon">
+                                    <i class="fa fa-cog"></i></span>
+                                <span class="nav-text">Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/<%= url %>/logout"><span class="nav-icon">
+                                    <i class="fa fa-sign-out"></i></span>
+                                <span class="nav-text">Logout</span>
+                            </a>
+                        </li>
                 </div>
             </div>
         </div>

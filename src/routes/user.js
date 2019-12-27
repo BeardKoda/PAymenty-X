@@ -61,16 +61,22 @@ const userRoute = (user)=>{
     user.post('/exchange/buy', auth, ExchangeController.buy)
     user.post('/exchange/sell', auth, ExchangeController.sell)
     // user.get('/transactions/all', auth, TransactionController.getAll)
-    user.get('/settings', auth, DashboardController.blank);
+    // settings
+    user.get('/settings', auth, ProfileController.setting);
+    user.post('/profile/update', auth, ProfileController.update)
+    user.post('/settings/update', auth, ProfileController.bank)
     user.get('/profile', auth, ProfileController.index);
+
     user.get('/wallet', auth, WalletController.index)
+    user.post('/wallet/generate', auth, WalletController.generate)
+    user.post('/password/update/', auth, AuthController.passUpdate)
     user.get('/logout', auth, AuthController.logout)
 
     user.get('**', auth, (req,res,next)=>{
         res.render('error/404')
     })
     
-// Handle 500
+    // Handle 500
     user.use(function(error, req, res, next) {
         res.status(500);
         res.render('error/500', {title:'500: Internal Server Error', error: error});

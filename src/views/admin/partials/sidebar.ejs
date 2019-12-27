@@ -32,6 +32,12 @@
                                 <span class="nav-text">Users</span>
                             </a>
                         </li>
+                        <li class="<%if('/'+url+'/coins'==c_url){%> active <%};%>">
+                            <a href="/<%= url %>/coins"><span class="nav-icon">
+                                    <i class="fa fa-bitcoin"></i></span>
+                                <span class="nav-text">Coins</span>
+                            </a>
+                        </li>
                         <li>
                             <a><span class="nav-caret"><i class="fa fa-caret-down"></i></span> <span class="nav-icon">
                                 <i class="fa fa-align-left"></i></span> <span class="nav-text">Transactions</span>
@@ -45,10 +51,29 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="<%if('/'+url+'/exchanges'==c_url){%> active <%};%>">
-                            <a href="/<%= url %>/exchanges"><span class="nav-icon">
-                                    <i class="fa fa-shopping-cart"></i></span>
-                                <span class="nav-text">Exchange</span>
+                        <li>
+                            <a><span class="nav-caret"><i class="fa fa-caret-down"></i></span> <span class="nav-icon">
+                                <i class="fa fa-align-left"></i></span> <span class="nav-text">Exchange</span>
+                            </a>
+                            <ul class="nav-sub">
+                                <li class="<%if('/'+url+'/exchange/buy'==c_url){%> active <%};%>">
+                                    <a href="/<%= url %>/exchange/buy"><span class="nav-text">Buy</span></a>
+                                </li>
+                                <li class="<%if('/'+url+'/exchange/sell'==c_url){%> active <%};%>">
+                                    <a href="/<%= url %>/exchange/sell"><span class="nav-text">Sell</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="<%if('/'+url+'/settings'==c_url){%> active <%};%>">
+                            <a href="/<%= url %>/settings"><span class="nav-icon">
+                                    <i class="fa fa-cog"></i></span>
+                                <span class="nav-text">Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/<%= url %>/logout"><span class="nav-icon">
+                                    <i class="fa fa-sign-out"></i></span>
+                                <span class="nav-text">Logout</span>
                             </a>
                         </li>
                 </div>

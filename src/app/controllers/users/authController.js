@@ -100,6 +100,26 @@ let controller = {
             console.log(err)
         }
     },
+    
+    passUpdate:(req,res,next)=>{
+        id =res.locals.user._id
+        var {oldPass, newPass, cnewPass} = req.body
+        if(cnewPass !== newPass){
+            req.flash('error', "Password do not match")
+            res.redirect('/'+res.locals.url+'/settings')
+        }else{
+            User.passwordChange(id, oldPass,newPass, (err, result)=>{
+                //  return view
+                if(err){
+                    req.flash('error', err)
+                    res.redirect('/'+res.locals.url+'/settings')
+                }else{
+                    req.flash('success', "Password Successfully Updated")
+                    res.redirect('/'+res.locals.url+'/settings')
+                }
+            })
+        }
+    },
 
     // Logout User
     logout:(req, res, next) => {

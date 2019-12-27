@@ -4,5 +4,7 @@ module.exports = {
     User:require('../models/user'),
     Wallet:require('./wallet'),
     Transaction :require('./transaction'),
-    Exchange:require('./exchange')
+    Exchange:require('./exchange'),
+    Coin:require('./coin'),
+    Udata:require('./udata')
 }

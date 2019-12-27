@@ -2,18 +2,28 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
 const schema = new Schema({
-    currency:{
+    name:{
         type:String,
         required: true,
+        unique:1,
         trim: true
     },
-    CSF:{
+    tag:{
         type:String,
         required: true,
+        unique:1,
         trim: true
     },
     amount:{
         type:String,
+    },
+    active:{
+        type:Boolean,
+        default:true
+    },
+    isDeleted:{
+        type:Boolean,
+        default:false
     }
 },
 {timestamps: true})

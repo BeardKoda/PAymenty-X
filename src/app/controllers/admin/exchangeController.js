@@ -1,26 +1,32 @@
-const { Transaction, Wallet, Coin } = require('../../models')
+const { Exchange, Wallet, Coin } = require('../../models')
 const client = require('../../../config/coin')
 const axios = require('axios')
 
 let controller = {
-    index :async(req, res, next) => {
-        const trans = await Transaction.find({type:"Deposit"}).sort({createdAt: -1})
-        const completed =await Transaction.find({type:"Deposit", status:"Paid"}), pending=await Transaction.find({type:"Deposit",status:"awaiting"}), cancelled=await Transaction.find({type:"Deposit", status:"Cancelled"}),
+    bindex :async(req, res, next) => {
+        const trans = await Exchange.find({type:"buy"}).sort({createdAt: -1})
+        const completed =await Exchange.find({type:"buy", status:"Paid"}), 
+        pending=await Exchange.find({type:"Deposit",status:"awaiting"}), 
+        cancelled=await Exchange.find({type:"buy", status:"Cancelled"}),
+        coins= await Coin.find({isDeleted:false})
         response ={
-            title:'Deposits',
+            title:'Exchnange - Buy',
             trans, completed:completed.length, pending:pending.length, cancelled:cancelled.length, 
+            coins
         }
-        res.render('pages/transaction/deposit', response);
+        res.render('pages/exchange/buy', response);
     },
 
-    Windex :async(req, res, next) => {
-        const trans = await Transaction.find({ type:"Withdraw"}).sort({createdAt: -1})
-        const completed =await Transaction.find({type:"Withdraw",status:"Paid"}), pending=await Transaction.find({type:"Withdraw",status:"awaiting"}), cancelled=await Transaction.find({type:"Withdraw",status:"Cancelled"}),
+    sindex :async(req, res, next) => {
+        const trans = await Exchange.find({ type:"sell"}).sort({createdAt: -1})
+        const completed =await Exchange.find({type:"sell",status:"Paid"}), pending=await Exchange.find({type:"sell",status:"awaiting"}), cancelled=await Exchange.find({type:"sell",status:"Cancelled"}),
+        coins= await Coin.find({isDeleted:false})
         response ={
-            title:'Withdrawals',
+            title:'Exchange - sell',
             trans, completed:completed.length, pending:pending.length, cancelled:cancelled.length, 
+            coins
         }
-        res.render('pages/transaction/withdraw', response);
+        res.render('pages/exchange/sell', response);
     },
 
     getRates:async(req,res,next)=>{
@@ -48,18 +54,18 @@ let controller = {
 
     show:async(req,res,next)=>{
         let {id} = req.params
-        const trans = await Transaction.find({_id:id})
+        const trans = await Exchange.find({_id:id})
         // console.log(trans[0])
         response={
-            title:"Transaction",
+            title:"Exchange",
             trans:trans[0]
         }
-        res.render('pages/transaction/show', response)
+        res.render('pages/Exchange/show', response)
     },
 
     getTX:async(req, res, next)=>{
         let {id} = req.params
-        Transaction.findOne({_id:id}).then(async(trans)=>{
+        Exchange.findOne({_id:id}).then(async(trans)=>{
             // if(err) res.send('error')
             // console.log(trans.TxId, trans.amount)
             let tranAmount = trans.amount
@@ -78,30 +84,30 @@ let controller = {
                     }).catch((err)=>{
                         console.log(err)
                     })
-                    final = await Transaction.findOne({_id:id})
+                    final = await Exchange.findOne({_id:id})
                     final.status = "Paid",
                     final.data=JSON.stringify(result),
                     final.save()
                     req.flash('success', "Successfully Verified")
-                    res.redirect("/"+res.locals.url+"/transactions/deposits")
+                    res.redirect("/"+res.locals.url+"/Exchanges/deposits")
                 }else if(result.status===0){
-                    final = await Transaction.findOne({_id:id})
+                    final = await Exchange.findOne({_id:id})
                     final.status = result.status_text
                     final.data=JSON.stringify(result)
                     final.save()
                     req.flash('success', "Successfully Verified")
-                    res.redirect("/"+res.locals.url+"/transactions/deposits")
+                    res.redirect("/"+res.locals.url+"/Exchanges/deposits")
                 }else {
-                    final = await Transaction.findOne({_id:id})
+                    final = await Exchange.findOne({_id:id})
                     final.status = 'Cancelled'
                     final.data=JSON.stringify(result)
                     final.save()
                     req.flash('success', "Successfully Verified")
-                    res.redirect("/"+res.locals.url+"/transactions/deposits")
+                    res.redirect("/"+res.locals.url+"/Exchanges/deposits")
                 }
             }else{
-                req.flash('error', "Transaction Verified Already")
-                res.redirect("/"+res.locals.url+"/transactions/deposits")
+                req.flash('error', "Exchange Verified Already")
+                res.redirect("/"+res.locals.url+"/Exchanges/deposits")
             }
         }).catch((err)=>{console.log(err)})
     },
@@ -118,7 +124,6 @@ let controller = {
         trans = await client.createWithdrawal(options);
         res.send(trans)
     },
-    
     getWithdr:async(req,res,next)=>{
         id = req.body.id
         options = {

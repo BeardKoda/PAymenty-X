@@ -3,14 +3,11 @@ const axios =require('axios')
 const Emitter = require('../../events/emitter');
 
 const getRate = async(value) =>{
-    // console.log(value)
-    try{
-        rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+value)
+    axios.get('https://api.coingecko.com/api/v3/coins/'+value).then((rate)=>{
        return rate.data.market_data.current_price.usd
-    }catch(err){
-      console.log(err)
-    }
+    })
 }
+
 let controller = {
     index:async (req,res,next)=>{
         authuser = res.locals.user

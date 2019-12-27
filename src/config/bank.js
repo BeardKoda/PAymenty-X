@@ -1,0 +1,10 @@
+module.exports = {
+    bank:"SBERBANK",
+    acctName:"EVAN MORIS",
+    acctNo:"40820840355860041646",
+    acctAddress:"GRAZHDANSKY PROSPEKT, HOUSE 121/ 100 SAINT PETERSBURG",
+    bAddress:"SBERBANK..(SEVERO-ZAPADNY SAINT PETERSBURG RUSSIA)",
+    sCode:"SABRRU2P.",
+    spCode:"190000",
+    bb:"BANK SBERBANK OF RUSSIA"
+}

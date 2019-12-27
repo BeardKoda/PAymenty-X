@@ -2,34 +2,35 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
 const schema = new Schema({
-    userId:{
-        type:String,
-        required: true,
-        trim: true
-    },
-    type:{
-        type:String,
-        required: true,
-        enum:['buy', 'sell'],
-        trim: true
-    },
-    currency:{
-        type:String,
-        required: true,
-        trim: true
-    },
-    status:{
-        type:String,
-        required: true,
-        enum:['Awaiting', 'Pending', 'Processing', 'Paid'],
-        trim: true
-    },
-    data:{
-        type:String,
-    },
-    amount:{
+    _uid:{
         type:String,
         required:true
+    },
+    firstName:{
+        type:String,
+        default:null,
+        trim: true
+    },
+    lastName:{
+        type:String,
+        default:null,
+        trim: true
+    },
+    location:{
+        type:String,
+        default:null,
+    },
+    telNo:{
+        type:String,
+        default:null,
+    },
+    Account_Details:{
+        type:String,
+        default:null
+    },
+    pics:{
+        type:String,
+        default:"user.jpeg"
     }
 },
 {timestamps: true})

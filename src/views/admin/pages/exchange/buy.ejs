@@ -1,0 +1,95 @@
+<%- include('../../partials/top') %>
+<!-- main content -->
+
+<div class="padding">
+    <div class="row">
+        <div class="col-6 col-md-4 col-lg-4">
+            <div class="box p-3">
+                <div class="d-flex"><span class="text-muted">Completed</span></div>
+                <div class="py-3 text-center text-lg text-success"><%=completed%></div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-4">
+            <div class="box p-3">
+                <div class="d-flex"><span class="text-muted">Pending</span></div>
+                <div class="py-3 text-center text-lg text-danger"><%=pending%></div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-4">
+            <div class="box p-3">
+                <div class="d-flex"><span class="text-muted">Cancelled </span></div>
+                <div class="py-3 text-center text-lg text-primary"><%=cancelled%></div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-sm-10">
+            <h4>Buy Requests - Exchange</h4>
+        </div>
+        <div class="col-sm-2 v-right">
+            <!-- <a href="/<%=url%>/coin/add" class="btn btn-fw primary mr-1">Add Coin</a> -->
+        </div>
+    </div>
+    <hr/>
+    
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="datatable" class="table v-middle p-0 m-0 box dataTable no-footer"style="width: 1168px;">
+                                <thead>
+                                    <tr role="row">
+                                        <th>id</th>
+                                        <th>Name</th>
+                                        <th>Tag</th>
+                                        <th>Amount</th>
+                                        <th>Date Created</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%var no=1%>
+                                    <%trans.forEach((t)=>{%>
+                                    <tr>
+                                        <td><%=no++%></td>
+                                        <td><%=t.name%></td>
+                                        <td><%=t.tag%></td>
+                                        <td>$<%=parseInt(t.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')%></td>
+                                        <td><%  var current_datetime = t.createdAt %>
+                                            <% var Ldated = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()%><%=Ldated%></td>
+                                        <td><%if(t.active){%>active<%}else{%>unactive<%}%></td>
+                                        <td class="row">
+                                            <a href="/<%=url%>/coin/edit/<%=t._id%>"style="margin-right:5px;" class="btn btn-sm info text-white">Edit</a>
+                                            <form method="POST" action="/<%=url%>/coin/toggle/<%=t._id%>">
+                                                <%if(t.active){%><button type="submit" style="margin-right:5px;" class="btn btn-sm success text-white">Disable</button><%}else{%><button type="submit" style="margin-right:5px;" class="btn btn-sm warning text-white">Enable</button><%}%>
+                                            </form>
+                                            <form method="POST" action="/<%=url%>/coin/delete/<%=t._id%>">
+                                                <button type="submit" class="btn btn-sm danger text-white" style="margin-right:5px;">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <%})%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+
+<script>
+    (function ($) {
+        $("#datatable").dataTable();
+    })(jQuery);
+
+</script>
+<!-- end of script -->
+<%- include('../../partials/footer') %>

@@ -1,13 +1,18 @@
 <div>
 <%if(message) {%>
 	<%if(message.success) {%>
-		<div class="alert alert-sm alert-success">
-			<p class="m-0"><%= message.success %></p>	
+		<div class="row">
+			<div class="col-sm-2 offset-sm-8 alert alert-sm alert-success"  style="position:fixed; z-index: 1;">
+				<p class="m-0 text-center"><%= message.success %></p>	
+			</div>
 		</div>
 	<%}%>		
 	<%if(message.error) {%>
-		<div class="alert alert-sm alert-warning">
-			<p class="m-0"><%= message.error %></p>	
+		<div class="row">
+			<div class="col-sm-2 offset-sm-8 alert alert-sm alert-danger"  style="position:fixed; z-index: 1;">
+				<p class="m-0 text-center"><%= message.error %></p>	
+			</div>
+			<!-- <span data-dismiss="alert-close">x</span> -->
 		</div>
 	<%}%>
 <%}%>

@@ -1,0 +1,44 @@
+<%- include('../partials/top') %>
+<!-- main content --> 
+<div class="padding">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="box">
+                <div class="box-divider m-0"></div>
+                <div class="box-body">
+                    <div class="form">
+                        <form id="buyCoin" class="tab-pane fade show active" method="POST" action="/<%=url%>/coin/add">
+                            <h3 class="text-center">Profile</h3>
+                            <div class="form-row">
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <label for="buyAmount">UserName</label>
+                                        <input class="form-control input-c" type="text" readonly name="name" value="<%=user.username%>">
+                                    </div>
+                                </div>
+                                <div class="col-2 p-4 mt-2">
+                                    <!-- <span class="pl-3">=</span> -->
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <label for="Amount">Email</label>
+                                        <input class="form-control input-c" readonly type="text" name="email" value="<%=user.email%>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="walletAddress">Password</label>
+                                <input class="form-control input-c" type="number" step="any" name="password">
+                            </div>
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn success" style="width: 300px;">Save Setting</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end main content -->
+<%- include('../partials/footer') %>

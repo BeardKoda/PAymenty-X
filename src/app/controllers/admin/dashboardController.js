@@ -24,9 +24,13 @@ let controller = {
         response = {
             title: 'Dashboard', trans, users, total:grandTotal, w_total, d_total,
         }
-        // console.log("grandTotal")
-        req.flash('error', "Welcome")
         res.render('pages/index', response);
+    },
+    setting:(req,res,next)=>{
+        response={
+            title:"Setting"
+        }
+        res.render('pages/setting', response);
     }
 }
 module.exports = controller
