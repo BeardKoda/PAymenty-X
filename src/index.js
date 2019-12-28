@@ -67,7 +67,11 @@ app.use(`/${USER_URL}`, user)
 appRoute(app)
 userRoute(user)
 adminRoute(admin)
-
+app.all('*', function(req, res, next) {
+    setTimeout(function() {
+        next();
+    }, 120000); // 120 seconds
+});
 var server = app.listen(PORT, function () {
     console.log("app running on port.", server.address().port);
 });

@@ -11,7 +11,7 @@ let controller = {
     index:async (req,res,next)=>{
         authuser = res.locals.user
         // Wallet.remove().then((res)=>console.log(res))
-        const wallet = await Wallet.find({userId: authuser._id }).sort({'_id':-1}).limit(4);
+        const wallet = await Wallet.find({userId: authuser._id,CSF:{$ne:"USD"}}).sort({'_id':-1}).limit(4);
         const transactions = await Transaction.find({userId:authuser._id}).sort({'_id':-1}).limit(3);
         const Ptrans= await Transaction.find({status:"awaiting"})
         const Ctrans= await Transaction.find({status:"Cancelled"})
@@ -34,7 +34,7 @@ let controller = {
     getApiData:async(req,res,next)=>{
         var grandTotal= 0
         authuser = res.locals.user
-        const wallet = await Wallet.find({userId: authuser._id }).sort({'_id':-1}).limit(4);
+        const wallet = await Wallet.find({userId: authuser._id,CSF:{$ne:"USD"} }).sort({'_id':-1}).limit(4);
         for(const wal of wallet){
             value = wal.CSF !== 'LTCT' && wal.CSF !=='USD'? wal.currency.toLowerCase():'bitcoin'
             rate = await getRate(value) * parseFloat(wal.amount)
