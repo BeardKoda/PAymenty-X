@@ -58,7 +58,7 @@
                                         <td><%=t.createdAt%></td>
                                         <td><%=t.amount%> <%=t.currencyFrom%></td>
                                         <td><%=t.type%></td>
-                                        <td><span class="badge <%if(t.status==='awaiting'){%>warning<%}%><%if(t.status==='Paid'){%>success<%}%><%if(t.status==='Cancelled'){%>danger<%}%>"><%= t.status %></span></td>
+                                        <td><span class="badge badge-pill <%if(t.status==='awaiting'){%>badge-warning<%}%><%if(t.status==='Paid'){%>badge-success<%}%><%if(t.status==='Cancelled'){%>badge-danger<%}%>"><%= t.status %></span></td>
                                         <td><a href="/<%=url%>/transaction/<%=t._id%>" class="btn info">more Info</a></td>
                                         <!-- <td><a href="/<%=url%>/transaction/<%=t._id%>" class="btn primary mr-2">Info</a></td> -->
                                     </tr>

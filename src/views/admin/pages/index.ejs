@@ -44,7 +44,8 @@
                             <td><%=user.username%></td>
                             <td><%=user.email%></td>
                             <td><%if(user.active){%>active<%}else{%>unactive<%}%></td>
-                            <td><%=user.createdAt%></td>
+                            <td><%var current_datetime = user.createdAt%>
+                                <% var Ldated = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()%><%=Ldated%></td>
                         </tr>
                         <%})%>
                         <%if(users.length == 0){%>
