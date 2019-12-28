@@ -67,8 +67,14 @@
                                             <form method="POST" action="/<%=url%>/coin/toggle/<%=t._id%>">
                                                 <%if(t.active){%><button type="submit" style="margin-right:5px;" class="btn btn-sm success text-white">Disable</button><%}else{%><button type="submit" style="margin-right:5px;" class="btn btn-sm warning text-white">Enable</button><%}%>
                                             </form>
-                                            <form method="POST" action="/<%=url%>/coin/delete/<%=t._id%>">
-                                                <button type="submit" class="btn btn-sm danger text-white" style="margin-right:5px;">Delete</button>
+                                            <form method="POST" action="/<%=url%>/coin/sell/<%=t._id%>">
+                                                <%if(t.sell){%><button type="submit" style="margin-right:5px;" class="btn btn-sm primary text-white">Disable Sell</button><%}else{%><button type="submit" style="margin-right:5px;" class="btn btn-sm warning text-white">Enable Sell</button><%}%>
+                                            </form>
+                                            <form method="POST" action="/<%=url%>/coin/buy/<%=t._id%>">
+                                                <%if(t.buy){%><button type="submit" style="margin-right:5px;" class="btn btn-sm info text-white">Disable Buy</button><%}else{%><button type="submit" style="margin-right:5px;" class="btn btn-sm warning text-white">Enable Buy</button><%}%>
+                                            </form>
+                                            <form method="POST" action="/<%=url%>/coin/pay/<%=t._id%>">
+                                                <%if(t.pay){%><button type="submit" style="margin-right:5px;" class="btn btn-sm info text-white">Disable Pay</button><%}else{%><button type="submit" style="margin-right:5px;" class="btn btn-sm warning text-white">Enable Pay</button><%}%>
                                             </form>
                                         </td>
                                     </tr>

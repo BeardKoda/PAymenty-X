@@ -17,6 +17,18 @@ const schema = new Schema({
     amount:{
         type:String,
     },
+    buy:{
+        type:Boolean,
+        default:true
+    },
+    sell:{
+        type:Boolean,
+        default:true
+    },
+    pay:{
+        type:Boolean,
+        default:true
+    },
     active:{
         type:Boolean,
         default:true

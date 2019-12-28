@@ -14,9 +14,9 @@ const getCoin = async(id) =>{
 let controller = {
     index :async(req, res, next) => {
         var coins = await Coin.find({isDeleted:false})
-        active = (await Coin.find({active:true})).length, 
+        active = (await Coin.find({active:true,isDeleted:false})).length, 
         deleted=(await Coin.find({isDeleted:true})).length,
-        suspended=(await Coin.find({active:false})).length
+        suspended=(await Coin.find({active:false,isDeleted:false})).length
         let response ={
             title:'All Coins',
             coins, active, suspended, deleted 
@@ -71,30 +71,75 @@ let controller = {
     update:async(req,res,next)=>{
         const { id } = req.params
         coin = await Coin.findOne({_id:id})
-        // coin.name = req.body.name
-        // coin.tag = req.body.tag
         coin.amount = req.body.amount
         await coin.save()
-            // console.log(coin)
             req.flash('success', 'Sucessfully Saved')
-            res.redirect('/'+res.locals.url+'/coins')
-        
+            res.redirect('/'+res.locals.url+'/coins')  
     },
     toggle:async(req,res,next)=>{
         const { id } = req.params
-        coin = await Coin.findOne({_id:id})
-        coin.active= !coin.active
-        await coin.save()
-        req.flash('success', 'Sucessfully Updated Status')
-        res.redirect('/'+res.locals.url+'/coins')
+        if(id){
+            coin = await Coin.findOne({_id:id})
+            coin.active= !coin.active
+            await coin.save()
+            req.flash('success', 'Sucessfully Updated Status')
+            res.redirect('/'+res.locals.url+'/coins')
+        }else{
+            req.flash('error', 'Missing Parameters')
+            res.redirect(res.locals.back)
+        }
+    },
+    toggleS:async(req,res,next)=>{
+        try{
+            const { id } = req.params
+            coin = await Coin.findOne({_id:id})
+            coin.sell= !coin.sell
+            await coin.save()
+            req.flash('success', 'Sucessfully Updated Coin Sell Status')
+            res.redirect('/'+res.locals.url+'/coins')
+        }catch(err){
+            req.flash('error', err)
+            res.redirect(res.locals.back)
+        }
+    },
+    toggleB:async(req,res,next)=>{
+        const { id } = req.params
+         try{
+            coin = await Coin.findOne({_id:id})
+            coin.buy= !coin.buy
+            await coin.save()
+            req.flash('success', 'Sucessfully Updated Coin Status')
+            res.redirect('/'+res.locals.url+'/coins')
+        }catch(err){
+            req.flash('error', err)
+            res.redirect(res.locals.back)
+        }
+    },
+    toggleP:async(req,res,next)=>{
+            const { id } = req.params
+        try{
+            coin = await Coin.findOne({_id:id})
+            coin.pay= !coin.pay
+            await coin.save()
+            req.flash('success', 'Sucessfully Updated Coin Status')
+            res.redirect('/'+res.locals.url+'/coins')
+        }catch(err){
+            req.flash('error', err)
+            res.redirect(res.locals.back)
+        }
     },
     delete:async(req,res,next)=>{
         const { id } = req.params
-        coin = await Coin.findOne({_id:id})
-        coin.delete= true
-        await coin.save()
-        req.flash('success', 'Sucessfully deleted Coin')
-        res.redirect('/'+res.locals.url+'/coins')
+        try{
+            coin = await Coin.findOne({_id:id})
+            coin.isDeleted = !coin.isDeleted
+            await coin.save()
+            req.flash('success', 'Sucessfully deleted Coin')
+            res.redirect('/'+res.locals.url+'/coins')
+        }catch(err){
+            req.flash('error', err)
+            res.redirect(res.locals.back)
+        }
     }
 }
 module.exports = controller

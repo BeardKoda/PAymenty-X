@@ -66,6 +66,9 @@ const adminRoute = (admin)=>{
     admin.post('/coin/edit/:id', auth, CoinController.update)
     admin.post('/coin/delete/:id', auth, CoinController.delete)
     admin.post('/coin/toggle/:id', auth, CoinController.toggle)
+    admin.post('/coin/sell/:id', auth, CoinController.toggleS)
+    admin.post('/coin/buy/:id', auth, CoinController.toggleB)
+    admin.post('/coin/pay/:id', auth, CoinController.toggleP)
     // Setting
     admin.get('/settings', auth, DashboardController.setting)
     admin.get('/logout', auth, AuthController.logout)

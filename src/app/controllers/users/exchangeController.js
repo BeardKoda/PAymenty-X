@@ -9,8 +9,10 @@ let controller = {
         authuser = res.locals.user
         response={
             title:'Exchange - Buy / Sell', 
-            coins:await Coin.find({isDeleted:false}),
-            wallets:await Wallet.find({userId:authuser._id})
+            buys:await Coin.find({buy:true,isDeleted:false}),
+            sells:await Coin.find({sell:true,isDeleted:false}),
+            pays:await Coin.find({isDeleted:false, pay:true}),
+            wallets:await Wallet.find({CSF:{$ne:"USD"},userId:authuser._id}).sort({createdAt:-1})
         }
         // console.log(response)
         res.render('pages/exchange/index', response );

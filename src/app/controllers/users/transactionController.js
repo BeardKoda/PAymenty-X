@@ -52,7 +52,7 @@ let controller = {
         response = {
             title:'Deposit', 
             coins:await Coin.find({tag:{ $ne: "USD"}, isDeleted:false}),
-            wallets:await Wallet.find({CSF:{$ne:"USD"}}).sort({createdAt:-1})
+            wallets:await Wallet.find({CSF:{$ne:"USD"},userId:authuser._id}).sort({createdAt:-1})
         }
         res.render('pages/deposit/index',response)
     },

@@ -23,6 +23,11 @@ schema.pre('save', function(next){
     // })
 })
 
+schema.pre('find', function(next){
+    var wallet = this
+    // wallet.find({isDeleted:false})
+    next()
+})
 schema.post('init', function(wal){
     // result.forEach((wal)=>{
         // decryptedA = cryptr.decrypt(wal.USDamount)
