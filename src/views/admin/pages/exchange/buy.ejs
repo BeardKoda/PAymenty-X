@@ -43,8 +43,8 @@
                                 <thead>
                                     <tr role="row">
                                         <th>id</th>
-                                        <th>Name</th>
-                                        <th>Tag</th>
+                                        <th>Currency</th>
+                                        <th>Type</th>
                                         <th>Amount</th>
                                         <th>Date Created</th>
                                         <th>Status</th>
@@ -56,12 +56,12 @@
                                     <%trans.forEach((t)=>{%>
                                     <tr>
                                         <td><%=no++%></td>
-                                        <td><%=t.name%></td>
-                                        <td><%=t.tag%></td>
+                                        <td><%=t.currency%></td>
+                                        <td><%=t.type%></td>
                                         <td>$<%=parseInt(t.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')%></td>
                                         <td><%  var current_datetime = t.createdAt %>
                                             <% var Ldated = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()%><%=Ldated%></td>
-                                        <td><%if(t.active){%>active<%}else{%>unactive<%}%></td>
+                                        <td><%=t.status%></td>
                                         <td class="row">
                                             <a href="/<%=url%>/coin/edit/<%=t._id%>"style="margin-right:5px;" class="btn btn-sm info text-white">Edit</a>
                                             <form method="POST" action="/<%=url%>/coin/toggle/<%=t._id%>">

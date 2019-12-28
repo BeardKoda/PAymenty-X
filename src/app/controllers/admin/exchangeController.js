@@ -6,7 +6,7 @@ let controller = {
     bindex :async(req, res, next) => {
         const trans = await Exchange.find({type:"buy"}).sort({createdAt: -1})
         const completed =await Exchange.find({type:"buy", status:"Paid"}), 
-        pending=await Exchange.find({type:"Deposit",status:"awaiting"}), 
+        pending=await Exchange.find({type:"buy",status:"Awaiting"}), 
         cancelled=await Exchange.find({type:"buy", status:"Cancelled"}),
         coins= await Coin.find({isDeleted:false})
         response ={
@@ -19,7 +19,9 @@ let controller = {
 
     sindex :async(req, res, next) => {
         const trans = await Exchange.find({ type:"sell"}).sort({createdAt: -1})
-        const completed =await Exchange.find({type:"sell",status:"Paid"}), pending=await Exchange.find({type:"sell",status:"awaiting"}), cancelled=await Exchange.find({type:"sell",status:"Cancelled"}),
+        const completed =await Exchange.find({type:"sell",status:"Paid"}), 
+        pending=await Exchange.find({type:"sell",status:"Awaiting"}), 
+        cancelled=await Exchange.find({type:"sell",status:"Cancelled"}),
         coins= await Coin.find({isDeleted:false})
         response ={
             title:'Exchange - sell',

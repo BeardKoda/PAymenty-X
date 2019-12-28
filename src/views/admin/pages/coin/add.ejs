@@ -9,26 +9,13 @@
                     <div class="form">
                         <form id="buyCoin" class="tab-pane fade show active" method="POST" action="/<%=url%>/coin/add">
                             <h3 class="text-center">Add New Coin</h3>
-                            <div class="form-row">
-                                <div class="col-5">
-                                    <div class="form-group">
-                                        <label for="buyAmount">Coin Name</label>
-                                        <input class="form-control input-c" type="text" name="name" placeholder="Coin Name">
-                                    </div>
-                                </div>
-                                <div class="col-2 p-4 mt-2">
-                                    <!-- <span class="pl-3">=</span> -->
-                                </div>
-                                <div class="col-5">
-                                    <div class="form-group">
-                                        <label for="Amount">Tag/Currency</label>
-                                        <input class="form-control input-c" type="text" name="tag" placeholder="$0.00">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
-                                <label for="walletAddress">Exchange Rate Amount</label>
-                                <input class="form-control input-c" type="number" step="any" name="amount" id="amount" placeholder="$0.00">
+                                <label for="buyAmount">Coin Name</label>
+                                <select class="form-control input-c" name="name" id="selectCryptocurrency">
+                                    <%for(const coin of coins) {%>
+                                        <option value="<%=coin.id%>"><%=coin.name%> - (<%=coin.symbol%>)</option>
+                                    <%}%>
+                                </select>
                             </div>
                             <div class="form-group text-center">
                                 <button type="submit" class="btn success" style="width: 300px;">Add Coin</button>

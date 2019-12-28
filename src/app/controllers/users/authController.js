@@ -64,7 +64,7 @@ let controller = {
                             .then((result)=>{
                                 // console.log(result)
                                 eventer.emit('sendMail:Register', result)
-                                req.flash('success', "Account Created Activate Account")
+                                req.flash('success', "Account Created, Please Check your Mail to activate Account")
                                 res.redirect('login')
                             }).catch((err)=>{
                                 // console.log(err)
