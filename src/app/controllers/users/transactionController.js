@@ -1,4 +1,4 @@
-const { Transaction, Wallet } = require('../../models')
+const { Transaction, Wallet, Coin } = require('../../models')
 const client = require('../../../config/coin')
 const axios = require('axios')
 
@@ -48,8 +48,13 @@ let controller = {
         res.render('pages/transaction/withdraw', {title:'Withdrawal History', trans, total, Ltotal})
     },
 
-    showDeposit:(req,res,next)=>{
-        res.render('pages/deposit/index', {title:'Deposit'})
+    showDeposit:async(req,res,next)=>{
+        response = {
+            title:'Deposit', 
+            coins:await Coin.find({tag:{ $ne: "USD"}, isDeleted:false}),
+            wallets:await Wallet.find({CSF:{$ne:"USD"}}).sort({createdAt:-1})
+        }
+        res.render('pages/deposit/index',response)
     },
 
     showWithdraw:(req,res,next)=>{
@@ -57,32 +62,45 @@ let controller = {
     },
 
     postDeposit:async(req,res, next)=>{
-        const {amount, currency, wallet} = req.body
+        const {amountBTC,amountUSD, currency, wallet} = req.body
         // res.send(req.body)
-        options = {
-            currency1:currency,
-            currency2:wallet,
-            amount:amount,
-            buyer_email:res.locals.user.email
+        if(amountUSD && amountBTC && currency && wallet){
+            console.log(req.body)
+            options = {
+                currency1:currency,
+                currency2:wallet,
+                amount:amountBTC,
+                buyer_email:res.locals.user.email
+            }
+            client.createTransaction(options).then((response)=>{
+                Transaction.create({
+                    userId:res.locals.user._id,
+                    type:"Deposit",
+                    currencyFrom:currency,
+                    currencyTo:wallet,
+                    address:response.address,
+                    TxId:response.txn_id,
+                    status:"awaiting",
+                    data:JSON.stringify(response),
+                    amount:req.body.amountBTC
+                }).then((trans)=>{
+                    var id=trans._id
+                    req.flash('success', "Deposit request created")
+                    res.render('pages/deposit/pay', {title:'Send Payment', response, id})
+                }).catch((err)=>{
+                    console.log(err)
+                    req.flash('error', err.message)
+                    res.redirect(res.locals.back)
+                })
+            }).catch((err)=>{
+                req.flash('error', err.message)
+                res.redirect(res.locals.back)
+            })
+        }else{
+            req.flas('error', 'missing parameters')
+            res.back()
         }
-        client.createTransaction(options).then((response)=>{
-            Transaction.create({
-                userId:res.locals.user._id,
-                type:"Deposit",
-                currencyFrom:currency,
-                currencyTo:wallet,
-                address:response.address,
-                TxId:response.txn_id,
-                status:"awaiting",
-                data:JSON.stringify(response),
-                amount:req.body.amount
-            }).then((trans)=>{
-                var id=trans._id
-                res.render('pages/deposit/pay', {title:'Send Payment', response, id})
-            }).catch((err)=>{console.log(err)})
-            // console.log(response)
-        }).catch((err)=>{console.log(err.message, 'error'), res.send(err.message)})
-    },
+},
 
     verify:(req,res,next)=>{
         res.send(req.body)

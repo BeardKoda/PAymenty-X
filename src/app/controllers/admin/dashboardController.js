@@ -10,6 +10,14 @@ const getRate = async(value) =>{
 let controller = {
     index:async(req,res,next)=>{
         const trans = await Transaction.find({ });
+        const users = await User.find({});
+        response = {
+            title: 'Dashboard', trans, users
+        }
+        res.render('pages/index', response);
+    },
+    getAxioData:async(req,res,next)=>{
+        const trans = await Transaction.find({ });
         total = 0,w_total = 0,d_total = 0
          let grandTotal= 0
          for(const t of trans){
@@ -20,11 +28,7 @@ let controller = {
             w_total = t.type === 'Withdraw' ? w_total+rate : w_total
             grandTotal += rate
         }
-        const users = await User.find({});
-        response = {
-            title: 'Dashboard', trans, users, total:grandTotal, w_total, d_total,
-        }
-        res.render('pages/index', response);
+        return res.status(200).json({grandTotal,total, w_total, d_total})
     },
     setting:(req,res,next)=>{
         response={

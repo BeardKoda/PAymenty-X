@@ -72,6 +72,10 @@ const userRoute = (user)=>{
     user.post('/password/update/', auth, AuthController.passUpdate)
     user.get('/logout', auth, AuthController.logout)
 
+
+    // Axios API routes
+    user.get('/api/dashboard/fetch', auth, DashboardController.getApiData)
+
     user.get('**', auth, (req,res,next)=>{
         res.render('error/404')
     })

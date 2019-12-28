@@ -10,33 +10,46 @@
                         <form id="form" method="POST" action="/<%=url%>/deposit/processing">
                             <div id="rootwizard" data-plugin="bootstrapWizard">
                                 <div class="tab-content">
+
                                     <div class="tab-pane active" id="tab1">
+                                        <div class="row text-center">
+                                            <div class="col-12">
+                                                <h4 class="text-center">Deposit Form </h4>
+                                                <hr/>
+                                            </div>
+                                        </div>
                                         <div class="row m-b">
                                             <div class="col-6">
                                                 <label for="currency">Currency</label>
-                                                <select class="form-control input-c" name="currency" id="currency">
-                                                    <option>BTC</option>
-                                                    <option>LTCT</option>
+                                                <select id="currency" class="form-control input-c" name="currency" id="currency">
+                                                    <%for(const coin of coins){%>
+                                                        <option value="<%=coin.tag%>"><%=coin.name%></option>
+                                                    <%}%>
                                                 </select>
                                             </div>
                                             <div class="col-6">
-                                                <label for="wallet">To</label>
-                                                <select class="form-control input-c" name="wallet" id="wallet">
-                                                    <option value="BTC">My Bitcoin wallet (0 BTC)</option>
-                                                    <option value="LTCT">My Etherum wallet (0 LTCT)</option>
+                                                <label for="wallet">Wallet</label>
+                                                <select class="form-control input-c" name="wallet" id="wallet" required>
+                                                    <%for(const wal of wallets){%>
+                                                        <option value="<%=wal.CSF%>"><%=wal.currency%> (<%=wal.CSF%>)</option>
+                                                    <%}%>
                                                 </select>
                                             </div>
                                         </div><br/>
-                                        <div class="form-group">
-                                            <label>Amount</label>
-                                            <input type="number" id="amount" name="amount" step="any" class="form-control" placeholder="$0.00" required>
+                                        <div class="row m-b">
+                                            <div class="col-6">
+                                                <label>Amount in <span id="cyptoT">BTC</span></label>
+                                                <input type="number" id="amtCypto" name="amountBTC" step="any" class="form-control" placeholder="$0.00" onInput="UCurrentValue(event)" required>
+                                            </div>
+                                            <div class="col-6">
+                                                <label>Amount in USD</label>
+                                                <input type="number" id="amtUSD" name="amountUSD" step="any" class="form-control" placeholder="$0.00" onInput="CCurrentValue(event)" required>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row py-3">
-                                        <div class="col-6">
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="d-flex justify-content-end">
+                                        <div class="col">
+                                            <div class="d-flex justify-content-center">
                                                 <button type="submit" id="next" class="btn primary button-next">Deposit</button>
                                             </div>
                                         </div>
@@ -50,4 +63,36 @@
         </div>
         
     </div>
+    <script>
+        $(document).ready(function(){
+            $("#currency").change(function(){
+                var selectedCurrency = $(this).children("option:selected").text();
+                var title = document.getElementById('cyptoT');
+                title.innerText = selectedCurrency
+                // console.log(selectedCurrency, title);
+            });
+            UCurrentValue =async(event)=>{
+                value = event.target.value
+                wal = $( "#currency option:selected" );
+                price = await getrate(wal)
+                var title = document.getElementById('amtUSD');
+                title.value = (value*price).toFixed(2)
+                // console.log(value, price)
+            }
+            CCurrentValue =async(event)=>{
+                value = event.target.value
+                wal = $( "#currency option:selected" );
+                price = await getrate(wal)
+                var title = document.getElementById('amtCypto');
+                title.value = (value/price).toFixed(2)
+                // console.log(value, price)
+            }
+            getrate=async(wal)=>{
+                cur = wal.val() === 'LTCT' ? "bitcoin" : wal.val() === 'USD' ? 'bitcoin':wal.text().toLowerCase()
+                rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+cur)
+                return rate.data.market_data.current_price.usd
+            }
+
+        });
+    </script>
 <%- include('../../partials/footer') %>

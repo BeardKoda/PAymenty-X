@@ -3,9 +3,8 @@ const axios =require('axios')
 const Emitter = require('../../events/emitter');
 
 const getRate = async(value) =>{
-    axios.get('https://api.coingecko.com/api/v3/coins/'+value).then((rate)=>{
-       return rate.data.market_data.current_price.usd
-    })
+    rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+value)
+    return rate.data.market_data.current_price.usd
 }
 
 let controller = {
@@ -19,11 +18,6 @@ let controller = {
         const Dtrans= await Transaction.find({status:"Paid"})
         let grandTotal= 0
         let val=[]
-        for(const wal of wallet){
-            value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
-            rate = await getRate(value) * parseInt(wal.amount)
-            grandTotal += rate
-        }
         response={
             title: 'Dashboard', 
             wallets:wallet,
@@ -36,9 +30,21 @@ let controller = {
         }
         res.render('pages/index', response );
     },
+
+    getApiData:async(req,res,next)=>{
+        var grandTotal= 0
+        authuser = res.locals.user
+        const wallet = await Wallet.find({userId: authuser._id }).sort({'_id':-1}).limit(4);
+        for(const wal of wallet){
+            value = wal.CSF !== 'LTCT' && wal.CSF !=='USD'? wal.currency.toLowerCase():'bitcoin'
+            rate = await getRate(value) * parseFloat(wal.amount)
+            grandTotal += rate
+        }
+        return res.status(200).json({grandTotal, wallet})
+    },
+
     blank:(req,res,next)=>{
         res.render('pages/blank', { title: 'Blank' });
     },
-
 }
 module.exports = controller

@@ -12,15 +12,33 @@
             </div>
             <div class="padding">
                 <div class="row">
+                    <div class="col-10"><h5 class="text-dark">Exchange Rates</h5></div>
+                </div>
+                <hr/>
+                <div class="row">
                     <% wallets.forEach((wallet)=>{%>
                     <div class="col-6 col-md-4 col-lg-3">
                         <div class="box p-3">
                             <div class="d-flex"><span class="text-dark text-md"><i class="cc <%=wallet.CSF%>"></i>   <%=wallet.currency%> </span></div>
-                            <div class="pt-3 text-center"><span class="text-muted text-small"><small>Current Amount</small></span></div>
-                            <div class="pb-3 text-center text-lg"><%=wallet.amount%></div>
+                            <div class="pt-3 text-center"><span class="text-muted text-small"><small>Exchange Rate</small></span></div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="pb-3 text-center text-md">1 <%=wallet.CSF%></div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="pb-3 text-center text-md">=</div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="pb-3 text-center text-md">$ <span id="<%=wallet.CSF%>">0.00</span></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <%})%>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-10"><h5 class="text-dark">Portfolio</h5></div>
                 </div>
                 <hr/>
                 <div class="row">
@@ -32,7 +50,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mt-0">
-                                        <h2 class="text-lg text-dark">$<%=grandTotal ? grandTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'):0%></h2>
+                                        <h2 class="text-lg text-dark">$<span id="grandtotal"></span></h2>
                                         <!-- <span class="text-success"><i class="fa fa-caret-up"></i> 64%</span> -->
                                     </div>
                                     <p class="pt-3">Overall balance</p>
@@ -74,13 +92,16 @@
                         </div>
                     </div>
                 </div>
+                <br/>
+                <div class="row">
+                    <div class="col-10"><h5 class="text-dark">Recent Deposits</h5></div>
+                    <div class="col-2"><a href="/<%=url%>/transactions/deposit" class="col-6 btn primary mr-2">View All</a></div>
+                </div>
                 <hr/>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="box pt-3">
                             <div class="row box-header">
-                                <div class="col-8"><h2 class="text-dark">Recent Deposits Transactions</h2></div>
-                                <div class="col-4"><a href="/<%=url%>/transactions/deposit" class="col-6 btn primary mr-2">View All</a></div>
                             </div>
                             <table class="table">
                                 <thead>
@@ -123,35 +144,57 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script>
-    var ctx = document.getElementById('chart-line-line');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Pending', 'Cancelled', 'Completed'],
-                datasets: [{
-                    label: 'Transactions',
-                    data: ['<%=Ptrans%>','<%=Ctrans%>','<%=Dtrans%>',],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {}
-        });
+    $(document).ready(function() {
+        // alert("document ready occurred!"); 
+        var total = document.getElementById('grandtotal');
+        axios.get(`/<%=url%>/api/dashboard/fetch`).then(async(response)=>{
+            let data = response.data
+            console.log(data)
+            total.innerHTML = parseInt(data.grandTotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            var wallets = data.wallet
+            for(var wal of wallets){
+                var value = document.getElementById(wal.CSF); 
+                cur = wal.CSF === 'LTCT' ? "bitcoin" : wal.CSF === 'USD' ? 'bitcoin':wal.currency.toLowerCase()
+                rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+cur)
+                value.innerText = parseInt(rate.data.market_data.current_price.usd).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                console.log(value, cur, )
+            }
+        
+        
+        }).catch((err)=>{
+            console.log(err)
+        }) 
+        var ctx = document.getElementById('chart-line-line');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Pending', 'Cancelled', 'Completed'],
+                    datasets: [{
+                        label: 'Transactions',
+                        data: ['<%=Ptrans%>','<%=Ctrans%>','<%=Dtrans%>',],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {}
+            });
+    })
 
 </script>
+
 <%- include('../partials/footer') %>

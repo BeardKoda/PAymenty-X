@@ -68,7 +68,10 @@ const adminRoute = (admin)=>{
     admin.post('/coin/toggle/:id', auth, CoinController.toggle)
     // Setting
     admin.get('/settings', auth, DashboardController.setting)
+    admin.get('/logout', auth, AuthController.logout)
 
+    // Axios API routes
+    admin.get('/api/dashboard/fetch', auth, DashboardController.getAxioData)
 
     // handle 404
     admin.get('**', auth, (req,res,next)=>{
