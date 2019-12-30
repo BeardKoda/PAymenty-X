@@ -17,11 +17,13 @@ const appRoute = (app)=>{
 
     // handle 404
     app.get('**', (req,res,next)=>{
+        res.locals.title = 404
         res.render('front/error/404')
     })
     
     // Handle 500
     // app.use(function(error, req, res, next) {
+    //     res.locals.title = 500
     //     res.status(500);
     //     res.render('error/500', {title:'500: Internal Server Error', error: error});
     // });

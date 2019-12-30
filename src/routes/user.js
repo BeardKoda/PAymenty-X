@@ -50,6 +50,7 @@ const userRoute = (user)=>{
     user.get('/deposit', auth, TransactionController.showDeposit)
     user.post('/deposit/processing', auth, TransactionController.postDeposit)
     user.get('/deposit/details', auth, TransactionController.showPay)
+    user.get('/deposit/pay/:id', auth, TransactionController.getPay)
     user.post('/deposit/verify', auth, TransactionController.verify)
 
     user.get('/withdraw', auth, TransactionController.showWithdraw)
@@ -60,6 +61,9 @@ const userRoute = (user)=>{
     user.get('/exchange', auth, ExchangeController.index)
     user.post('/exchange/buy', auth, ExchangeController.buy)
     user.post('/exchange/sell', auth, ExchangeController.sell)
+    user.get('/exchange/pay/:id', auth, ExchangeController.getPay)
+    user.get('/exchange/buy/history', auth, ExchangeController.getBuy)
+    user.get('/exchange/sell/history', auth, ExchangeController.getSell)
     // user.get('/transactions/all', auth, TransactionController.getAll)
     // settings
     user.get('/settings', auth, ProfileController.setting);
@@ -77,14 +81,16 @@ const userRoute = (user)=>{
     user.get('/api/dashboard/fetch', auth, DashboardController.getApiData)
 
     user.get('**', auth, (req,res,next)=>{
+        res.locals.title = "404"
         res.render('error/404')
     })
     
     // Handle 500
-    user.use(function(error, req, res, next) {
-        res.status(500);
-        res.render('error/500', {title:'500: Internal Server Error', error: error});
-    });
+    // user.use(function(error, req, res, next) {
+        // res.locals.title = "500"
+    //     res.status(500);
+    //     res.render('error/500', {title:'500: Internal Server Error', error: error});
+    // });
   
 
 }

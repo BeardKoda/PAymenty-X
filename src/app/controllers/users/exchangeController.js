@@ -1,8 +1,15 @@
-const { Exchange, Wallet, Coin } = require('../../models')
+const { Exchange, Wallet, Coin, Udata } = require('../../models')
 const bank = require('../../../config/bank')
 var eventer=require('../../events/emitter')
 const client = require('../../../config/coin')
 const axios = require('axios')
+
+const getRate = async(value) =>{
+    // console.log(value)
+    rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+value)
+       return rate.data.market_data.current_price.usd
+}
+
 
 let controller = {
     index:async (req,res,next)=>{
@@ -18,38 +25,67 @@ let controller = {
         res.render('pages/exchange/index', response );
     },
 
+    getPay:async(req, res,next)=>{
+        id = req.params.id
+        // res.send(id)
+        try{
+            data = await Exchange.findOne({_id:id})
+            result = {
+                title:'Send Payment',
+                response:JSON.parse(data.data), 
+                payurl:"exchange",
+                id
+            }
+            res.render('pages/deposit/pay', result)
+        }catch(err){
+            msg="Data doesn't Exist"
+            req.flash('error', msg)
+            res.redirect('/'+res.locals.url+'/exchange')
+        }
+    },
+
     buy:async(req, res, next)=>{
         authuser = res.locals.user
-        const {currency, amount } = req.body
-        if(currency && amount && amount >= 0.01){
-            if(currency !=="USD"){
+        const {Bcurrency, Pcurrency, amount } = req.body
+        if(Bcurrency && Pcurrency && amount && amount >= 1){
+            if(Pcurrency !=="USD"){
                 options = {
-                    currency1:wallet,
-                    currency2:wallet,
+                    currency1:Bcurrency,
+                    currency2:Pcurrency,
                     amount:amount,
                     buyer_email:res.locals.user.email
                 }
-                data = client.createTransaction(options)
+                data = await client.createTransaction(options)
             }else{
                 data = bank
             }
-            Exchange.create({
-                userId:authuser._id,
-                type:"buy",
-                currency:currency,
-                status:"Awaiting",
-                data:JSON.stringify(data),
-                amount:amount
-            }).then((result)=>{
+            try{
+                let result = await Exchange.create({
+                    userId:authuser._id,
+                    type:"buy",
+                    currencyTo:Bcurrency,
+                    currencyFrom:Pcurrency,
+                    status:"Awaiting",
+                    data:JSON.stringify(data),
+                    amount:amount
+                })
+            // .then((result)=>{
                 if(result){
-                    msg="Successfully Request to Buy Coin"
-                    req.flash('success', msg)
-                    res.redirect('/'+res.locals.url+'/exchanges')
+                    if(Pcurrency!=='USD'){
+                        id=result._id
+                        msg="Successfully Request to Buy Coin"
+                        req.flash('success', msg)
+                        res.redirect('/'+res.locals.url+'/exchange/pay/'+id)
+                    }else{
+                        msg="Successfully Request to Buy Coin"
+                        req.flash('success', msg)
+                        res.redirect('/'+res.locals.url+'/exchange/')
+                    }
                 }
-            }).catch((err)=>{
+            }catch(err){
                 // console.log(err)
                 next(err)
-            })
+            }
         }else{
             msg="Invalid Data"
             req.flash('error', msg)
@@ -59,25 +95,45 @@ let controller = {
 
     sell:async(req, res, next)=>{
         authuser = res.locals.user
-        const {currency, amount } = req.body
-        if(currency && amount && amount >= 0.01){
-            // console.log(req.body)
-            Exchange.create({
-                userId:authuser._id,
-                type:"sell",
-                currency:currency,
-                status:"Awaiting",
-                amount:amount
-            }).then((result)=>{
+        const {Scurrency, Pcurrency, amount } = req.body
+        // res.send(req.body)
+        if(Scurrency && Pcurrency && amount && amount >= 0.01){
+            try{
+                result = await Exchange.create({
+                    userId:authuser._id,
+                    type:"sell",
+                    currencyTo:Scurrency,
+                    currencyFrom:Pcurrency,
+                    status:"Awaiting",
+                    amount:amount
+                })
                 if(result){
-                    msg="Successfully Request to Sell Coin"
-                    req.flash('success', msg)
-                    res.redirect('/'+res.locals.url+'/exchanges')
+                    if(Pcurrency=='USD'){
+                        id=result._id
+                        profile = await Udata.findOne({_uid:authuser._id})
+                        if(profile.AccountDetails==null){
+                            console.log(res.locals.l.query)
+                            msg="Transaction is Propcessing!!  Setup Your Account Details Below"
+                            req.flash('success', msg)
+                            // res.locals.l.query = {
+                            //     tab:"account"
+                            // }
+                            res.redirect('/'+res.locals.url+'/settings?tab=account')
+                        }else{
+                            // console.log('profile')
+                            msg="Your Transaction is Processing!"
+                            req.flash('success', msg)
+                            res.redirect('/'+res.locals.url+'/exchange')
+                        }
+                    }else{
+                        msg="Your Transaction is Processing!"
+                        req.flash('success', msg)
+                        res.redirect('/'+res.locals.url+'/exchange')
+                    }
                 }
-            }).catch((err)=>{
-                // console.log(err)
+            }catch(err){
                 next(err)
-            })
+            }
         }else{
             msg="Invalid Data"
             req.flash('error', msg)
@@ -85,5 +141,48 @@ let controller = {
         }
     },
 
+    getBuy:async(req,res,next)=>{
+        var total=0;
+        var Ltotal = 0
+        authuser = res.locals.user
+        trans = await Exchange.find({userId: authuser._id, type:'buy'}).sort({createdAt: -1})
+        console.log(trans)
+        if(trans.length > 0){
+            wal = await Wallet.findOne({CSF:trans[0].currencyTo})
+            value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
+            Ltotal = await getRate(value) * parseInt(trans[0].amount)
+            for (const t of trans) {
+                wal = await Wallet.findOne({CSF:t.currencyTo})
+                console.log(t, wal)
+                value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
+                rate = await getRate(value) * parseInt(t.amount)
+                total += rate
+            }
+        }
+        res.render('pages/exchange/buy', {title:'Buy Request History', trans, total, Ltotal})
+    },
+    getSell:async(req,res,next)=>{
+        var total=0;
+        var Ltotal = 0
+        authuser = res.locals.user
+        trans = await Exchange.find({userId: authuser._id, type:'sell'}).sort({createdAt: -1})
+        // console.log(trans)
+        if(trans.length > 0){
+            wal = await Wallet.findOne({CSF:trans[0].currencyTo})
+            value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
+            Ltotal = await getRate(value) * parseInt(trans[0].amount)
+            for (const t of trans) {
+                wal = await Wallet.findOne({CSF:t.currencyTo})
+                console.log(t, wal)
+                value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
+                rate = await getRate(value) * parseInt(t.amount)
+                total += rate
+            }
+        }
+        console.log(total, Ltotal,trans)
+        // res.send(Ltotal)
+        // res.status(200).json(trans)
+        res.status(200).render('pages/exchange/sell', {title:'Sell Request History', trans, total, Ltotal})
+    },
 }
 module.exports = controller

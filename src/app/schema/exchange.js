@@ -13,7 +13,12 @@ const schema = new Schema({
         enum:['buy', 'sell'],
         trim: true
     },
-    currency:{
+    currencyTo:{
+        type:String,
+        required: true,
+        trim: true
+    },
+    currencyFrom:{
         type:String,
         required: true,
         trim: true

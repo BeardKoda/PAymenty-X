@@ -1,27 +1,27 @@
 <%- include('../../partials/top') %>
 <!-- main content --> <div class="padding">
-                    <div class="row">
+                    <div class="row"><%tab = l.query.tab%>
                         <div class="col-md-6 offset-md-3">
                             <div class="box">
                                 <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active b-0" id="buyCoinLinks" data-toggle="tab"
+                                        <a class="nav-link <%if(tab=='buy'){%>active b-0<%}%> b-0" id="buyCoinLinks" data-toggle="tab"
                                             href="#buyCoin">Buy</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="sellCoinLinks" data-toggle="tab"
+                                        <a class="nav-link <%if(tab=='sell'){%>active b-0<%}%>" id="sellCoinLinks" data-toggle="tab"
                                             href="#sellCoin">Sell</a>
                                     </li>
                                 </ul>
                                 <div class="box-divider m-0"></div>
                                 <div class="box-body">
                                     <div class="tab-content">
-                                        <form id="buyCoin" class="tab-pane fade show active" role="tabpanel" method="POST" action="/<%=url%>/exchange/buy">
+                                        <form id="buyCoin" class="tab-pane fade <%if(tab=='buy'){%>show active<%}%>" role="tabpanel" method="POST" action="/<%=url%>/exchange/buy">
                                             <h3 class="text-center">Buy</h3>
                                             <div class="form-group">
                                                 <label class="mb-1 justify-content-start" for="Select Coin">Select the
                                                     Crypto Currency to buy ‘Minimum Value 0.005 BTC’</label>
-                                                <select class="form-control input-c" name="currency" id="selectCryptocurrency">
+                                                <select class="form-control input-c" name="Bcurrency" id="selectCryptocurrency">
                                                     <%for(const coin of buys) {%>
                                                         <option value="<%=coin.tag%>"><%=coin.name%> - (<%=coin.tag%>)</option>
                                                     <%}%>
@@ -29,7 +29,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="mb-1 justify-content-start" for="Select Coin">Select the Payment</label>
-                                                <select class="form-control input-c" name="currency" id="selectCryptocurrency">
+                                                <select class="form-control input-c" name="Pcurrency" id="selectCryptocurrency">
                                                     <%for(const coin of pays) {%>
                                                         <option value="<%=coin.tag%>"><%=coin.name%> - (<%=coin.tag%>)</option>
                                                     <%}%>
@@ -44,13 +44,22 @@
                                             </div>
                                         </form>
                                         <!-- Sell -->
-                                        <form id="sellCoin" class="tab-pane fade" role="tabpanel" method="POST" action="/<%=url%>/exchange/sell">
+                                        <form id="sellCoin" class="tab-pane fade <%if(tab=='sell'){%>show active b-0<%}%>" role="tabpanel" method="POST" action="/<%=url%>/exchange/sell">
                                             <h3 class="text-center">Sell</h3>
                                             <div class="form-group">
                                                 <label class="mb-1 justify-content-start" for="Select Coin">Select the
-                                                    Crypto Currency to Sell ‘Minimum Value 0.005 BTC’</label>
-                                                    <select class="form-control input-c" name="wallet"  id="selectWallet">
+                                                    Crypto Currency to Sell </label>
+                                                    <select class="form-control input-c" name="Scurrency"  id="selectWallet">
                                                         <%for(const coin of sells) {%>
+                                                            <option value="<%=coin.tag%>"><%=coin.name%> - (<%=coin.tag%>)</option>
+                                                        <%}%>
+                                                    </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="mb-1 justify-content-start" for="Select Coin">Select the
+                                                    Crypto Currency to Recieve Payment</label>
+                                                    <select class="form-control input-c" name="Pcurrency"  id="selectWallet">
+                                                        <%for(const coin of pays) {%>
                                                             <option value="<%=coin.tag%>"><%=coin.name%> - (<%=coin.tag%>)</option>
                                                         <%}%>
                                                     </select>

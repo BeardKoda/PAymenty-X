@@ -6,7 +6,7 @@ let controller = {
         // Wallet.remove().then((res)=>console.log(res))
         // const wallet = await Wallet.find({userId: authuser._id });
         // console.log(wallet)
-        
+        console.log(res.locals)
         res.render('pages/profile', { title: 'Profile'});
     },
     blank:(req,res,next)=>{
@@ -21,7 +21,6 @@ let controller = {
                 title:"Settings",
                 profile
             }
-            console.log(response)
             res.render('pages/setting', response)
         // }catch(err){
         //     console.log(err)
@@ -39,6 +38,7 @@ let controller = {
             data.save()
             //  return view
             req.flash('success', "Profile Successfully Updated")
+            res.locals.tab = res.locals.tab?res.locals.tab: "profile"
             res.redirect('/'+res.locals.url+'/settings')
         })
         // res.send(req.body)
@@ -57,7 +57,9 @@ let controller = {
             data.save()
             //  return view
             req.flash('success', "Account Successfully Updated")
-            res.redirect('/'+res.locals.url+'/settings')
+            
+            res.locals.tab = "account"
+            res.redirect('/'+res.locals.url+'/settings?tab='+tab)
         })
     },
     changePassword:(req,res,next)=>{

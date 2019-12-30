@@ -86,7 +86,8 @@ let controller = {
                 }).then((trans)=>{
                     var id=trans._id
                     req.flash('success', "Deposit request created")
-                    res.render('pages/deposit/pay', {title:'Send Payment', response, id})
+                    // res.render('pages/deposit/pay', {title:'Send Payment', response, payurl:"exchange", id})
+                    res.redirect('/'+res.locals.url+'/deposit/pay/'+id)
                 }).catch((err)=>{
                     console.log(err)
                     req.flash('error', err.message)
@@ -100,7 +101,25 @@ let controller = {
             req.flas('error', 'missing parameters')
             res.back()
         }
-},
+    },
+
+    getPay:async(req, res,next)=>{
+        id = req.params.id
+        try{
+            data = await Transaction.findOne({_id:id})
+            result = {
+                title:'Send Payment',
+                response:JSON.parse(data.data), 
+                payurl:"exchange",
+                id
+            }
+            res.render('pages/deposit/pay', result)
+        }catch(err){
+            msg="Data Doesn't Exists"
+            req.flash('error', msg)
+            res.redirect('/'+res.locals.url+'/deposit')
+        }
+    },
 
     verify:(req,res,next)=>{
         res.send(req.body)
