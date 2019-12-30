@@ -10,6 +10,18 @@ const getRate = async(value) =>{
        return rate.data.market_data.current_price.usd
 }
 
+const verfiyAmount = async(coin, amount, user)=>{
+    wal = await Wallet.findOne({userId:user._id, CSF:coin})
+    if(amount > wal.amount){
+        console.log(wal)
+        return result = {
+            msg:'You don\'t have enough '+coin+' to sell',
+            error:true
+        }
+    }else{
+        return result = {error:false}
+    }
+}
 
 let controller = {
     index:async (req,res,next)=>{
@@ -19,8 +31,10 @@ let controller = {
             buys:await Coin.find({buy:true,isDeleted:false}),
             sells:await Coin.find({sell:true,isDeleted:false}),
             pays:await Coin.find({isDeleted:false, pay:true}),
-            wallets:await Wallet.find({CSF:{$ne:"USD"},userId:authuser._id}).sort({createdAt:-1})
+            wallets:await Wallet.find({CSF:{$ne:"USD"},userId:authuser._id}).sort({createdAt:-1}),
+            tab:"buy"
         }
+        req.locals.tab = req.locals.tab ? req.locals.tab :'buy'
         // console.log(response)
         res.render('pages/exchange/index', response );
     },
@@ -92,12 +106,11 @@ let controller = {
             res.redirect('/'+res.locals.url+'/buy-sell')
         }
     },
-
     sell:async(req, res, next)=>{
         authuser = res.locals.user
         const {Scurrency, Pcurrency, amount } = req.body
-        // res.send(req.body)
-        if(Scurrency && Pcurrency && amount && amount >= 0.01){
+        let valid = await verfiyAmount(Scurrency, amount, authuser)
+        if(!valid.error){
             try{
                 result = await Exchange.create({
                     userId:authuser._id,
@@ -112,7 +125,7 @@ let controller = {
                         id=result._id
                         profile = await Udata.findOne({_uid:authuser._id})
                         if(profile.AccountDetails==null){
-                            console.log(res.locals.l.query)
+                            // console.log(res.locals.l.query)
                             msg="Transaction is Propcessing!!  Setup Your Account Details Below"
                             req.flash('success', msg)
                             // res.locals.l.query = {
@@ -136,7 +149,8 @@ let controller = {
             }
         }else{
             msg="Invalid Data"
-            req.flash('error', msg)
+            req.flash('error', valid.msg)
+            req.query.tab = 'sell'
             res.redirect('/'+res.locals.url+'/buy-sell')
         }
     },
