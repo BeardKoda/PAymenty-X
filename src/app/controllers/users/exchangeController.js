@@ -92,7 +92,7 @@ let controller = {
                     }else{
                         msg="Successfully Request to Buy Coin"
                         req.flash('success', msg)
-                        res.redirect('/'+res.locals.url+'/exchange/')
+                        res.redirect('/'+res.locals.url+'/exchange/buy/history')
                     }
                 }
             }catch(err){
@@ -133,7 +133,7 @@ let controller = {
                             // console.log('profile')
                             msg="Your Transaction is Processing!"
                             req.flash('success', msg)
-                            res.redirect('/'+res.locals.url+'/exchange')
+                            res.redirect('/'+res.locals.url+'/exchange/sell/history')
                         }
                     }else{
                         msg="Your Transaction is Processing!"

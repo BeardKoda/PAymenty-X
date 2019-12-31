@@ -17,7 +17,7 @@ let controller = {
             rate = await getRate(value) * parseInt(wal.amount)
             grandTotal += rate
         }
-        // console.log(wallet)
+        console.log(wallet)
         response =  { title: 'Wallets', wallets:wallet, grandTotal}
         res.render('pages/wallet/index',response);
     },

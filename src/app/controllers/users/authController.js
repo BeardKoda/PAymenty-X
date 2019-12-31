@@ -4,10 +4,10 @@ var eventer=require('../../events/emitter')
 
 let controller = {
     loginForm :(req, res, next) => {
-        res.render('auth/login', { title: 'Express' });
+        res.render('auth/login', { title: 'Login' });
     },
     registerForm :(req, res, next) => {
-        res.render('auth/register', { title: 'Express' });
+        res.render('auth/register', { title: 'Register' });
     },
 
     login:(req, res, next) => {
@@ -135,11 +135,35 @@ let controller = {
             });
       }
     },
-    testMail:(req,res,next)=>{
-        result = res.locals.user
-        eventer.emit('sendMail:Register', result)
-        res.send('done')
-    }
 
+    // testMail:(req,res,next)=>{
+    //     result = res.locals.user
+    //     eventer.emit('sendMail:Register', result)
+    //     res.send('done')
+    // }
+
+    // resend mail
+    mailForm:(req,res,next)=>{
+        res.render('auth/resend', { title: 'Resend Mail' });
+    },
+
+    mailSend:(req,res,next)=>{
+        const { email } = req.body
+        console.log("here")
+        User.findOne({email:email}).then((user)=>{
+            if(!user.isVerified){
+                user.isVerified = false
+                user.token= crypto.randomBytes(45).toString('hex')
+                if(user.save()){
+                    eventer.emit('sendMail:Register', result)
+                    req.flash('success', "Activation Mail Sent")
+                    res.redirect('login')
+                }
+            }
+            req.flash('success', "Account Activated Login")
+            res.redirect('login')
+
+        })
+    }
 }
 module.exports = controller

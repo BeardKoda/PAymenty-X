@@ -1,0 +1,47 @@
+<%- include('./layout/head') %>
+    <div class="wrapper">
+        <%- include('../partials/flash') %>
+        <div class="container">
+            <div class="loginWrapper">
+                <div class="logo"></div>
+            </div>
+            <div class="formContainer">
+                    <div class="fieldsWrapperAnimated">
+                        <div>
+                            <div class="title gray">
+                                Resend Verification mail
+                            </div>
+                            <div class="inputLabel gray-70">
+                                Enter your email address to resend email verification
+                            </div>
+                            <div class="inputs">
+                                <form method="POST" action=''>
+                                    <div class="sc-bxivhb jGVOBN">
+                                        <div class="sc-bZQynM hfyoFp">
+                                            <div class="input-wrapper">
+                                                <input id="email" class="sc-bwzfXH ioKZsq" type="email" name="email" placeholder="enter email" required/>
+                                            </div>
+                                            <div id="email_error" class="sc-ifAKCX cPFPGG capture red d_none">
+                                                Please enter valid email address
+                                            </div>
+                                        </div>
+
+                                        <div class="sc-bZQynM hfyoFp">
+                                            <div class="input-wrapper">
+                                                <button id="emailPageActionButton" type="submit" class="sc-gzVnrw gJOssB" >
+                                                    Send 
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="footer capture gray-70">
+                © CoinRemits2019. All rights reserved.
+            </div>
+        </div>
+    </div>
+<%- include('./layout/footer') %>

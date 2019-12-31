@@ -47,7 +47,11 @@ const adminRoute = (admin)=>{
 
     admin.get('/', auth, DashboardController.index);
     admin.get('/admins', auth, AdminController.index)
+    // users
     admin.get('/users', auth, UserController.index)
+    admin.get('/user/funds/add/:id', auth, UserController.addFund)
+    admin.post('/user/funds/add/:id', auth, UserController.saveFund)
+
     // Rates
     admin.get('/rates/refresh', auth, TransactionController.getRates)
     // Transaction 
