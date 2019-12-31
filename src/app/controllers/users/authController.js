@@ -92,7 +92,7 @@ let controller = {
                     res.redirect('/user/login')
                 }
                 if(user){
-                    req.flash('success', 'Verified')
+                    req.flash('success', 'Account is now verified')
                     res.redirect('/user/login')
                 }
             })
@@ -134,6 +134,11 @@ let controller = {
                 }
             });
       }
+    },
+    testMail:(req,res,next)=>{
+        result = res.locals.user
+        eventer.emit('sendMail:Register', result)
+        res.send('done')
     }
 
 }

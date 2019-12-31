@@ -32,10 +32,9 @@ let controller = {
             sells:await Coin.find({sell:true,isDeleted:false}),
             pays:await Coin.find({isDeleted:false, pay:true}),
             wallets:await Wallet.find({CSF:{$ne:"USD"},userId:authuser._id}).sort({createdAt:-1}),
-            tab:"buy"
         }
-        req.locals.tab = req.locals.tab ? req.locals.tab :'buy'
-        // console.log(response)
+        req.query.tab = req.query.tab ? req.query.tab :'buy'
+        console.log(req.query)
         res.render('pages/exchange/index', response );
     },
 
@@ -128,9 +127,7 @@ let controller = {
                             // console.log(res.locals.l.query)
                             msg="Transaction is Propcessing!!  Setup Your Account Details Below"
                             req.flash('success', msg)
-                            // res.locals.l.query = {
-                            //     tab:"account"
-                            // }
+                            req.query.tab = 'account'
                             res.redirect('/'+res.locals.url+'/settings?tab=account')
                         }else{
                             // console.log('profile')
@@ -148,9 +145,9 @@ let controller = {
                 next(err)
             }
         }else{
-            msg="Invalid Data"
             req.flash('error', valid.msg)
             req.query.tab = 'sell'
+            // console.log(req.query)
             res.redirect('/'+res.locals.url+'/buy-sell')
         }
     },
@@ -160,7 +157,7 @@ let controller = {
         var Ltotal = 0
         authuser = res.locals.user
         trans = await Exchange.find({userId: authuser._id, type:'buy'}).sort({createdAt: -1})
-        console.log(trans)
+        // console.log(trans)
         if(trans.length > 0){
             wal = await Wallet.findOne({CSF:trans[0].currencyTo})
             value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
@@ -175,6 +172,7 @@ let controller = {
         }
         res.render('pages/exchange/buy', {title:'Buy Request History', trans, total, Ltotal})
     },
+
     getSell:async(req,res,next)=>{
         var total=0;
         var Ltotal = 0
@@ -193,7 +191,7 @@ let controller = {
                 total += rate
             }
         }
-        console.log(total, Ltotal,trans)
+        // console.log(total, Ltotal,trans)
         // res.send(Ltotal)
         // res.status(200).json(trans)
         res.status(200).render('pages/exchange/sell', {title:'Sell Request History', trans, total, Ltotal})

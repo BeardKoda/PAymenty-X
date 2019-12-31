@@ -6,6 +6,7 @@ module.exports = {
     APP_NAME:process.env.APP_NAME,
     PORT: process.env.PORT,
     NODE_ENV: process.env.NODE_ENV,
+    APP_URL:process.env.APP_URL,
 
     SESS_LIFETIME: process.env.SESS_LIFETIME,
     SESS_NAME: process.env.SESS_NAME,

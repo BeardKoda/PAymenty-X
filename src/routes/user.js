@@ -75,7 +75,7 @@ const userRoute = (user)=>{
     user.post('/wallet/generate', auth, WalletController.generate)
     user.post('/password/update/', auth, AuthController.passUpdate)
     user.get('/logout', auth, AuthController.logout)
-
+    // user.get('/test/mail', auth, AuthController.testMail)
 
     // Axios API routes
     user.get('/api/dashboard/fetch', auth, DashboardController.getApiData)
@@ -84,6 +84,7 @@ const userRoute = (user)=>{
         res.locals.title = "404"
         res.render('error/404')
     })
+
     
     // Handle 500
     // user.use(function(error, req, res, next) {

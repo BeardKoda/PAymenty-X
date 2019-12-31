@@ -1,13 +1,13 @@
 const nodeMailer = require('nodemailer')
 const { MAIL } = require("./app")
 options ={
-    host: MAIL.HOST || 'smtp.gmail.com',
+    host: MAIL.HOST || 'mail.privateemail.com',
     port: MAIL.PORT|| 465,
     secure: true,
     auth: {
         // should be replaced with real sender's account
-        user: MAIL.USER || 'guardianplus6@gmail.com',
-        pass: MAIL.PASS || 'Josuha332512'
+        user: MAIL.USER || 'contact@coinremits.com',
+        pass: MAIL.PASS || 'Josuha@332512'
     }
 }
 const transporter = nodeMailer.createTransport(options)

@@ -14,6 +14,9 @@ schema.statics.authenticate = function (email, password, callback) {
         } else if (!user) {
           var err = 'Email doesn\'t exists'
           return callback(err);
+        }else if(!user.isVerified){
+          var err = "Account not Verified"
+          return callback(err)
         }
         bcrypt.compare(password, user.password, function (err, result) {
           if (result === true) {
