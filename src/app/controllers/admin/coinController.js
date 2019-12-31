@@ -51,6 +51,7 @@ let controller = {
                 Coin.create({
                     name:cvalue.name,
                     tag:cvalue.symbol,
+                    gid:cvalue.id,
                     amount:cvalue.market_data.current_price.usd
                 }, (err, response)=>{
                     console.log(err, response)

@@ -22,6 +22,10 @@ const schema = new Schema({
         required: true,
         trim: true
     },
+    gid:{
+        type:String,
+        required: true,
+    },
     amount:{
         type:String,
         required:true,

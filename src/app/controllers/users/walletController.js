@@ -12,11 +12,7 @@ let controller = {
         authuser = res.locals.user
         const wallet = await Wallet.find({userId: authuser._id });
         grandTotal = 0
-        for(const wal of wallet){
-            value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
-            rate = await getRate(value) * parseInt(wal.amount)
-            grandTotal += rate
-        }
+        
         // console.log(wallet)
         response =  { title: 'Wallets', wallets:wallet, grandTotal}
         res.render('pages/wallet/index',response);
@@ -30,16 +26,19 @@ let controller = {
         res.render('pages/wallet/add', response)
     },
     generate:(req,res,next)=>{
+        authuser=res.locals.user
         Coin.find({isDeleted:false}).then((currency)=>{
             if(currency.length > 0){
                 currency.forEach((cur)=>{
                     Wallet.findOne({userId:authuser._id,CSF:cur.tag}).then((response)=>{
                     if(response===null){
+                        console.log(currency)
                         Wallet.create({
                         userId:authuser._id,
                         type:"crypto",
                         currency:cur.name,
                         CSF:cur.tag,
+                        gid:cur.gid,
                         amount:"0"
                         })
                     }
