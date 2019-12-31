@@ -11,6 +11,7 @@ module.exports = (req,res,next) => {
                 req.flash("error", "Please Generate Wallet")
                 res.redirect('/'+res.locals.url+"/wallet")
             }
+            next()
         })
     }
 };
