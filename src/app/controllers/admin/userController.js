@@ -1,6 +1,38 @@
 // const { User } = require('../../models')
-const {Wallet} = require('../../models/')
+const { Wallet, Exchange } = require('../../models/')
 const User = require('../../models/user')
+const axios = require('axios')
+const bank = require('../../../config/bank')
+
+const getRate = async(value) =>{
+    // console.log(value)
+    rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+value)
+       return rate.data.market_data.current_price.usd
+}
+
+const buy= async(data)=>{
+    const {Bcurrency, Pay, amountBTC, id } = data
+    if(Bcurrency && Pay && amountBTC){
+        let result = await Exchange.create({
+            userId:id,
+            type:"buy",
+            currencyTo:Bcurrency,
+            currencyFrom:Bcurrency,
+            status:"Awaiting",
+            data:JSON.stringify(bank),
+            amount:amountBTC,
+            amountUSD:Pay
+        })
+        if(result){
+            // console.log('ture')
+            return true
+        }
+    }else{
+        // console.log('flfl')
+        return false
+    }
+}
+
 let controller = {
     index :async(req, res, next) => {
         const trans = await User.find({ });
@@ -26,18 +58,28 @@ let controller = {
     },
     saveFund:async(req,res,next)=>{
         const { wallet, id, amount } = req.body
-        console.log(req.body)
+        // console.log(req.body)
         User.findById(id).then((user)=>{
             // console.log(parseInt(amount))
-            Wallet.findOne({userId:id, CSF:wallet}).then((wal)=>{
-                wal.amount = parseInt(amount)
-                if(wal.save()){
-                    req.flash('success', "succesfully added")
-                    res.redirect('/'+res.locals.url+'/users')
+            Wallet.findOne({userId:id, CSF:wallet}).then(async(wal)=>{
+                value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
+                rate = await getRate(value)
+                wava = rate*parseInt(amount)
+                data = {
+                    Bcurrency:wallet,
+                    id:id, amountBTC:parseInt(amount), Pay:wava
                 }
-                
-            })
+                // console.log(rate, data)
+                saved = await buy(data)
+                if(saved){
+                    wal.amount = parseFloat(wal.amount) + parseFloat(amount)
+                    if(wal.save()){
+                        req.flash('success', "succesfully added")
+                        res.redirect('/'+res.locals.url+'/users')
+                    }
+                }
+            }).catch(err=>{console.log(err)})
         })
-    }
+    },
 }
 module.exports = controller

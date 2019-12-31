@@ -25,6 +25,19 @@
                         </li>
                         <li>
                             <a><span class="nav-caret"><i class="fa fa-caret-down"></i></span> <span class="nav-icon">
+                                <i class="fa fa-align-left"></i></span> <span class="nav-text">Exchange History</span>
+                            </a>
+                            <ul class="nav-sub">
+                                <li class="<%if('/'+url+'/exchange/buy/history'==c_url){%> active <%};%>">
+                                    <a href="/<%= url %>/exchange/buy/history"><span class="nav-text">Buy History</span></a>
+                                </li>
+                                <li class="<%if('/'+url+'/exchange/sell/history'==c_url){%> active <%};%>">
+                                    <a href="/<%= url %>/exchange/sell/history"><span class="nav-text">Sell History</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a><span class="nav-caret"><i class="fa fa-caret-down"></i></span> <span class="nav-icon">
                                 <i class="fa fa-align-left"></i></span> <span class="nav-text">Transactions</span>
                             </a>
                             <ul class="nav-sub">
