@@ -35,7 +35,11 @@ const schema = new Schema({
     amount:{
         type:String,
         required:true
-    }
+    },
+    amountUSD:{
+        type:String,
+        required:true
+    },
 },
 {timestamps: true})
 module.exports = schema

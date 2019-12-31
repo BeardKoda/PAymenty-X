@@ -21,7 +21,8 @@
                                             <div class="form-group">
                                                 <label class="mb-1 justify-content-start" for="Select Coin">Select the
                                                     Crypto Currency to buy ‘Minimum Value 0.005 BTC’</label>
-                                                <select class="form-control input-c" name="Bcurrency" id="selectCryptocurrency">
+                                                <select id="currency" class="form-control input-c" name="Bcurrency" id="selectCryptocurrency">
+                                                    <option disabled selected>Select Currency</option>
                                                     <%for(const coin of buys) {%>
                                                         <option value="<%=coin.tag%>"><%=coin.name%> - (<%=coin.tag%>)</option>
                                                     <%}%>
@@ -29,16 +30,23 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="mb-1 justify-content-start" for="Select Coin">Select the Payment</label>
-                                                <select class="form-control input-c" name="Pcurrency" id="selectCryptocurrency">
-                                                    <%for(const coin of pays) {%>
-                                                        <option value="<%=coin.tag%>"><%=coin.name%> - (<%=coin.tag%>)</option>
-                                                    <%}%>
+                                                <select class="form-control input-c" name="Pay" id="selectCryptocurrency">
+                                                    <option disabled selected>Select Payment Option</option>
+                                                        <option value="Bank">Bank Transfer</option>
+                                                        <option value="Bank">PayPal</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="buyAmount">Amount </label>
-                                                <input class="form-control input-c" type="number" name="amount" id="buyAmount" placeholder="0.00" step="any">
+                                            <div class="row m-b">
+                                                <div class="col-6">
+                                                    <label>Amount in <span id="cyptoT">BTC</span></label>
+                                                    <input type="number" id="amtCypto" name="amountBTC" step="any" class="form-control" placeholder="$0.00" onInput="UCurrentValue(event)" required>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label>Amount in USD</label>
+                                                    <input type="number" id="amtUSD" name="amountUSD" step="any" class="form-control" placeholder="$0.00" onInput="CCurrentValue(event)" readonly>
+                                                </div>
                                             </div>
+                                            <hr />
                                             <div class="form-group text-center">
                                                 <button type="submit" class="btn success" style="width: 300px;">Buy Coin</button>
                                             </div>
@@ -80,4 +88,38 @@
                     </div>
                 </div>
 <!-- end main content -->
+
+<script>
+    $(document).ready(function(){
+        $("#currency").change(function(){
+            var selectedCurrency = $(this).children("option:selected").text();
+            var title = document.getElementById('cyptoT');
+            title.innerText = selectedCurrency
+            // console.log(selectedCurrency, title);
+        });
+        UCurrentValue =async(event)=>{
+            value = event.target.value
+            wal = $( "#currency option:selected" );
+            price = await getrate(wal)
+            var title = document.getElementById('amtUSD');
+            title.value = (value*price).toFixed(2)
+            // console.log(value, price)
+        }
+        CCurrentValue =async(event)=>{
+            value = event.target.value
+            wal = $( "#currency option:selected" );
+            price = await getrate(wal)
+            var title = document.getElementById('amtCypto');
+            title.value = (value/price).toFixed(2)
+            // console.log(value, price)
+        }
+        getrate=async(wal)=>{
+            cur = wal.val() === 'LTCT' ? "bitcoin" : wal.val() === 'USD' ? 'bitcoin':wal.text().toLowerCase()
+            rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+cur)
+            return rate.data.market_data.current_price.usd
+        }
+
+    });
+</script>
 <%- include('../../partials/footer') %>
+

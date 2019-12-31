@@ -18,7 +18,7 @@ let controller = {
                 response = {
                     title:'Edit', 
                     user:user,
-                    wallets:await Wallet.find({})
+                    wallets:await Wallet.find({userId:id})
                 }
                 res.render('pages/user/add',response)
             }

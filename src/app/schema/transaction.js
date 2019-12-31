@@ -41,7 +41,14 @@ const schema = new Schema({
     amount:{
         type:String,
         required:true
-    }
+    },
+    verified:{
+        type:Boolean,
+        default:false
+    },
+    token:{
+        type:String
+    },
 },
 {timestamps: true})
 module.exports = schema

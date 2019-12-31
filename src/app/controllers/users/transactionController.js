@@ -57,8 +57,14 @@ let controller = {
         res.render('pages/deposit/index',response)
     },
 
-    showWithdraw:(req,res,next)=>{
-        res.render('pages/withdraw/index', {title:'Withdraw'})
+    showWithdraw:async(req,res,next)=>{
+        authuser = res.locals.user
+        response= {
+            title:'Withdraw',
+            coins:await Coin.find({isDeleted:false}),
+            wallets:await Wallet.find({userId:authuser._id}),
+        }
+        res.render('pages/withdraw/index',response)
     },
 
     postDeposit:async(req,res, next)=>{
@@ -132,27 +138,41 @@ let controller = {
         res.render('pages/deposit/pay', {title:'Send Payment', response})
     },
 
-    postWithdraw:(req, res, next)=>{
+    postWithdraw:async(req, res, next)=>{
+        authuser = res.locals.user
         const {currency, wallet, amount, address} = req.body
         // res.send(req.body)
-        Transaction.create({
+        wal = await Wallet.findOne({userId:authuser._id, CSF:wallet})
+        // console.log(wal)
+        if(amount > wal.amount){
+            let err = "You don't have enough "+wallet+" in wallet"
+            req.flash('error', err)
+            res.redirect(res.locals.back)
+        }
+            Transaction.create({
             userId:res.locals.user._id,
             type:"Withdraw",
             currencyFrom:wallet,
-            currencyTo:currency,
+            currencyTo:wallet,
             address:address,
             TxId:" ",
             status:"awaiting",
+            verified:false,
+            token:123456,
             amount:amount
-        }).then((result)=>{
-            // console.log(result)
-            req.session.success = "Widrawal request Successfully created wait validation"
-        res.render('pages/withdraw/process',{title:'Withdrawal Processing'})
-        }).catch((err)=>{
-            // console.log(err)
-            req.flash('error', err)
-            res.redirect('withdraw')
-        })
+            }).then((result)=>{
+                // console.log(result)
+                req.session.success = "Widrawal request Successfully created wait validation"
+            res.render('pages/withdraw/process',{title:'Withdrawal Processing'})
+            }).catch((err)=>{
+                // console.log(err)
+                req.flash('error', err)
+                res.redirect('withdraw')
+            })
+        
     },
+    Wverifty:async(req,res,next)=>{
+        console.log(res)
+    }
 }
 module.exports = controller

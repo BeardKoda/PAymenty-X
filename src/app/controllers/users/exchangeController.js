@@ -59,44 +59,35 @@ let controller = {
 
     buy:async(req, res, next)=>{
         authuser = res.locals.user
-        const {Bcurrency, Pcurrency, amount } = req.body
-        if(Bcurrency && Pcurrency && amount && amount >= 1){
-            if(Pcurrency !=="USD"){
-                options = {
-                    currency1:Bcurrency,
-                    currency2:Pcurrency,
-                    amount:amount,
-                    buyer_email:res.locals.user.email
-                }
-                data = await client.createTransaction(options)
-            }else{
-                data = bank
-            }
+        const {Bcurrency, Pay, amountBTC, amountUSD } = req.body
+        // res.send(req.body)
+        if(Bcurrency && Pay && amountBTC >= 0.02){
+            data = bank
             try{
                 let result = await Exchange.create({
                     userId:authuser._id,
                     type:"buy",
                     currencyTo:Bcurrency,
-                    currencyFrom:Pcurrency,
+                    currencyFrom:Bcurrency,
                     status:"Awaiting",
                     data:JSON.stringify(data),
-                    amount:amount
+                    amount:amountBTC,
+                    amountUSD:amountUSD
                 })
-            // .then((result)=>{
                 if(result){
-                    if(Pcurrency!=='USD'){
                         id=result._id
+                    if(Pay!=='Bank'){
                         msg="Successfully Request to Buy Coin"
                         req.flash('success', msg)
-                        res.redirect('/'+res.locals.url+'/exchange/pay/'+id)
+                        req.flash('success', msg)
+                        res.redirect('/'+res.locals.url+'/exchange/pay/Paypal/'+id)
                     }else{
                         msg="Successfully Request to Buy Coin"
                         req.flash('success', msg)
-                        res.redirect('/'+res.locals.url+'/exchange/buy/history')
+                        res.redirect('/'+res.locals.url+'/payment/Bank/'+id)
                     }
                 }
             }catch(err){
-                // console.log(err)
                 next(err)
             }
         }else{
@@ -105,6 +96,7 @@ let controller = {
             res.redirect('/'+res.locals.url+'/buy-sell')
         }
     },
+
     sell:async(req, res, next)=>{
         authuser = res.locals.user
         const {Scurrency, Pcurrency, amount } = req.body
@@ -196,5 +188,11 @@ let controller = {
         // res.status(200).json(trans)
         res.status(200).render('pages/exchange/sell', {title:'Sell Request History', trans, total, Ltotal})
     },
+
+    bank:async(req,res,next)=>{
+        const {id}= req.params
+        data = await Exchange.findOne({_id:id})
+        res.render('pages/exchange/bank', {title:'Bank Details',data})
+    }
 }
 module.exports = controller

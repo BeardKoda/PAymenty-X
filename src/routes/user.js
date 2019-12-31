@@ -68,6 +68,7 @@ const userRoute = (user)=>{
     user.get('/exchange/pay/:id', auth, ExchangeController.getPay)
     user.get('/exchange/buy/history', auth, ExchangeController.getBuy)
     user.get('/exchange/sell/history', auth, ExchangeController.getSell)
+    user.get('/payment/bank/:id', auth, ExchangeController.bank)
     // user.get('/transactions/all', auth, TransactionController.getAll)
     // settings
     user.get('/settings', auth, ProfileController.setting);
