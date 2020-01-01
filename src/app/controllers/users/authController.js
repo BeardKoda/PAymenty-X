@@ -28,13 +28,16 @@ let controller = {
                         res.redirect('login')
                     }
                     if(user){
-                        res.redirect('/'+res.locals.url+'/authenticate/2FA/'+user._id)
-                        // user.lastLoggin = Date.now()
-                        // if(user.save()){
-                        //     req.flash('sucess', 'loggedIn')
-                        //     req.session.userId = user._id
-                        //     res.redirect('/user')
-                        // }
+                        if(user.isAF){
+                            res.redirect('/'+res.locals.url+'/authenticate/2FA/'+user._id)
+                        }else{
+                            user.lastLoggin = Date.now()
+                            if(user.save()){
+                                req.flash('sucess', 'loggedIn')
+                                req.session.userId = user._id
+                                res.redirect('/user')
+                            }
+                        }
                     }
                 })
             }else{
