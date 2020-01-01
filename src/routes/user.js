@@ -6,7 +6,7 @@ const IN_PROD = NODE_ENV === 'production'
 
 const path = require('path')
 
-const { auth, unauth, mid} = require('../app/middleware/user')
+const { auth, unauth, mid, wallet} = require('../app/middleware/user')
 const { AuthController, DashboardController, WalletController, TransactionController, ProfileController, ExchangeController } = require('../app/controllers/users')
 const ejs = require( 'ejs' )
 var flash = require('connect-flash');
@@ -50,25 +50,25 @@ const userRoute = (user)=>{
     // AUTHENTICATED ROUTES
     user.get('/', auth, DashboardController.index);
     user.get('/blank', auth, DashboardController.blank);
-    user.get('/buy-sell', auth, ExchangeController.index);
-    user.get('/deposit', auth, TransactionController.showDeposit)
+    user.get('/buy-sell', [auth, wallet], ExchangeController.index);
+    user.get('/deposit', [auth, wallet], TransactionController.showDeposit)
     user.post('/deposit/processing', auth, TransactionController.postDeposit)
     user.get('/deposit/details', auth, TransactionController.showPay)
-    user.get('/deposit/pay/:id', auth, TransactionController.getPay)
-    user.post('/deposit/verify', auth, TransactionController.verify)
+    user.get('/deposit/pay/:id', [auth, wallet], TransactionController.getPay)
+    user.post('/deposit/verify', [auth, wallet], TransactionController.verify)
 
-    user.get('/withdraw', auth, TransactionController.showWithdraw)
+    user.get('/withdraw', [auth, wallet], TransactionController.showWithdraw)
     user.post('/withdraw/processing', auth, TransactionController.postWithdraw)
-    user.get('/transactions/deposit', auth, TransactionController.Dindex)
-    user.get('/transactions/withdraw', auth, TransactionController.Windex)
+    user.get('/transactions/deposit', [auth, wallet], TransactionController.Dindex)
+    user.get('/transactions/withdraw', [auth, wallet], TransactionController.Windex)
 
-    user.get('/exchange', auth, ExchangeController.index)
+    user.get('/exchange', [auth, wallet], ExchangeController.index)
     user.post('/exchange/buy', auth, ExchangeController.buy)
     user.post('/exchange/sell', auth, ExchangeController.sell)
-    user.get('/exchange/pay/:id', auth, ExchangeController.getPay)
-    user.get('/exchange/buy/history', auth, ExchangeController.getBuy)
-    user.get('/exchange/sell/history', auth, ExchangeController.getSell)
-    user.get('/payment/bank/:id', auth, ExchangeController.bank)
+    user.get('/exchange/pay/:id', [auth, wallet], ExchangeController.getPay)
+    user.get('/exchange/buy/history', [auth, wallet], ExchangeController.getBuy)
+    user.get('/exchange/sell/history', [auth, wallet], ExchangeController.getSell)
+    user.get('/payment/bank/:id', [auth, wallet], ExchangeController.bank)
     // user.get('/transactions/all', auth, TransactionController.getAll)
     // settings
     user.get('/settings', auth, ProfileController.setting);

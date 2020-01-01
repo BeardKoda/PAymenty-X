@@ -14,6 +14,10 @@ const schema = new Schema({
         unique:1,
         trim: true
     },
+    gid:{
+        type:String,
+        required:true
+    },
     amount:{
         type:String,
     },
