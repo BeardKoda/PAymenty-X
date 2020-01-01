@@ -29,6 +29,9 @@ const UserSchema = new Schema({
     token:{
         type:String
     },
+    tokenAF:{
+        type:String
+    },
     isDeleted:{
         type:Boolean,
         default:false

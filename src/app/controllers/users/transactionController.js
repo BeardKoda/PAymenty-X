@@ -49,6 +49,7 @@ let controller = {
     },
 
     showDeposit:async(req,res,next)=>{
+        authuser = res.locals.user
         response = {
             title:'Deposit', 
             coins:await Coin.find({tag:{ $ne: "USD"}, isDeleted:false}),
@@ -68,13 +69,14 @@ let controller = {
     },
 
     postDeposit:async(req,res, next)=>{
-        const {amountBTC,amountUSD, currency, wallet} = req.body
+        authuser = res.locals.user
+        const {amountBTC,amountUSD, currency} = req.body
         // res.send(req.body)
-        if(amountUSD && amountBTC && currency && wallet){
+        if(amountUSD && amountBTC && currency){
             console.log(req.body)
             options = {
                 currency1:currency,
-                currency2:wallet,
+                currency2:currency,
                 amount:amountBTC,
                 buyer_email:res.locals.user.email
             }
@@ -83,7 +85,7 @@ let controller = {
                     userId:res.locals.user._id,
                     type:"Deposit",
                     currencyFrom:currency,
-                    currencyTo:wallet,
+                    currencyTo:currency,
                     address:response.address,
                     TxId:response.txn_id,
                     status:"awaiting",
@@ -104,8 +106,8 @@ let controller = {
                 res.redirect(res.locals.back)
             })
         }else{
-            req.flas('error', 'missing parameters')
-            res.back()
+            req.flash('error', 'missing parameters')
+            res.redirect(res.locals.back)
         }
     },
 

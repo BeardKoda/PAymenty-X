@@ -5,7 +5,8 @@ const Emitter = new EventEmitter();
     Emitter.on('test', (data)=>{
         console.log(data)
     });
-    Emitter.on('tested',require('./listeners/sendEmail'));
+    // Emitter.on('tested',require('./listeners/sendEmail'));
     Emitter.on('sendMail:Register',require('./listeners/sendEmail'));
+    Emitter.on('sendMail:Login',require('./listeners/sendLogin'));
 
 module.exports = Emitter
