@@ -38,7 +38,8 @@ const userRoute = (user)=>{
 
     // Authentication Routes
     user.get('/login', unauth, AuthController.loginForm)
-    user.get('/register', unauth, AuthController.registerForm)
+    // user.get('/register', )
+    // user.get('/register', unauth, AuthController.registerForm)
     user.post('/login', unauth, AuthController.login)
     user.post('/register', unauth, AuthController.register)
     user.get('/authenticate/2FA/:id', unauth, AuthController.show2FA)
@@ -46,7 +47,7 @@ const userRoute = (user)=>{
     user.get('/activate', AuthController.mailForm)
     user.post('/activate', AuthController.mailSend)
     user.get('/password/reset/:token', AuthController.mailForm)
-    user.get('/register', unauth, AuthController.registerForm)
+    // user.get('/register', unauth, AuthController.registerForm)
     user.get('/register/verify/:token', unauth, AuthController.verify)
 
     // AUTHENTICATED ROUTES
