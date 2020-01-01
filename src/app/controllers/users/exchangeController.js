@@ -31,6 +31,7 @@ let controller = {
             buys:await Coin.find({buy:true,isDeleted:false}),
             sells:await Coin.find({sell:true,isDeleted:false}),
             pays:await Coin.find({isDeleted:false, pay:true}),
+            coins:await Coin.find({isDeleted:false, Active:true}),
             wallets:await Wallet.find({CSF:{$ne:"USD"},userId:authuser._id}).sort({createdAt:-1}),
         }
         req.query.tab = req.query.tab ? req.query.tab :'buy'

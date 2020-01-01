@@ -23,7 +23,7 @@
                                                 <label for="currency">Currency</label>
                                                 <select id="currency" class="form-control input-c" name="currency" id="currency">
                                                     <%for(const coin of coins){%>
-                                                        <option value="<%=coin.tag%>"><%=coin.name%></option>
+                                                        <option id="<%=coin.tag%>" value="<%=coin.tag%>" data-data="<%=coin.gid%>"><%=coin.name%></option>
                                                     <%}%>
                                                 </select>
                                             </div>
@@ -73,22 +73,26 @@
             });
             UCurrentValue =async(event)=>{
                 value = event.target.value
-                wal = $( "#currency option:selected" );
-                price = await getrate(wal)
+                wals = $( "#currency option:selected" );
+                var wal = document.getElementById(wals.val()); 
+                va = wal.dataset.data
+                price = await getrate(va, wals.val())
                 var title = document.getElementById('amtUSD');
                 title.value = (value*price).toFixed(2)
                 // console.log(value, price)
             }
             CCurrentValue =async(event)=>{
                 value = event.target.value
-                wal = $( "#currency option:selected" );
-                price = await getrate(wal)
+                wals = $( "#currency option:selected" );
+                var wal = document.getElementById(wals.val()); 
+                va = wal.dataset.data
+                price = await getrate(va, wals.val())
                 var title = document.getElementById('amtCypto');
                 title.value = (value/price).toFixed(2)
                 // console.log(value, price)
             }
-            getrate=async(wal)=>{
-                cur = wal.val() === 'LTCT' ? "bitcoin" : wal.val() === 'USD' ? 'bitcoin':wal.text().toLowerCase()
+            getrate=async(val, wal)=>{
+                cur = wal === 'LTCT' ? "bitcoin" : wal === 'USD' ? 'bitcoin':val.toLowerCase()
                 rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+cur)
                 return rate.data.market_data.current_price.usd
             }
