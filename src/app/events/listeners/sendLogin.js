@@ -46,7 +46,7 @@ module.exports = (data) => {
                                                   <tbody>
                                                     <tr>
                                                       <td style="box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 14px; vertical-align: top; background-color: #55b8da; border-radius: 5px; text-align: center; padding-bottom: 0px;" valign="top" bgcolor="#55b8da" align="center">
-                                                        <p style="font-size:30px;">`+`${data.tokenAF}`+`</p>
+                                                        <p style="font-size:30px;color:"#fff">`+`${data.tokenAF}`+`</p>
                                                       </td>
                                                     </tr>
                                                   </tbody>
