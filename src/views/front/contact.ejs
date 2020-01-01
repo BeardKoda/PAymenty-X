@@ -1,25 +1,70 @@
-<%- include('./partials/head.ejs') %>
-<%- include('./partials/header.ejs') %>
-<%- include('./partials/search2.ejs') %>
-    <div class="sect r">
-        <div class="cont">
-            <div class="why_wrap">
-                <div data-w-id="0efbc7a1-4eeb-9199-8d52-760648462dfd" class="why_wrap_div">
-                    <img src="/static/user/assets/images/il-final.svg" width="528" alt="" />
-                </div>
-                <div class="why_wrap_div secw">
-                    <h2>Accept crypto, get paid in <span style="color:blue">USD</span></h2>
-                    <div class="text">
+<%- include('../user/auth/layout/head') %>
+    <div class="wrapper">
+        <div class="container">
+            <div class="loginWrapper">
+                <div class="logo"></div>
+            </div>
+            <div class="formContainer">
+                <form method="POST" action="login" name="signin_form" onsubmit="return validate(event, 'signin_form')">
+                    <div class="fieldsWrapperAnimated">
                         <div>
-                            Receive funds directly to your bank account with zero price volatility or risk.
-                        </div>
-                        <div class="sept"></div>
-                        <div>
-                            Get paid in Bitcoin, Ethereum from anyone anywhere and get settlement in USD instantly.
+                            <div class="title gray">
+                                Contact Form
+                            </div>
+                            <div class="inputLabel gray-70">
+                                <a href='/' class="text-primary"> Back Home</a>
+                            </div>
+                            <div class="inputs">
+                                <form method="post" action='user/login'>
+                                    <div class="sc-bxivhb jGVOBN">
+                                        <div class="sc-bZQynM hfyoFp">
+                                            <div class="input-wrapper">
+                                                <input
+                                                id="inputId_email"
+                                                class="sc-bwzfXH ioKZsq"
+                                                type="email"
+                                                name="email"
+                                                placeholder="your_mail@domain.com"
+                                                required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div class="sc-bZQynM hfyoFp">
+                                            <div class="input-wrapper"><input
+                                                id="inputId_email"
+                                                class="sc-bwzfXH ioKZsq"
+                                                type="text"
+                                                name="message"
+                                                placeholder="Enter Message"
+                                                required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div class="sc-bZQynM hfyoFp">
+                                            <div class="input-wrapper">
+                                                <button
+                                                    id="emailPageActionButton"
+                                                    type="submit"
+                                                    class="sc-gzVnrw gJOssB"
+                                                >
+                                                    Send
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
+            </div>
+            <div class="footer capture gray-70">
+                © CoinRemits2019. All rights reserved.
+                <strong>tel</strong> : +74992411605
+                <strong>Address</strong> :Smolenskiy bulvar 30 /32  Moscow  119002  
             </div>
         </div>
     </div>
-<%- include('./partials/footer.ejs') %>
+<%- include('../user/auth/layout/footer') %>

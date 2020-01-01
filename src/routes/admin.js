@@ -6,7 +6,7 @@ const IN_PROD = NODE_ENV === 'production'
 
 const path = require('path')
 const { AdminController, AuthController, UserController, DashboardController, TransactionController, CoinController,ExchangeController } = require('../app/controllers/admin')
-const {auth, unauth,mid} = require('../app/middleware/admin')
+const {auth, unauth, Asuper, mid, } = require('../app/middleware/admin')
 
 // GII database
 var mongo_express = require('mongo-express/lib/middleware')
@@ -43,7 +43,7 @@ const adminRoute = (admin)=>{
     // Registeration Route from API
     admin.post('/register', AuthController.register)
     // DB Routes
-    admin.use('/mongo_express', mongo_express(mongo_express_config))
+    admin.use('/mongo_db', Asuper, mongo_express(mongo_express_config))
 
     admin.get('/', auth, DashboardController.index);
     admin.get('/admins', auth, AdminController.index)

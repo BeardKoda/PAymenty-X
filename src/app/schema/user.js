@@ -22,6 +22,10 @@ const UserSchema = new Schema({
         type:Boolean,
         default:true
     },
+    isAF:{
+        type:Boolean,
+        default:true
+    },
     isVerified: {
       type:Boolean,
       default:false
