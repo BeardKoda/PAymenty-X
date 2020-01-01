@@ -1,4 +1,4 @@
-const { Wallet, Transaction, Coin } = require('../../models')
+const { Wallet, Transaction } = require('../../models')
 const axios =require('axios')
 const Emitter = require('../../events/emitter');
 
@@ -20,7 +20,6 @@ let controller = {
         let val=[]
         response={
             title: 'Dashboard', 
-            Coins:await Coin.find({tag:{$ne:"USD"},isDeleted:false}),
             wallets:wallet,
             trans:transactions,
             Ptrans:Ptrans.length,
@@ -35,15 +34,13 @@ let controller = {
     getApiData:async(req,res,next)=>{
         var grandTotal= 0
         authuser = res.locals.user
-        coins = await Coin.find({tag:{$ne:"USD"},isDeleted:false})
         const wallet = await Wallet.find({userId: authuser._id,CSF:{$ne:"USD"} }).sort({'_id':-1}).limit(4);
-        
         for(const wal of wallet){
-            value = await Coin.findOne({tag:wal.CSF})
-            rate = await getRate(value.gid) * parseFloat(wal.amount)
+            value = wal.CSF !== 'LTCT' && wal.CSF !=='USD'? wal.currency.toLowerCase():'bitcoin'
+            rate = await getRate(value) * parseFloat(wal.amount)
             grandTotal += rate
         }
-        return res.status(200).json({grandTotal, coins})
+        return res.status(200).json({grandTotal, wallet})
     },
 
     blank:(req,res,next)=>{

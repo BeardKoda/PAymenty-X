@@ -48,7 +48,6 @@ schema.post('save', async(result)=>{
               Wallet.create({
                 userId:authuser._id,
                 type:"crypto",
-                gid:cur.gid,
                 currency:cur.name,
                 CSF:cur.tag,
                 amount:"0"

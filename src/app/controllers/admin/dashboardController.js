@@ -22,7 +22,7 @@ let controller = {
          let grandTotal= 0
          for(const t of trans){
             wal = await Wallet.findOne({CSF:t.currencyTo})
-            value = wal.CSF !== 'LTCT'? wal.gid:'bitcoin'
+            value = wal.CSF !== 'LTCT'? wal.currency.toLowerCase():'bitcoin'
             rate = await getRate(value) * parseInt(t.amount)
             d_total = t.type === 'Deposit' ? d_total+rate : d_total
             w_total = t.type === 'Withdraw' ? w_total+rate : w_total
