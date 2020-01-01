@@ -22,6 +22,10 @@ const AdminSchema = new Schema({
         type:Boolean,
         default:true
     },
+    super:{
+        type:Boolean,
+        default:false
+    },
     isDeleted:{
         type:Boolean,
         default:false

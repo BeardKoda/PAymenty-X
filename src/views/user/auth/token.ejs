@@ -1,0 +1,51 @@
+<%- include('./layout/head') %>
+    <div class="wrapper">
+        <%- include('../partials/flash') %>
+        <div class="container">
+            <div class="loginWrapper">
+                <div class="logo"></div>
+            </div>
+            <div class="formContainer">
+                <form method="POST" action="/user/authenticate/2FA/verify">
+                    <input type="text" name="email" value="<%=email%>" hidden>
+                    <div class="fieldsWrapperAnimated">
+                        <div>
+                            <div class="inputLabel gray-70">
+                               Enter 2FA token sent to your mail
+                            </div>
+                            <div class="inputs">
+                                <!-- <form method="post" action=''> -->
+                                    <div class="sc-bxivhb jGVOBN">
+                                        <div class="sc-bZQynM hfyoFp">
+                                            <div class="input-wrapper">
+                                                <input id="inputId_email" class="sc-bwzfXH ioKZsq" type="text" name="token" placeholder="*******" required />
+                                            </div>
+                                            <div id="email_error" class="sc-ifAKCX cPFPGG capture red d_none">
+                                                Please enter valid token
+                                            </div>
+                                        </div>
+
+                                        <div class="sc-bZQynM hfyoFp">
+                                            <div class="input-wrapper">
+                                                <button
+                                                    id="emailPageActionButton"
+                                                    type="submit"
+                                                    class="sc-gzVnrw gJOssB"
+                                                >
+                                                    Authenticate
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="footer capture gray-70">
+                © CoinRemits2019. All rights reserved.
+            </div>
+        </div>
+    </div>
+<%- include('./layout/footer') %>

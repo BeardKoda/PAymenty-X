@@ -28,18 +28,20 @@ let controller = {
                         res.redirect('login')
                     }
                     if(user){
-                        user.lastLoggin = Date.now()
-                        if(user.save()){
-                            req.flash('sucess', 'loggedIn')
-                            req.session.userId = user._id
-                            res.redirect('/user')
-                    }
+                        res.redirect('/'+res.locals.url+'/authenticate/2FA/'+user._id)
+                        // user.lastLoggin = Date.now()
+                        // if(user.save()){
+                        //     req.flash('sucess', 'loggedIn')
+                        //     req.session.userId = user._id
+                        //     res.redirect('/user')
+                        // }
                     }
                 })
             }else{
                 var err = new Error('All fields are required')
-                err.status = 400                    
-                res.redirect('login')
+                err.status = 400          
+                req.flash("error", err)       
+                res.redirect('/'+res.locals.url+'/login')
             }
         }catch(error){
             next(error)
@@ -133,14 +135,8 @@ let controller = {
                     return res.redirect('login');
                 }
             });
-      }
+        }
     },
-
-    // testMail:(req,res,next)=>{
-    //     result = res.locals.user
-    //     eventer.emit('sendMail:Register', result)
-    //     res.send('done')
-    // }
 
     // resend mail
     mailForm:(req,res,next)=>{
@@ -149,7 +145,7 @@ let controller = {
 
     mailSend:(req,res,next)=>{
         const { email } = req.body
-        console.log("here")
+        // console.log("here")
         User.findOne({email:email}).then((user)=>{
             if(!user.isVerified){
                 user.isVerified = false
@@ -164,6 +160,49 @@ let controller = {
             res.redirect('login')
 
         })
-    }
+    },
+
+    show2FA:(req,res,next)=>{
+        id = req.params.id
+        console.log(id)
+        if(id){
+            User.findOne({_id:id}).then((user)=>{
+                if(user){
+                    User.AF2gen(user.email,(err, user)=>{
+                        if(err){
+                            req.flash('error', err)
+                            res.redirect('login')
+                        }
+                        if(user){
+                            eventer.emit('sendMail:Login', user)
+                            res.render('auth/token', {title:'2FA Token', email:user.email})
+                        }
+                    })
+                }
+            })
+        }else{
+            res.redirect('login')
+        }
+    },
+
+    FA2:async(req, res, next)=>{
+        const { token, email }=req.body
+        // console.log(req.body)
+        User.AF2(token, email,(err, user)=>{
+            if(err){
+                // console.log(err)
+                req.flash('error', err)
+                res.redirect('login')
+            }
+            if(user){
+                user.lastLoggin = Date.now()
+                if(user.save()){
+                    req.flash('sucess', 'loggedIn')
+                    req.session.userId = user._id
+                    res.redirect('/user')
+                }
+            }
+        })
+    }   
 }
 module.exports = controller

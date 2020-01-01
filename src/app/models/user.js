@@ -7,26 +7,57 @@ var crypto = require("crypto");
 schema = require('../schema/user')
 
 schema.statics.authenticate = function (email, password, callback) {
-    User.findOne({ email: email })
-      .exec(function (err, user) {
-        if (err) {
-          return callback(err)
-        } else if (!user) {
-          var err = 'Email doesn\'t exists'
+  User.findOne({ email: email })
+    .exec(function (err, user) {
+      if (err) {
+        return callback(err)
+      } else if (!user) {
+        var err = 'Email doesn\'t exists'
+        return callback(err);
+      }else if(!user.isVerified){
+        var err = "Account not Verified"
+        return callback(err)
+      }
+      bcrypt.compare(password, user.password, function (err, result) {
+        if (result === true) {
+          return callback(null, user);
+        } else {
+          var err ='Invalid Password.'
           return callback(err);
-        }else if(!user.isVerified){
-          var err = "Account not Verified"
-          return callback(err)
         }
-        bcrypt.compare(password, user.password, function (err, result) {
-          if (result === true) {
-            return callback(null, user);
-          } else {
-            var err ='Invalid Password.'
-            return callback(err);
-          }
-        })
-      });
+      })
+    });
+}
+schema.statics.AF2gen = function (email, callback){
+  User.findOne({ email: email })
+  .exec(function (err, user) {
+      token = Math.random().toString(36).substr(2, 5);
+      user.tokenAF = token
+      if(user.save()){
+        console.log("random", token);
+        return callback(null, user);
+      }
+  })
+}
+
+schema.statics.AF2 = function (token,email, callback) {
+  val = email
+  User.findOne({email:val, tokenAF:token}).exec(function (err, user) {
+        // console.log(email, val, token,user, err)
+      if (err) {
+        return callback(err)
+      } else if (!user) {
+        var err = 'Token Expired'
+        return callback(err);
+      }else if(!user.isVerified){
+        var err = "Account not Verified"
+        return callback(err)
+      }
+      if(user){
+          return callback(null, user);
+        }
+        
+    });
 }
 
 schema.post('save', async(result)=>{
