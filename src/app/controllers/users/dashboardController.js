@@ -1,4 +1,4 @@
-const { Wallet, Transaction, Coin } = require('../../models')
+const { Wallet, Transaction, Exchange, Coin } = require('../../models')
 const axios =require('axios')
 const Emitter = require('../../events/emitter');
 
@@ -12,7 +12,7 @@ let controller = {
         authuser = res.locals.user
         // Wallet.remove().then((res)=>console.log(res))
         const wallet = await Wallet.find({userId: authuser._id,CSF:{$ne:"USD"}}).sort({'_id':-1}).limit(4);
-        const transactions = await Transaction.find({userId:authuser._id}).sort({'_id':-1}).limit(3);
+        const transactions = await Exchange.find({userId:authuser._id}).sort({'_id':-1}).limit(3);
         const Ptrans= await Transaction.find({status:"awaiting"})
         const Ctrans= await Transaction.find({status:"Cancelled"})
         const Dtrans= await Transaction.find({status:"Paid"})
