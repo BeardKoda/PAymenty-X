@@ -145,8 +145,8 @@ let controller = {
         const {currency, wallet, amountBTC, address} = req.body
         // res.send(req.body)
         wal = await Wallet.findOne({userId:authuser._id, CSF:wallet})
-        // console.log(wal)
-        if(amountBTC > wal.amount){
+        console.log(wal)
+        if(amountBTC > parseFloat(wal.amount)){
             let err = "You don't have enough "+wallet+" in wallet"
             req.flash('error', err)
             res.redirect(res.locals.back)
