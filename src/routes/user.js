@@ -95,11 +95,11 @@ const userRoute = (user)=>{
 
     
     // Handle 500
-    // user.use(function(error, req, res, next) {
-        // res.locals.title = "500"
-    //     res.status(500);
-    //     res.render('error/500', {title:'500: Internal Server Error', error: error});
-    // });
+    user.use(function(error, req, res, next) {
+        res.locals.title = "500"
+        res.status(500);
+        res.render('error/500', {title:'500: Internal Server Error', error: error});
+    });
   
 
 }
