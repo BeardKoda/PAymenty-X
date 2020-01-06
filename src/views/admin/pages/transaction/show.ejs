@@ -40,7 +40,7 @@
                         <% if(trans.type === 'Deposit' && trans.status !== "Paid" && trans.status!=="Cancelled") {%>
                             <a href="/<%=url%>/transaction/verify/<%=trans._id%>" class="col-4 offset-md-4 btn primary mr-2 text-white">Verify Transaction</a>
                         <%} if(trans.type === 'Withdraw' && trans.status !== "Paid"){%>
-                            <a class="col-4 offset-md-4 btn primary mr-2 text-white">Approve Widthrawal</a>
+                            <a href="/<%=url%>/transaction/approve/<%=trans._id%>" class="col-4 offset-md-4 btn primary mr-2 text-white">Approve Widthrawal</a>
                         <%}%>
                     </div>
                 </div>
