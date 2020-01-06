@@ -19,8 +19,10 @@ schema.pre('save', function(next){
 })
 schema.post('init', function(wal){
     // result.forEach((wal)=>{
+        // console.log(wal.amount)
         decryptedA = cryptr.decrypt(wal.amount)
         wal.amount = decryptedA
+        // console.log(wal.amount, decryptedA, 'khj')
         // console.log(wal.amount)
     // })
 })

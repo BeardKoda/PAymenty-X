@@ -107,16 +107,29 @@ let controller = {
     },
 
     approveWi:async(req,res,next)=>{
-       const { amount } = req.body
-        options = {
-            amount:amount,
-            currency,currency,
-            add_tx_fee:1,
-            address:address,
-            auto_confirm:0
+        let {id} = req.params
+        trans = await Transaction.findOne({_id:id})
+        trans.status = "Paid"
+        if(trans.save()){
+            wallet = await Wallet.findOne({userId:trans.userId, CSF:trans.currencyTo})
+            tran = await Transaction.findOne({_id:id})
+            wallet.amount = parseFloat(wallet.amount) - parseFloat(tran.amount)
+            // console.log(wallet, tran)
+            if(wallet.save()){
+                req.flash('success', "Successfully Approved")
+                res.redirect("/"+res.locals.url+"/transactions/withdraws")
+            }
         }
-        trans = await client.createWithdrawal(options);
-        res.send(trans)
+       
+        // options = {
+        //     amount:amount,
+        //     currency,currency,
+        //     add_tx_fee:1,
+        //     address:address,
+        //     auto_confirm:0
+        // }
+        // trans = await client.createWithdrawal(options);
+        // res.send(trans)
     },
     
     getWithdr:async(req,res,next)=>{

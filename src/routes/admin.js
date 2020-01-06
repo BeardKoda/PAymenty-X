@@ -59,6 +59,7 @@ const adminRoute = (admin)=>{
     admin.get('/transactions/withdraws', auth, TransactionController.Windex)
     admin.get('/transaction/:id', auth, TransactionController.show)
     admin.get('/transaction/verify/:id', auth, TransactionController.getTX)
+    admin.get('/transaction/approve/:id', auth, TransactionController.approveWi)
     // Exchange 
     admin.get('/exchange/buy', auth, ExchangeController.bindex)
     admin.get('/exchange/sell', auth, ExchangeController.sindex)
