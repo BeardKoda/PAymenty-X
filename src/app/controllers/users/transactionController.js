@@ -3,7 +3,7 @@ const client = require('../../../config/coin')
 const axios = require('axios')
 
 const getRate = async(value) =>{
-    // console.log(value)
+    console.log(value)
     rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+value)
        return rate.data.market_data.current_price.usd
 }
@@ -44,6 +44,7 @@ let controller = {
                 rate = await getRate(value) * parseInt(t.amount)
                 total += rate
             }
+            console.log(total)
         }
         res.render('pages/transaction/withdraw', {title:'Withdrawal History', trans, total, Ltotal})
     },
