@@ -50,4 +50,5 @@ let controller = {
         res.render('pages/blank', { title: 'Blank' });
     },
 }
+
 module.exports = controller
