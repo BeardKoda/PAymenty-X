@@ -142,11 +142,11 @@ let controller = {
 
     postWithdraw:async(req, res, next)=>{
         authuser = res.locals.user
-        const {currency, wallet, amount, address} = req.body
+        const {currency, wallet, amountBTC, address} = req.body
         // res.send(req.body)
         wal = await Wallet.findOne({userId:authuser._id, CSF:wallet})
         // console.log(wal)
-        if(amount > wal.amount){
+        if(amountBTC > wal.amount){
             let err = "You don't have enough "+wallet+" in wallet"
             req.flash('error', err)
             res.redirect(res.locals.back)
@@ -161,15 +161,15 @@ let controller = {
             status:"awaiting",
             verified:false,
             token:123456,
-            amount:amount
+            amount:amountBTC
             }).then((result)=>{
                 // console.log(result)
                 req.session.success = "Widrawal request Successfully created wait validation"
             res.render('pages/withdraw/process',{title:'Withdrawal Processing'})
             }).catch((err)=>{
-                // console.log(err)
+                console.log(err)
                 req.flash('error', err)
-                res.redirect('withdraw')
+                res.redirect(res.locals.back)
             })
         
     },
