@@ -113,12 +113,15 @@ let controller = {
             req.flash('error', "Password do not match")
             res.redirect('/'+res.locals.url+'/settings')
         }else{
+            // console.log(req.body)
             User.passwordChange(id, oldPass,newPass, (err, result)=>{
+                console.log(err, result)
                 //  return view
                 if(err){
                     req.flash('error', err)
                     res.redirect('/'+res.locals.url+'/settings')
-                }else{
+                }
+                if(result){
                     req.flash('success', "Password Successfully Updated")
                     res.redirect('/'+res.locals.url+'/settings')
                 }

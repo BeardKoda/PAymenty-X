@@ -95,6 +95,7 @@ schema.post('save', async(result)=>{
 schema.pre('save', function(next){
     var user = this
     if(user.isModified('password')){
+      console.log('hello')
         bcrypt.genSalt(SALT, (err, salt)=>{
             if (err) return next(err)
             bcrypt.hash(user.password, salt, (err, hash)=>{
@@ -137,17 +138,12 @@ schema.statics.passwordChange = (id, oldPass, newPass, callback) => {
       var err = 'User not found.'
       return callback(err);
     }else{
+      console.log(id, oldPass, newPass)
       bcrypt.compare(oldPass, user.password, function (err, result) {
         if (result === true) {
-          bcrypt.genSalt(SALT, (err, salt)=>{
-            if (err) return next(err)
-            bcrypt.hash(newPass, salt, (err, hash)=>{
-                if(err)return next(err)
-                user.password=hash
-                user.save()
-                return callback(null, user);
-            })
-          })
+          user.password=newPass
+          user.save()
+          return callback(null, user);
         } else {
           var err ='Wrong Old Password.'
           return callback(err);
