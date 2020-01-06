@@ -62,6 +62,7 @@ let controller = {
             res.redirect('/'+res.locals.url+'/settings?tab='+tab)
         })
     },
+    
     changePassword:(req,res,next)=>{
         res.send("change")
     }
