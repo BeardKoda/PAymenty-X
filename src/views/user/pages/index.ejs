@@ -13,12 +13,15 @@
             <div class="padding">
                 <div class="row">
                     <div class="col-6"><h5 class="text-dark">Exchange Rates</h5></div>
-                    <div class="col-6 alert alert-success alert-dismissible fade show text-center" role="alert">
-                        <strong><%= mm%></strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    
+                    <%if(w.amount==0){%>
+                        <div class="col-6 alert alert-success alert-dismissible fade show text-center" role="alert">
+                            <strong><%= mm%></strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <%}%>
                 </div>
                 <hr/>
                 <div class="row">
