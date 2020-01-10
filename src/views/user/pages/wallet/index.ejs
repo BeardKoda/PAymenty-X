@@ -9,19 +9,16 @@
                     </div>
                     <div class="col-12">
                         <div class="box p-3">
-                            <div class="row pt-3">
+                            <div class="row p-3 justify-content-center">
                                 <div class="col-4">
-                                    <h4><%=user.username%></h4>
-                                    <p><%=user.email%></p>
-                                    <p><%=prof.firstName%></p>
+                                    <img src="/static/user/assets/user.jpeg" width="100px" alt="...">
                                 </div>
-                                <div class="col-4" style="border-left: solid 2px #eee;border-right: solid 2px #eee;">
-                                    <h5><%=prof.type%> Account</h5>
-                                    <p><%=prof.address%></p>
-                                </div>
-                                <div class="col-4">
-                                    <h5><%=prof.firstName%> <%=prof.lastName%></h5>
-                                    <p><%=prof.telNo%></p>
+                                <div class="col-4" style="border-left: solid 2px #eee;">
+                                    <h5><%=user.username%></h5>
+                                    <p><i class="fa fa-address-card small"></i><%=prof.type%> Account <br/>
+                                    <i class="fa fa-envelope-square small"></i> <%=user.email%> <br/>
+                                    <i class="fa fa-address-card small"></i><%=prof.address%><br/>
+                                    <i class="fa fa-phone small"></i><%=prof.telNo%></p>
                                 </div>
                             </div>
                         </div>
