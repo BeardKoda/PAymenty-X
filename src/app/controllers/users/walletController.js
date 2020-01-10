@@ -16,8 +16,8 @@ let controller = {
         grandTotal = 0
         
         mm ='Account has been verified and secured with 2FA'
-        // console.log(walletw.amount,'here')
-        response =  { title: 'Wallets', wallets:wallet, grandTotal,prof,mm}
+        console.log(walletw.amount,'here')
+        response =  { title: 'Wallets', wallets:wallet,w:walletw, grandTotal,prof,mm}
         // if(parseInt(walletw.amount) === '0'){
         // }
         res.render('pages/wallet/index',response);

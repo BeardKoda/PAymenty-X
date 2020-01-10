@@ -16,6 +16,7 @@ let controller = {
         const Ptrans= await Transaction.find({status:"awaiting"})
         const Ctrans= await Transaction.find({status:"Cancelled"})
         const Dtrans= await Transaction.find({status:"Paid"})
+        const w = await Wallet.findOne({userId: authuser._id,gid:'bitcoin' });
         let grandTotal= 0
         let val=[]
         mm ='Account has been verified and secured with 2FA'
@@ -28,7 +29,7 @@ let controller = {
             Ctrans:Ctrans.length,
             Dtrans:Dtrans.length,
             grandTotal,
-            val,mm
+            val,mm,w
         }
         res.render('pages/index', response );
     },
