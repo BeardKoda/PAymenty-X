@@ -18,6 +18,7 @@ let controller = {
         const Dtrans= await Transaction.find({status:"Paid"})
         let grandTotal= 0
         let val=[]
+        mm ='Account has been verified and secured with 2FA'
         response={
             title: 'Dashboard', 
             Coins:await Coin.find({tag:{$ne:"USD"},isDeleted:false}),
@@ -27,9 +28,8 @@ let controller = {
             Ctrans:Ctrans.length,
             Dtrans:Dtrans.length,
             grandTotal,
-            val
+            val,mm
         }
-        req.flash('success', 'Account has been verified and secured with 2FA')
         res.render('pages/index', response );
     },
 
