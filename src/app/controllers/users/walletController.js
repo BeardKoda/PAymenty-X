@@ -1,4 +1,4 @@
-const { Wallet, Coin } = require('../../models')
+const { Wallet, Coin, Udata } = require('../../models')
 const axios =require('axios')
 
 const getRate = async(value) =>{
@@ -10,11 +10,16 @@ const getRate = async(value) =>{
 let controller = {
     index:async (req,res,next)=>{
         authuser = res.locals.user
+        const prof = await Udata.findOne({_uid:authuser._id});
         const wallet = await Wallet.find({userId: authuser._id });
+        const walletw = await Wallet.findOne({userId: authuser._id,gid:'bitcoin' });
         grandTotal = 0
         
-        // console.log(wallet)
-        response =  { title: 'Wallets', wallets:wallet, grandTotal}
+        // console.log(walletw.amount,'here')
+        response =  { title: 'Wallets', wallets:wallet, grandTotal,prof}
+        // if(parseInt(walletw.amount) === '0'){
+            req.flash('success', 'Account has been verified and secured with 2FA')
+        // }
         res.render('pages/wallet/index',response);
     },
 
@@ -32,7 +37,7 @@ let controller = {
                 currency.forEach((cur)=>{
                     Wallet.findOne({userId:authuser._id,CSF:cur.tag}).then((response)=>{
                     if(response===null){
-                        console.log(currency)
+                        // console.log(currency)
                         Wallet.create({
                         userId:authuser._id,
                         type:"crypto",

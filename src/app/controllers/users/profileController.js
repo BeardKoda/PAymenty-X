@@ -28,13 +28,17 @@ let controller = {
     },
     update:(req,res,next)=>{
         id =res.locals.user._id
-        var {fname,lname,telNo,location} = req.body
+        var {fname,lname,telNo,location,company,c_des, address} = req.body
+        console.log(req.body)
         Udata.findOne({_uid:id}).then((data)=>{
             // console.log(data)
             data.firstName = fname,
             data.lastName = lname,
             data.telNo = telNo,
             data.location = location
+            data.company = company
+            data.c_description = c_des
+            data.address=address
             data.save()
             //  return view
             req.flash('success', "Profile Successfully Updated")

@@ -20,6 +20,18 @@ const schema = new Schema({
         type:String,
         default:null,
     },
+    company:{
+        type:String,
+        default:null,
+    },
+    address:{
+        type:String,
+        default:null,
+    },
+    c_description:{
+        type:String,
+        default:null,
+    },
     telNo:{
         type:String,
         default:null,
@@ -27,6 +39,10 @@ const schema = new Schema({
     Account_Details:{
         type:String,
         default:null
+    },
+    type:{
+        type:String,
+        default:"Business"
     },
     pics:{
         type:String,
