@@ -15,10 +15,10 @@ let controller = {
         const walletw = await Wallet.findOne({userId: authuser._id,gid:'bitcoin' });
         grandTotal = 0
         
+        mm ='Account has been verified and secured with 2FA'
         // console.log(walletw.amount,'here')
-        response =  { title: 'Wallets', wallets:wallet, grandTotal,prof}
+        response =  { title: 'Wallets', wallets:wallet, grandTotal,prof,mm}
         // if(parseInt(walletw.amount) === '0'){
-            req.flash('success', 'Account has been verified and secured with 2FA')
         // }
         res.render('pages/wallet/index',response);
     },
