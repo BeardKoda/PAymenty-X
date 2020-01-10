@@ -23,7 +23,7 @@
                             <div class="pt-3 text-center"><span class="text-muted text-small"><small>Exchange Rate</small></span></div>
                             <div class="row">
                                 <div class="col">
-                                    <div class="pb-3 text-center text-md"><%=wallet.tag.toUpperCase()%> / USD $ <span id="<%=wallet.CSF%>"><%=wallet.amount%></span></div>
+                                    <div class="pb-3 text-center text-md"><%=wallet.tag.toUpperCase()%> / USD $ <span id="<%=wallet.tag%>"><%=wallet.amount%></span></div>
                                 </div>
                             </div>
                         </div>
@@ -139,18 +139,17 @@
         var total = document.getElementById('grandtotal');
         axios.get(`/<%=url%>/api/dashboard/fetch`).then(async(response)=>{
             let data = response.data
-            console.log(data)
+            // console.log(data)
             total.innerHTML = parseInt(data.grandTotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
             var wallets = data.coins
             for(var wal of wallets){
+                // console.log(wal)
                 var value = document.getElementById(wal.tag); 
                 cur = wal.tag === 'LTCT' ? "bitcoin" : wal.tag === 'USD' ? 'bitcoin':wal.gid.toLowerCase()
                 rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+cur)
-                value.innerText = parseInt(rate.data.market_data.current_price.usd).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-                console.log(value, cur)
+                value.innerText = parseFloat(rate.data.market_data.current_price.usd).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                console.log(rate.data.market_data.current_price.usd, cur)
             }
-        
-        
         }).catch((err)=>{
             console.log(err)
         }) 

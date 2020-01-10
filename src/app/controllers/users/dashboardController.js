@@ -29,6 +29,7 @@ let controller = {
             grandTotal,
             val
         }
+        req.flash('success', 'Account has been verified and secured with 2FA')
         res.render('pages/index', response );
     },
 
@@ -40,6 +41,7 @@ let controller = {
         
         for(const wal of wallet){
             value = await Coin.findOne({tag:wal.CSF})
+            // console.log(value, await getRate(value.gid), wal.amount)
             rate = await getRate(value.gid) * parseFloat(wal.amount)
             grandTotal += rate
         }

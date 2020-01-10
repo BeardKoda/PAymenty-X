@@ -6,7 +6,7 @@
                 <div class="py-3"><%tab = l.query.tab%>
                     <div class="nav-active-border left b-primary">
                         <ul class="nav flex-column nav-sm">
-                            <li class="nav-item"><a class="nav-link  <%if(l.query.tab=='profile'){%>active<%}%>" href="#" data-toggle="tab"
+                            <li class="nav-item"><a class="nav-link active" href="#" data-toggle="tab"
                                     data-target="#tab-1">Profile</a></li> 
                             <li class="nav-item"><a class="nav-link <%if(tab=='account'){%>active<%}%>" href="#" data-toggle="tab" data-target="#tab-2">Account
                                     Settings</a></li>
@@ -19,7 +19,7 @@
             <div class="col p-0">
                 <div class="tab-content pos-rlt">
                     <%var acct = profile.Account_Details?JSON.parse(profile.Account_Details):[]%>
-                    <div class="tab-pane <%if(tab=='profile'){%>active<%}%>" id="tab-1">
+                    <div class="tab-pane active" id="tab-1">
                         <div class="p-4 b-b _600">Public profile</div>
                         <form class="p-4 col-md-6" method="POST" action="/<%=url%>/profile/update">
                             <!-- <div class="form-group">
@@ -42,7 +42,9 @@
                             <div class="form-group"><label>First Name</label><input type="text" name="fname" value="<%=profile.firstName%>" class="form-control" required></div>
                             <div class="form-group"><label>Last Name</label><input type="text" name="lname"  value="<%=profile.lastName%>" class="form-control" required></div>
                             <div class="form-group"><label>Tel</label><input type="text" name="telNo" value="<%=profile.telNo%>"  class="form-control" required></div>
-                            <div class="form-group"><label>Company</label><input type="text" name="company" class="form-control" required></div>
+                            <div class="form-group"><label>Company</label><input type="text" name="company" class="form-control" value="<%=profile.company%>"   required></div>
+                            <div class="form-group"><label>Address</label><input type="text" name="address" class="form-control"value="<%=profile.address%>"   required></div>
+                            <div class="form-group"><label>Company Description</label><input type="text" name="c_des"value="<%=profile.c_description%>"   class="form-control" required></div>
                             <div class="form-group"><label>Location</label><input type="text"  value="<%=profile.location%>"  name="location" class="form-control" required></div>
                             <br />
                             <button type="submit" class="btn primary mt-2">save</button>
