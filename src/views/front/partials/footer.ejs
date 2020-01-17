@@ -3,22 +3,19 @@
         <div class="top_footer">
             <div class="logosocial">
                 <div>
-                        <h3 style="color: skyblue;font-size: 30px;">CoinRemits</h3>
+                    <a href="/" class="w-inline-block w--current"><img src="/static/user/assets/images/Text-logo dark.png"
+                            alt="" /></a>
                     <div class="soc_wrap">
-                        <a href="#" class="soc w-inline-block">
-                            <img src="/static/user/assets/images/twitter.svg" alt="twitter" />
-                        </a>
-                        <a href="#" class="soc w-inline-block">
-                            <img src="/static/user/assets/images/fb.svg" alt="facebook" />
-                        </a>
-                        <a href="#" class="soc w-inline-block">
-                            <img src="/static/user/assets/images/iconmonstr-medium-1.svg" alt="medium" />
-                        </a>
-                        <a href="#" class="soc w-inline-block">
-                            <img src="/static/user/assets/images/telegram.svg" alt="telegram" />
-                        </a>
+                        <a href="https://twitter.com/Payment_X" target="_blank" class="soc w-inline-block"><img
+                                src="/static/user/assets/images/twitter.svg" alt="twitter" /></a>
+                        <a href="https://www.facebook.com/coinremit/" target="_blank" class="soc w-inline-block"><img
+                                src="/static/user/assets/images/fb.svg" alt="facebook" /></a>
+                        <a href="https://medium.com/coinremit" target="_blank" class="soc w-inline-block"><img
+                                src="/static/user/assets/images/iconmonstr-medium-1.svg" alt="medium" /></a>
+                        <a href="https://t.me/coinremit" target="_blank" class="soc w-inline-block">
+                            <img src="/static/user/assets/images/telegram.svg" alt="telegram" /></a>
 
-                        <a href="#" target="_blank"
+                        <a href="https://www.linkedin.com/company/coinremit/" target="_blank"
                             class="soc w-inline-block">
                             <img src="/static/user/assets/images/linkedin.svg" alt="linkedin" /></a>
                     </div>
@@ -28,8 +25,10 @@
                 <div class="link_wrapper">
                     <h4>Company</h4>
                     <div class="links">
-                        <a href="contact" class="footer_link">Contact</a>
-                        <a href="help@CoinRemits.com" class="footer_link" target="_blank"
+                        <!-- <a href="pricing-plans.html" class="footer_link">Pricing</a>
+        <a href="features.html" class="footer_link">Features</a> -->
+                        <a href="contacts.html" class="footer_link">Contact</a>
+                        <a href="https://coinremit.zendesk.com/hc/en-us" class="footer_link" target="_blank"
                             rel="nofollow">Help</a>
                     </div>
                     <br /><br />
@@ -37,14 +36,14 @@
                 <div class="link_wrapper seclw">
                     <h4>Legal</h4>
                     <div class="links">
-                        <a href="privacy-policy" class="footer_link">Privacy policy</a>
-                        <a href="terms-condition" class="footer_link">Terms of use</a>
+                        <a href="policy.html" class="footer_link">Privacy policy</a>
+                        <a href="tc.html" class="footer_link">Terms of use</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="bottom_footer_wrap">
-            <div>© CoinRemits 2019. All rights reserved.</div>
+        <div class="bottom_footer_wrap text-center">
+            <div>© Coinremits 2020. All rights reserved.</div>
         </div>
     </div>
 </footer>
@@ -53,6 +52,21 @@
 <script src="/static/user/assets/js/paymentx.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <script src="/static/user/assets/js/app.min.js"></script>
+
+<script>
+    $(document).ready(()=>{
+        getrate=async(wal)=>{
+            rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+wal)
+            return rate.data.market_data.current_price.usd
+        }
+        console.log("here")
+        price = getrate("bitcoin")
+        var title = document.getElementById('rates');
+        title.value = (value/price).toFixed(2)
+        console.log('header',title.value)
+        
+    })
+</script>
 </body>
 
 </html>

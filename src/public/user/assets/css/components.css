@@ -1717,6 +1717,12 @@ textarea.w-select {
     padding-left: 10px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .w-nav-link {
+    color: #222222 !important;
+  }
+}
 @media screen and (max-width: 479px) {
   .w-nav[data-collapse="tiny"] .w-nav-menu {
     display: none;
