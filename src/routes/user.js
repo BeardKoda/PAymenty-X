@@ -39,7 +39,7 @@ const userRoute = (user)=>{
     // Authentication Routes
     user.get('/login', unauth, AuthController.loginForm)
     // user.get('/register', )
-    // user.get('/register', unauth, AuthController.registerForm)
+    user.get('/register', unauth, AuthController.registerForm)
     user.post('/login', unauth, AuthController.login)
     user.post('/register', unauth, AuthController.register)
     user.get('/authenticate/2FA/:id', unauth, AuthController.show2FA)

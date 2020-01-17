@@ -505,7 +505,12 @@ iframe#launcher {
 .footer {
   position: absolute;
   bottom: 15px;
-  left: 148px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
 }
 .buttonsWrapper {
   margin-bottom: 25px;
@@ -602,7 +607,16 @@ iframe#launcher {
     border-style: solid;
     border-color: rgb(20, 54, 229);
     border-image: initial;
-    border-radius: 3px;
+    border-radius: 13px;
+    -webkit-border-radius: 13px;
+    -moz-border-radius: 13px;
+    -ms-border-radius: 13px;
+    -o-border-radius: 13px;
+}
+
+.btn-outline-white {
+  color: rgb(255, 255, 255) !important;
+  border-color: rgb(255, 255, 255) !important;
 }
 
 .cPFPGG {

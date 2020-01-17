@@ -1,36 +1,19 @@
-
-<body>
-    <header class="sect s1">
-        <div data-collapse="medium" data-animation="default" data-duration="400"
-            data-w-id="9aa8a9a4-7090-63f7-9907-1ce56643ef07" class="navbar w-nav">
+<header class="sect s1">
+        <div data-collapse="medium" data-animation="default" data-duration="400" class="navbar w-nav">
             <div class="cont nav-cont">
                 <a href="/" class="brand w-nav-brand w--current">
-                    <h3 style="color: blue;font-size: 30px;">CoinRemits</h3>
+                    <img src="/static/user/assets/images/Text-logo-white.svg" alt="">
                 </a>
                 <nav role="navigation" class="nav-menu w-nav-menu">
-                    <a href="#" class="payment_logo w-nav-brand">
-                        <h3 style="color: blue;font-size: 30px;">CoinRemits</h3>
+                    <a href="#" class="payment_logo w-nav-brand"><img src="./static/user/assets/images/Text-logo dark.png" alt="" /></a>
                     <div class="nebu_wrap">
-                        <a href="contact" class="nlink w-nav-link">Contact</a>
-                        <a href="terms-condition" class="nlink w-nav-link" rel="nofollow">Help</a>
-                        <a href="#" class="nlink w-nav-link">BTC/USD <span id="rates">7,423.01</span></a>
+                        <a href="#" class="nlink w-nav-link text-white">Contact</a>
+                        <a href="#" class="nlink w-nav-link text-white" target="_blank"
+                            rel="nofollow">About</a>
+                        <p class="nlink w-nav-link text-white">BTC/USD <span id="rates">7,423.01</span></p>
                     </div>
                     <div class="signup-in_wrap">
-                        <!-- <a href="/user/register" class="sign_up" rel="nofollow">Sign Up</a> -->
-                        <a href="/user/login" class="sign_in" rel="nofollow">Sign In</a>
+                        <a href="/user/register" class="sign_up mr-3 text-white m-sign_up" rel="nofollow">Sign Up</a>
+                        <a href="/user/login" class="sign_in text-white m-sign_in" rel="nofollow">Sign In</a>
                     </div>
                 </nav>
-
-                <script>
-                    $(document).ready(async()=>{
-                        price = await getrate("bitcoin")
-                        var title = document.getElementById('rates');
-                        title.value = (value/price).toFixed(2)
-                        console.log(title.value)
-                        
-                        getrate=async(wal)=>{
-                            rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+wal)
-                            return rate.data.market_data.current_price.usd
-                        }
-                    })
-                </script>
