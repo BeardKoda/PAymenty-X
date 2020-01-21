@@ -1,18 +1,30 @@
 const appRoute = (app)=>{
     app.get('/', (req, res)=>{
-        console.log(app.mountpath)
         res.render('front/land', {title:"Home"})
     })
     app.get('/privacy-policy', (req, res)=>{
-        console.log(app.mountpath)
         res.render('front/privacy', {title:"Privacy Policy"})
     })
+    app.get('/about', (req, res)=>{
+        res.render('front/about', {title:"About Us"})
+    })
+    app.get('/services', (req, res)=>{
+        res.render('front/service', {title:"Our Service"})
+    })
+    app.get('/market_data', (req, res)=>{
+        res.render('front/market', {title:"Market Data"})
+    })
+    app.get('/buy_sell', (req, res)=>{
+        res.render('front/buy', {title:"Buy and Sell"})
+    })
+    app.get('/exchange', (req, res)=>{
+        res.render('front/exchange', {title:"Buy and Sell"})
+    })
     app.get('/terms-condition', (req, res)=>{
-
         res.render('front/terms', {title:"Terms and Conditions"})
     })
     app.get('/contact', (req, res)=>{
-        res.render('front/contact', {title:"Contact"})
+        res.render('front/contact', {title:"Contact Us"})
     })
 
     // handle 404
