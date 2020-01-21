@@ -1,175 +1,39 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <title><%=site_title%> -  <%=title%></title>
-    <meta content="The future of money is here, Coinremits is the easiest way to buy, sell and accept cryptocurrencies globally"
-        name="description" />
-    <meta content="The future of money is here" property="og:title" />
-    <meta content="The future of money is here, Coinremits is the easiest way to buy, sell and accept cryptocurrencies globally"
-        property="og:description" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link href="/static/user/assets/css/index.css" rel="stylesheet" type="text/css" />
-    <link href="/static/user/assets/css/normalize.css" rel="stylesheet" type="text/css" />
-    <link href="/static/user/assets/css/components.css" rel="stylesheet" type="text/css" />
-    <link href="/static/user/assets/css/paymentx.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css" />
-
-    <style>
-        @media (min-width: 992px) {
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="39b92d36-d5d5-d633-4e18-abe9f0ce1e56"] {
-                opacity: 0;
-                -webkit-transform: translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="86608a6d-ee73-3446-b3c7-2bd6fa679985"] {
-                opacity: 0;
-                -webkit-transform: translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="8791dfa2-2eed-4602-d953-c2773352600f"] {
-                -webkit-transform: translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                opacity: 0;
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="4551afe9-8731-2448-7a9f-41b486ed1375"] {
-                opacity: 0;
-                -webkit-transform: translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="9a64d915-501f-17eb-2997-77915fe595e8"] {
-                opacity: 0;
-                -webkit-transform: translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="e68f1c48-73f3-9432-e838-40a7e9d40bb0"] {
-                -webkit-transform: translate3d(0, 144px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 144px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 144px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 144px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="14048d98-f25b-3bf2-d369-6f82c65ba5d3"] {
-                -webkit-transform: translate3d(0, -126px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, -126px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, -126px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, -126px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="5769ffdf-d4cc-4506-3238-df69aeed8e33"] {
-                -webkit-transform: translate3d(0, -143px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, -143px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, -143px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, -143px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="b6a4d664-ffd7-dfdb-81eb-87179a194875"] {
-                -webkit-transform: translate3d(-22px, 22px, 0) scale3d(0.6, 0.6, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(-22px, 22px, 0) scale3d(0.6, 0.6, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(-22px, 22px, 0) scale3d(0.6, 0.6, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(-22px, 22px, 0) scale3d(0.6, 0.6, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                opacity: 0;
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="299857ff-9aec-63d3-eb32-52a394dd85e5"] {
-                -webkit-transform: translate3d(22px, 22px, 0) scale3d(0.6, 0.6, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(22px, 22px, 0) scale3d(0.6, 0.6, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(22px, 22px, 0) scale3d(0.6, 0.6, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(22px, 22px, 0) scale3d(0.6, 0.6, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                opacity: 0;
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="ded29a51-82af-dfc6-487a-7a2998249f57"] {
-                -webkit-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                opacity: 0;
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="5f7a8e0b-f64d-f08c-b8e3-20616555e021"] {
-                opacity: 0;
-                -webkit-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="7a804660-135b-4003-ab21-1f98e4b6bcde"] {
-                opacity: 0;
-                -webkit-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="0d71f9bd-3b36-6dec-36b7-95959b71f4ce"] {
-                opacity: 0;
-                -webkit-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="84b26fe6-3a4a-3a4d-adaa-ac269588f9e9"] {
-                opacity: 0;
-                -webkit-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="7a434514-763b-601a-f9d5-a5f624feff2e"] {
-                opacity: 0;
-                -webkit-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-            }
-
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="5b1e55ec-0658-2b28-7349-27b6ca43aabb"] {
-                opacity: 0;
-                -webkit-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-            }
-        }
-
-        @media (max-width: 767px) and (min-width: 480px) {
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="0efbc7a1-4eeb-9199-8d52-760648462dfd"] {
-                opacity: 0;
-            }
-        }
-
-        @media (max-width: 479px) {
-            html.w-mod-js:not(.w-mod-ix) [data-w-id="0efbc7a1-4eeb-9199-8d52-760648462dfd"] {
-                opacity: 0;
-            }
-        }
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-
-    <script type="text/javascript">
-        WebFont.load({
-            google: { families: ["Nunito Sans:regular,600,700,800,900"] }
-        });
-    </script>
-
-</head>
+<html lang="en">
+   
+   <head>
+      <!-- Basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- Mobile Metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- Site Metas -->
+      <title>Coinremits</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- Site Icons -->
+      <link rel="icon" href="/static/fnt/images/fevicon/fevicon.gif" type="image/gif" />
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="/static/fnt/css/bootstrap.min.css" />
+      <!-- Site CSS -->
+      <link rel="stylesheet" href="/static/fnt/css/style.css" />
+      <!-- Responsive CSS -->
+      <link rel="stylesheet" href="/static/fnt/css/responsive.css" />
+      <!-- Colors CSS -->
+      <link rel="stylesheet" href="/static/fnt/css/colors.css" />
+      <!-- Custom CSS -->
+      <link rel="stylesheet" href="/static/fnt/css/custom.css" />
+      <!-- Counter CSS -->
+      <link rel="stylesheet" href="/static/fnt/css/jquery.countdown.css" />
+      <!-- Wow Animation CSS -->
+      <link rel="stylesheet" href="/static/fnt/css/animate.css" />
+      <!-- Market value slider CSS -->
+      <link rel="stylesheet" type="text/css" href="/static/fnt/css/carouselTicker.css" media="screen" />
+      <link href="https//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+   </head>

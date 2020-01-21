@@ -1,70 +1,135 @@
-<%- include('../user/auth/layout/head') %>
-    <div class="wrapper">
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/header.ejs') %>
+<div>
+
+    <section id="inner_page_infor" class="innerpage_banner">
         <div class="container">
-            <div class="loginWrapper">
-                <div class="logo"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="full">
+                        <div class="inner_page_info">
+                            <h3>Contacts</h3>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><i class="fa fa-angle-right"></i></li>
+                                <li><a href="#">Contacts</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="formContainer">
-                <form method="POST" action="login" name="signin_form" onsubmit="return validate(event, 'signin_form')">
-                    <div class="fieldsWrapperAnimated">
-                        <div>
-                            <div class="title gray">
-                                Contact Form
-                            </div>
-                            <div class="inputLabel gray-70">
-                                <a href='/' class="text-primary"> Back Home</a>
-                            </div>
-                            <div class="inputs">
-                                <form method="post" action='user/login'>
-                                    <div class="sc-bxivhb jGVOBN">
-                                        <div class="sc-bZQynM hfyoFp">
-                                            <div class="input-wrapper">
-                                                <input
-                                                id="inputId_email"
-                                                class="sc-bwzfXH ioKZsq"
-                                                type="email"
-                                                name="email"
-                                                placeholder="your_mail@domain.com"
-                                                required
-                                                />
-                                            </div>
-                                        </div>
+        </div>
+    </section>
 
-                                        <div class="sc-bZQynM hfyoFp">
-                                            <div class="input-wrapper"><input
-                                                id="inputId_email"
-                                                class="sc-bwzfXH ioKZsq"
-                                                type="text"
-                                                name="message"
-                                                placeholder="Enter Message"
-                                                required
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div class="sc-bZQynM hfyoFp">
-                                            <div class="input-wrapper">
-                                                <button
-                                                    id="emailPageActionButton"
-                                                    type="submit"
-                                                    class="sc-gzVnrw gJOssB"
-                                                >
-                                                    Send
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+    <!-- section -->
+        <section class="padding_0 info_coins">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="full">
+                            <h2 style="display:none;">heading</h2>
+                            <div class="coin_formation">
+                                <ul>
+                                    <li>
+                                        <span class="curr_name">Bitcoin Price</span>
+                                        <span class="curr_price">2395.00 USD</span>
+                                    </li>
+                                    <li>
+                                        <span class="curr_name">Bitcoin Price</span>
+                                        <span class="curr_price">2321.68 EUR</span>
+                                    </li>
+                                    <li>
+                                        <span class="curr_name">24H Volume</span>
+                                        <span class="curr_price">1,957.25 BTC</span>
+                                    </li>
+                                    <li>
+                                        <span class="curr_name">Active Traders</span>
+                                        <span class="curr_price">1,169,857 EUR</span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-            <div class="footer capture gray-70">
-                © CoinRemits2019. All rights reserved.
-                <strong>tel</strong> : +74992411605
-                <strong>Address</strong> :Smolenskiy bulvar 30 /32  Moscow  119002  
+        </section>
+    <!-- end section -->
+    <!-- section -->
+    <section class="layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs">
+                    <div class="full">
+                        <div class="heading_main">
+                            <h2><span>GET IN TOUCH</span></h2>
+                            <p>We Provide High Quality Services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact_information">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 adress_cont">
+                        <div class="information_bottom text_align_center">
+                            <div class="icon_bottom">
+                                <i class="fa fa-road" aria-hidden="true"></i>
+                            </div>
+                            <div class="info_cont">
+                                <h4>Moscow</h4>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 adress_cont">
+                        <div class="information_bottom text_align_center">
+                            <div class="icon_bottom">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </div>
+                            <div class="info_cont">
+                                <h4>+(749) 9241 1605</h4>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 adress_cont">
+                        <div class="information_bottom text_align_center">
+                            <div class="icon_bottom">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </div>
+                            <div class="info_cont">
+                                <h4>info@coinremits.com.com</h4>
+                                <p>24/7 online support</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact_form">
+                    <div class="form_section">
+                        <form class="form_contant" action="http://psdconverthtml.com/live/crypto/index.html">
+                            <fieldset>
+                                <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <input class="field_custom" placeholder="Websire URL" type="text">
+                                </div>
+                                <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <input class="field_custom" placeholder="Your name" type="text">
+                                </div>
+                                <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <input class="field_custom" placeholder="Email adress" type="email">
+                                </div>
+                                <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <input class="field_custom" placeholder="Phone number" type="text">
+                                </div>
+                                <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <textarea class="field_custom" placeholder="Messager"></textarea>
+                                </div>
+                                <div class="center"><a class="btn main_btn" href="Info@coinremits.com">SUBMIT NOW</a></div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-<%- include('../user/auth/layout/footer') %>
+    </section>
+    <!-- end section -->
+   
+</div>
+<%- include('./partials/footer.ejs') %>
