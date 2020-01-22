@@ -130,159 +130,47 @@
               </div>
            </div>
            <div class="row">
+            <% rates.forEach((coin)=>{%>
               <div class="col-md-3 col-sm-6 col-xs-12">
                  <div class="full">
-                    <div class="rate_box" style="background: #607d8b;">
+                    <div class="rate_box" style="background:<%=coin.bg%>">
                        <div class="inner_rate_box">
-                          <div class="coin__sort_name_rates">ETH</div>
-                          <div class="coin_name_rates">Ethereum</div>
+                          <div class="coin__sort_name_rates"><%=coin.id%></div>
+                          <div class="coin_name_rates"><%=coin.name%></div>
                           <div class="vcw_full_lenth">
                              <div class="vcw_price">
                                 <div class="curry_pr">USD</div>
-                                <div class="value_pr">1.135</div>
+                                <div class="value_pr"><%=coin.data.price%></div>
                              </div>
                              <div class="vcw_price">
                                 <div class="curry_pr">EUR</div>
-                                <div class="value_pr">2.316</div>
+                                <div class="value_pr"><%=coin.data.priceEr%></div>
                              </div>
                              <div class="vcw_price">
-                                <div class="curry_pr">GBP</div>
-                                <div class="value_pr">2.036</div>
+                                <div class="curry_pr">Market</div>
+                                <div class="value_pr"><%=coin.data.mcap%>%</div>
                              </div>
                           </div>
                           <div class="vcw_full_lenth final_pric">
                              <div class="vcw_price">
-                                <div class="curry_pr pert">2.2%</div>
-                                <div class="value_pr"><i class="fa fa-arrow-circle-o-down"></i> -2.36</div>
+                                <div class="curry_pr pert"><%=coin.data.update%>%</div>
+                                <!-- <div class="value_pr"><i class="fa fa-arrow-circle-o-down"></i> -2.36</div> -->
                              </div>
                              <div class="vcw_price">
-                                <div class="curry_pr">20%</div>
-                                <div class="value_pr"><i class="fa fa-arrow-circle-o-up"></i> +1.36</div>
+                                <div class="curry_pr"><%=coin.data.seven%>%</div>
+                                <!-- <div class="value_pr"><i class="fa fa-arrow-circle-o-up"></i> +1.36</div> -->
                              </div>
                              <div class="vcw_price">
-                                <div class="curry_pr">1.20%</div>
-                                <div class="value_pr"><i class="fa fa-arrow-circle-o-down"></i> -0.89</div>
+                                <div class="curry_pr"><%=coin.data.one%>%</div>
+                                <!-- <div class="value_pr"><i class="fa fa-arrow-circle-o-down"></i> -0.89</div> -->
                              </div>
                           </div>
                        </div>
                     </div>
                  </div>
               </div>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                 <div class="full">
-                    <div class="rate_box" style="background: #0089e0;">
-                       <div class="inner_rate_box">
-                          <div class="coin__sort_name_rates">LTC</div>
-                          <div class="coin_name_rates">Litecoin</div>
-                          <div class="vcw_full_lenth">
-                             <div class="vcw_price">
-                                <div class="curry_pr">USD</div>
-                                <div class="value_pr">1.135</div>
-                             </div>
-                             <div class="vcw_price">
-                                <div class="curry_pr">EUR</div>
-                                <div class="value_pr">2.316</div>
-                             </div>
-                             <div class="vcw_price">
-                                <div class="curry_pr">GBP</div>
-                                <div class="value_pr">2.036</div>
-                             </div>
-                          </div>
-                          <div class="vcw_full_lenth final_pric">
-                             <div class="vcw_price">
-                                <div class="curry_pr pert">2.2%</div>
-                                <div class="value_pr"><i class="fa fa-arrow-circle-o-down"></i> -2.36</div>
-                             </div>
-                             <div class="vcw_price">
-                                <div class="curry_pr">20%</div>
-                                <div class="value_pr"><i class="fa fa-arrow-circle-o-up"></i> +1.36</div>
-                             </div>
-                             <div class="vcw_price">
-                                <div class="curry_pr">1.20%</div>
-                                <div class="value_pr"><i class="fa fa-arrow-circle-o-down"></i> -0.89</div>
-                             </div>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                 <div class="full">
-                    <div class="rate_box" style="background: #27415a;">
-                       <div class="inner_rate_box">
-                          <div class="coin__sort_name_rates">BTC</div>
-                          <div class="coin_name_rates">Bitcoin</div>
-                          <div class="vcw_full_lenth">
-                             <div class="vcw_price">
-                                <div class="curry_pr">USD</div>
-                                <div class="value_pr">1.135</div>
-                             </div>
-                             <div class="vcw_price">
-                                <div class="curry_pr">EUR</div>
-                                <div class="value_pr">2.316</div>
-                             </div>
-                             <div class="vcw_price">
-                                <div class="curry_pr">GBP</div>
-                                <div class="value_pr">2.036</div>
-                             </div>
-                          </div>
-                          <div class="vcw_full_lenth final_pric">
-                             <div class="vcw_price">
-                                <div class="curry_pr pert">2.2%</div>
-                                <div class="value_pr"><i class="fa fa-arrow-circle-o-down"></i> -2.36</div>
-                             </div>
-                             <div class="vcw_price">
-                                <div class="curry_pr">20%</div>
-                                <div class="value_pr"><i class="fa fa-arrow-circle-o-up"></i> +1.36</div>
-                             </div>
-                             <div class="vcw_price">
-                                <div class="curry_pr">1.20%</div>
-                                <div class="value_pr"><i class="fa fa-arrow-circle-o-down"></i> -0.89</div>
-                             </div>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                 <div class="full">
-                    <div class="rate_box" style="background:rgb(0, 188, 212);">
-                       <div class="inner_rate_box">
-                          <div class="coin__sort_name_rates">XRP</div>
-                          <div class="coin_name_rates">Ripple</div>
-                          <div class="vcw_full_lenth">
-                             <div class="vcw_price">
-                                <div class="curry_pr">USD</div>
-                                <div class="value_pr">1.135</div>
-                             </div>
-                             <div class="vcw_price">
-                                <div class="curry_pr">EUR</div>
-                                <div class="value_pr">2.316</div>
-                             </div>
-                             <div class="vcw_price">
-                                <div class="curry_pr">GBP</div>
-                                <div class="value_pr">2.036</div>
-                             </div>
-                          </div>
-                          <div class="vcw_full_lenth final_pric">
-                             <div class="vcw_price">
-                                <div class="curry_pr pert">2.2%</div>
-                                <div class="value_pr"><i class="fa fa-arrow-circle-o-down"></i> -2.36</div>
-                             </div>
-                             <div class="vcw_price">
-                                <div class="curry_pr">20%</div>
-                                <div class="value_pr"><i class="fa fa-arrow-circle-o-up"></i> +1.36</div>
-                             </div>
-                             <div class="vcw_price">
-                                <div class="curry_pr">1.20%</div>
-                                <div class="value_pr"><i class="fa fa-arrow-circle-o-down"></i> -0.89</div>
-                             </div>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-           </div>
+              <%})%>
+            </div>
            <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                  <div class="full table-responsive">
@@ -292,21 +180,23 @@
                              <th>Symbol</th>
                              <th>Name</th>
                              <th>USD</th>
-                             <th>Change 1h</th>
                              <th>Change 24h</th>
                              <th>Change 7d</th>
+                             <th>Change 14d</th>
                           </tr>
                        </thead>
                        <tbody>
+                        <% rates.forEach((coin)=>{%>
                           <tr class="active_table">
-                             <td>BTC</td>
-                             <td>Bitcoin</td>
-                             <td>11,145</td>
-                             <td style="color:red">-0.6%</td>
-                             <td style="color:red">-7.55%</td>
-                             <td style="color:lightgreen">+6.22%</td>
+                             <td><%=coin.id%></td>
+                             <td><%=coin.name%></td>
+                             <td><%=coin.data.price%></td>
+                             <td style="color:<%if(coin.data.update>0){%>lightgreen<%}else{%>red<%}%>"><%=coin.data.update%>%</td>
+                             <td style="color:<%if(coin.data.seven>0){%>lightgreen<%}else{%>red<%}%>"><%=coin.data.seven%>%</td>
+                             <td style="color:<%if(coin.data.one>0){%>lightgreen<%}else{%>red<%}%>"><%=coin.data.one%>%</td>
                           </tr>
-                          <tr>
+                        <%})%>
+                          <!-- <tr>
                              <td>ETH</td>
                              <td>Ethereum</td>
                              <td>1,094</td>
@@ -337,7 +227,7 @@
                              <td style="color:lightgreen">+0.02%</td>
                              <td style="color:red">-9.89%</td>
                              <td style="color:lightgreen">+8.89%</td>
-                          </tr>
+                          </tr> -->
                        </tbody>
                     </table>
                  </div>
