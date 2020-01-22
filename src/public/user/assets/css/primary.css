@@ -3,7 +3,8 @@
 .text-hover-theme .active > a {
   color: #53a6fa !important; }
 
-.nav-active-theme .nav-link.active,
+  .nav-active-theme .nav-link.active,
+.nav-active-theme .nav-link.actived,
 .nav-active-theme .nav > li.active > a,
 .btn.theme,
 .btn.b-theme:hover,
@@ -11,12 +12,12 @@
 .pace .pace-progress,
 .theme {
   color: rgba(255, 255, 255, 0.85) !important;
-  background-color: #53a6fa !important; }
+  background-color: #e9d16f !important; }
 
 .b-theme,
 .nav-border,
 nav.nav-border {
-  border-color: #53a6fa !important; }
+  border-color: #e9d16f !important; }
 
 .btn.theme-accent,
 .btn.b-theme-accent:hover,
@@ -29,11 +30,17 @@ nav.nav-border {
   background-color: #22b66e !important; }
 
 .sidenav .nav-border .active > a,
-.sidenav .nav-active-text .active > a {
-  color: #53a6fa; }
+.sidenav .nav-active-text .active > a,
+.sidenav .nav-active-text .actived {
+  color: #e9d16f; 
+}
 
 .fill-theme {
-  fill: #53a6fa; }
+  fill: #e9d16f; }
 
 .stroke-theme {
-  stroke: #53a6fa; }
+  stroke: #e9d16f; 
+}
+.dark{
+  background-color: #031629 !important;
+}
