@@ -1,7 +1,7 @@
+
+const FrontController = require('../app/controllers/frontController')
 const appRoute = (app)=>{
-    app.get('/', (req, res)=>{
-        res.render('front/land', {title:"Home"})
-    })
+    app.get('/', FrontController.index)
     app.get('/privacy-policy', (req, res)=>{
         res.render('front/privacy', {title:"Privacy Policy"})
     })
