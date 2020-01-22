@@ -89,10 +89,25 @@
               </div>
            </div>
         </div>
-     </div>
+     </div> 
+     <script>
+      $(document).ready(async()=>{
+            var usd = document.getElementById('usd_curr_price')
+            var eur = document.getElementById('eur_curr_price')
+            var btc = document.getElementById('btc_curr_price')
+            if(btc){
+               // console.log(curChange)
+               rate = await axios.get('https://api.coingecko.com/api/v3/coins/bitcoin')
+               usd.innerText = parseFloat(rate.data.market_data.current_price.usd).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+' USD';
+               eur.innerText = parseFloat(rate.data.market_data.current_price.eur).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+' EUR';
+               // btc.innerText = parseFloat(rate.data.market_data.circulating_supply).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')+' BTC';
+            }
+      })
+      </script>
      <!-- jQuery (necessary for Bootstrap's JavaScript) -->
      <script src="/static/fnt/js/jquery.min.js"></script>
      <!-- custom js -->
      <script src="/static/fnt/js/custom.js"></script>
+    
   </body>
   </html>
