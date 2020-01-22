@@ -46,7 +46,7 @@ const schema = new Schema({
     },
     pics:{
         type:String,
-        default:"user.jpeg"
+        default:"user.png"
     }
 },
 {timestamps: true})
