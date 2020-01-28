@@ -16,7 +16,7 @@ let controller = {
         grandTotal = 0
         
         mm ='Account has been verified and secured with 2FA'
-        console.log(walletw.amount,'here')
+        // console.log(walletw.amount,'here')
         response =  { title: 'Wallets', wallets:wallet,w:walletw, grandTotal,prof,mm}
         // if(parseInt(walletw.amount) === '0'){
         // }
@@ -56,6 +56,12 @@ let controller = {
                 res.redirect('/'+res.locals.url+'/wallet')
             }
         })
+    },
+    generateCold:(req,res,next)=>{
+        response={
+            title:"Generate Cold Wallet",
+        }
+        res.render('pages/wallet/cold', response)
     }
 }
 module.exports = controller

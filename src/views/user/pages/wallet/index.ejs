@@ -37,9 +37,14 @@
                     <div class="col-8">
                         <h5>Your Wallets </h5>
                     </div>
-                    <div class="col-4">
-                        <form method="POST" action="/<%=url%>/wallet/generate">
+                    <div class="col-2">
+                        <form method="POST" action="/<%=url%>/wallet/generate/">
                             <button type="submit" class="btn btn-md info">Generate Wallet</button>
+                        </form>
+                    </div>
+                    <div class="col-2">
+                        <form method="GET" action="/<%=url%>/wallet/cold/generate">
+                            <button type="submit" class="btn btn-md info">Generate Cold Wallet</button>
                         </form>
                     </div>
                 </div><hr/>
