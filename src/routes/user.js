@@ -81,6 +81,7 @@ const userRoute = (user)=>{
 
     user.get('/wallet', auth, WalletController.index)
     user.post('/wallet/generate', auth, WalletController.generate)
+    user.get('/wallet/cold/generate', auth, WalletController.generateCold)
     user.post('/password/update/', auth, AuthController.passUpdate)
     user.get('/logout', auth, AuthController.logout)
     // user.get('/test/mail', auth, AuthController.testMail)
