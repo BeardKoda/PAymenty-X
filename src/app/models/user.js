@@ -12,7 +12,7 @@ schema.statics.authenticate = function (email, password, callback) {
       if (err) {
         return callback(err)
       } else if (!user) {
-        var err = 'Email doesn\'t exists'
+        var err = 'Invalid Credientials'
         return callback(err);
       }else if(!user.isVerified){
         var err = "Account not Verified"
