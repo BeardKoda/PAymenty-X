@@ -62,6 +62,12 @@ let controller = {
             title:"Generate Cold Wallet",
         }
         res.render('pages/wallet/cold', response)
+    },
+    connectHard:(req,res,next)=>{
+        response={
+            title:"Connect Hard Wallet",
+        }
+        res.render('pages/wallet/hard', response)
     }
 }
 module.exports = controller
