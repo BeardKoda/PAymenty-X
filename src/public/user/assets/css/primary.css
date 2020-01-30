@@ -44,3 +44,11 @@ nav.nav-border {
 .dark{
   background-color: #031629 !important;
 }
+
+.modal{
+  top:50% !important;
+}
+.derror{
+  background-color: darkred;
+  color: #ffffff;
+}
