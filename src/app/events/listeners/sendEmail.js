@@ -69,7 +69,7 @@ module.exports = (data) => {
                           <tbody>
                             <tr style="color: #999999; font-size: 12px;">
                               <td align="center" style="box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; vertical-align: top; padding: 20px 10px 40px; text-align: center; font-size: 14px; color: grey;" valign="top">
-                                <em style="color: #999999; font-size: 12px;">Copyright © 2016 CoinRemits, All rights reserved.</em>
+                                <em style="color: #999999; font-size: 12px;">Copyright © 2020 CoinRemits, All rights reserved.</em>
                                 <br style="color: #999999; font-size: 12px;">
                                 <strong style="color: #999999; font-size: 12px;">Our mailing address is:</strong><br style="color: #999999; font-size: 12px;">
                                 <div class="vcard"><span class="org fn">CoinRemits</span>

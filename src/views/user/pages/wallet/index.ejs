@@ -5,7 +5,7 @@
             <div class="padding">
                 <div class="row">
                     <div class="col-6">
-                        <h5 class="col-6">Profile / Portfolio</h5>
+                        <h5 class="col-lg-6 col-sm-12">Profile / Portfolio</h5>
                     </div>
                     <%if(w.amount==0){%>
                     <div class="col-6 alert alert-success alert-dismissible fade show text-center" role="alert">
@@ -25,10 +25,10 @@
                             </div>
                             <div class="col-4" style="border-left: solid 2px #eee;">
                                 <h5><%=user.username%></h5>
-                                <p><i class="fa fa-address-card small"></i><%=prof.type%> Account <br/>
-                                <i class="fa fa-envelope-square small"></i> <%=user.email%> <br/>
-                                <i class="fa fa-address-card small"></i><%=prof.address%><br/>
-                                <i class="fa fa-phone small"></i><%=prof.telNo%></p>
+                                <p><i class="fa fa-address-card small mr-3"></i><%=prof.type%> Account <br/>
+                                <i class="fa fa-envelope-square small mr-3"></i> <%=user.email%> <br/>
+                                <i class="fa fa-address-card small mr-3"></i><%=prof.address%><br/>
+                                <i class="fa fa-phone small mr-3"></i><%=prof.telNo%></p>
                             </div>
                         </div>
                     </div>
@@ -38,18 +38,18 @@
                         <h5>Your Wallets </h5>
                     </div>
                     <div class="col-6 row">
-                        <form method="POST" action="/<%=url%>/wallet/generate/" class="mr-2">
+                        <form method="POST" action="/<%=url%>/wallet/generate/" class="mr-2 mb-1">
                             <button type="submit" class="btn btn-md info">Generate Wallet</button>
                         </form>
                     <!-- </div>
                     <div class="col-4 row"> -->
-                        <a href="https://beta-wallet.trezor.io/next/" type="submit" class="btn btn-md info mr-2">Connect Hard Wallet</a>
+                        <a href="https://beta-wallet.trezor.io/next/" type="submit" class="btn btn-md info mr-2 mb-1">Connect Hard Wallet</a>
                         <a href="/<%=url%>/wallet/cold/generate" type="submit" class="btn btn-md info">Generate Cold Wallet</a>
                     </div>
                 </div><hr/>
                 <div class="row">
                     <% wallets.forEach((wallet)=>{%>
-                    <div class="col-3 col-md-3 col-lg-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3">
                         <div class="box p-3">
                             <div class="row text-center">
                                 <div class="col-12 text-center">
@@ -118,7 +118,6 @@
         var total = document.getElementById('grandtotal');
         axios.get(`/<%=url%>/api/dashboard/fetch`).then(async(response)=>{
             let data = response.data
-            console.log(data)
             total.innerHTML = parseInt(data.grandTotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
             var wallets = data.coins
             for(var wal of wallets){
@@ -126,7 +125,6 @@
                 cur = wal.tag === 'LTCT' ? "bitcoin" : wal.tag === 'USD' ? 'bitcoin':wal.gid.toLowerCase()
                 rate = await axios.get('https://api.coingecko.com/api/v3/coins/'+cur)
                 value.innerText = parseInt(rate.data.market_data.current_price.usd).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-                console.log(value, cur)
             }
         }).catch((err)=>{
             console.log(err)

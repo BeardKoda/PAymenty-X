@@ -103,6 +103,7 @@ let controller = {
         const {Scurrency, Pcurrency, amount } = req.body
         let valid = await verfiyAmount(Scurrency, amount, authuser)
         if(!valid.error){
+            // console.log("here")
             try{
                 result = await Exchange.create({
                     userId:authuser._id,
@@ -110,7 +111,8 @@ let controller = {
                     currencyTo:Scurrency,
                     currencyFrom:Pcurrency,
                     status:"Awaiting",
-                    amount:amount
+                    amount:amount,
+                    amountUSD:amount
                 })
                 if(result){
                     if(Pcurrency=='USD'){
@@ -136,6 +138,7 @@ let controller = {
                 }
             }catch(err){
                 next(err)
+                // console.log(err)
             }
         }else{
             req.flash('error', valid.msg)
