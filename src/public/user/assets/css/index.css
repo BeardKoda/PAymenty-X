@@ -19,6 +19,7 @@ html {
 }
 
 body {
+  height: 100vh;
   font-family: "Nunito Sans", Arial;
   font-style: normal;
   font-weight: normal;

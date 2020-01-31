@@ -38,13 +38,13 @@
                         <h5>Your Wallets </h5>
                     </div>
                     <div class="col-6 row">
-                        <form method="POST" action="/<%=url%>/wallet/generate/" class="mr-2 mb-1">
-                            <button type="submit" class="btn btn-md info">Generate Wallet</button>
+                        <form method="POST" action="#" onsubmit="event.preventDefault();" class="mr-2 mb-1">
+                            <button type="submit" class="btn btn-md info" data-toggle="modal" data-target="#modal">Generate Wallet</button>
                         </form>
                     <!-- </div>
                     <div class="col-4 row"> -->
-                        <a href="#" type="submit" class="btn btn-md info mr-2 mb-1 disabled">Connect Hard Wallet</a>
-                        <a href="#" type="submit" class="btn btn-md info disabled">Generate Cold Wallet</a>
+                        <a href="#" type="submit" class="btn btn-md info mr-2 mb-1" data-toggle="modal" data-target="#modal">Connect Hard Wallet</a>
+                        <a href="#" type="submit" class="btn btn-md info"data-toggle="modal" data-target="#modal">Generate Cold Wallet</a>
                     </div>
                 </div><hr/>
                 <div class="row">
@@ -112,6 +112,21 @@
         </div>
     </div>
 <!-- end main content -->
+
+<div id="modal" class="modal fade animate black-overlay" data-backdrop="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content flip-x">
+            <div class="modal-body text-center">
+                <div id="error" style="display: none;" class="derror"><p>Invalid Pin</p></div>
+                <p class="py-3 mt-3"><i style="font-size: 38px;" class="fa fa-exclamation-triangle text-warning fa-5x"></i></p>
+                <p>Authorization Required!!!<br/>Contact Admnin to perform this Request</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn white" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function() {
         // alert("document ready occurred!"); 
@@ -130,5 +145,6 @@
             console.log(err)
         }) 
     })
+
 </script>
 <%- include('../../partials/footer') %>
