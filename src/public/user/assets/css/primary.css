@@ -52,3 +52,6 @@ nav.nav-border {
   background-color: darkred;
   color: #ffffff;
 }
+.disabled{
+  opacity: 0.6;
+}
